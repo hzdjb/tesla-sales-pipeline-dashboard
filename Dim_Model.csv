@@ -1,0 +1,7 @@
+ModelId,ModelName,ModelFamily,BodyType,BasePriceNZD
+M01,Model 3 RWD,Model 3,Sedan,63900
+M02,Model 3 Long Range,Model 3,Sedan,74900
+M03,Model 3 Performance,Model 3,Sedan,89900
+M04,Model Y RWD,Model Y,SUV,67900
+M05,Model Y Long Range,Model Y,SUV,79900
+M06,Model Y Performance,Model Y,SUV,94900

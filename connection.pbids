@@ -1,0 +1,14 @@
+{
+  "version": "0.1",
+  "connections": [
+    {
+      "details": {
+        "protocol": "folder",
+        "address": {
+          "path": "C:\\Projects\\tesla-sales-pipeline-dashboard\\output"
+        }
+      },
+      "mode": null
+    }
+  ]
+}

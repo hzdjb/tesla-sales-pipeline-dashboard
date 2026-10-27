@@ -1,0 +1,9 @@
+SourceId,SourceName,SourceCategory
+SRC01,Website Enquiry,Digital
+SRC02,Online Test Drive Booking,Digital
+SRC03,Social Media Ads,Paid
+SRC04,Google Ads,Paid
+SRC05,Walk-in,Offline
+SRC06,Event / Mall Pop-up,Offline
+SRC07,Owner Referral,Referral
+SRC08,Corporate Fleet Desk,Offline

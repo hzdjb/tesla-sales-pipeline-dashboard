@@ -1,0 +1,501 @@
+AccountId,AccountName,AccountType,City,Segment,CustomerLifetimeValue,IsExistingOwner,CreatedDate
+AC000001,Alison McFarlane,Person,Christchurch,Private,85900.0,TRUE,2024-09-27
+AC000002,Green-Green,Business,Hamilton,Fleet,72100.0,TRUE,2024-01-13
+AC000003,"Gibb, Thompson and Hamilton",Business,Christchurch,Fleet,72200.0,TRUE,2023-06-22
+AC000004,Ari Elliott,Person,Christchurch,Private,73800.0,TRUE,2024-01-23
+AC000005,Bruce Shaw,Person,Wellington,Private,141400.0,TRUE,2024-10-31
+AC000006,Cheryl Lane,Person,Auckland,Private,73500.0,TRUE,2024-06-21
+AC000007,Jillian MacDonald-Atkinson,Person,Auckland,Private,92200.0,TRUE,2024-09-08
+AC000008,Paul Kennedy,Person,Wellington,Private,95900.0,TRUE,2023-01-10
+AC000009,Jocelyn Pope,Person,Auckland,Private,76000.0,TRUE,2023-06-18
+AC000010,David Brown,Person,Auckland,Private,68900.0,TRUE,2024-08-20
+AC000011,Mark Adams,Person,Wellington,Private,90400.0,TRUE,2024-08-31
+AC000012,Aaron Tucker,Person,Auckland,Private,65300.0,TRUE,2024-07-14
+AC000013,David Drew,Person,Tauranga,Private,72900.0,TRUE,2024-09-08
+AC000014,Ann Baker,Person,Christchurch,Private,71700.0,TRUE,2024-07-14
+AC000015,Debra Stewart,Person,Hamilton,Private,95000.0,TRUE,2024-10-26
+AC000016,"Bird, Jensen and Crawford",Business,Wellington,Small Business,84300.0,TRUE,2024-04-09
+AC000017,Claudia Scott,Person,Auckland,Private,87500.0,TRUE,2023-07-12
+AC000018,Irene Perry,Person,Christchurch,Private,79600.0,TRUE,2023-08-29
+AC000019,Neil Rossiter,Person,Auckland,Private,70200.0,TRUE,2024-04-13
+AC000020,Anthony Ireland,Person,Wellington,Private,68700.0,TRUE,2023-07-29
+AC000021,David McDonald,Person,Tauranga,Private,84600.0,TRUE,2023-08-16
+AC000022,Carolyn Edwards,Person,Christchurch,Private,94400.0,TRUE,2023-02-23
+AC000023,Parker-Bowater,Business,Wellington,Fleet,90600.0,TRUE,2024-10-19
+AC000024,Samantha Chambers,Person,Tauranga,Private,91600.0,TRUE,2024-08-11
+AC000025,Jones PLC,Business,Christchurch,Fleet,91400.0,TRUE,2023-12-08
+AC000026,William Forsyth,Person,Auckland,Private,92200.0,TRUE,2023-12-26
+AC000027,Christopher Fuller,Person,Christchurch,Private,154200.0,TRUE,2023-02-21
+AC000028,Shaun Connolly,Person,Wellington,Private,89900.0,TRUE,2024-07-04
+AC000029,Duncan Group,Business,Auckland,Small Business,87500.0,TRUE,2023-04-30
+AC000030,Forsyth-Tait,Business,Auckland,Small Business,163900.0,TRUE,2023-01-02
+AC000031,Jason Toms-Guard,Person,Auckland,Private,77500.0,TRUE,2023-07-05
+AC000032,Michelle Hamilton,Person,Auckland,Private,83500.0,TRUE,2023-01-02
+AC000033,Gary Enright,Person,Auckland,Private,88100.0,TRUE,2023-09-20
+AC000034,Paula Taylor-Davies,Person,Auckland,Private,92800.0,TRUE,2023-02-24
+AC000035,Greig PLC,Business,Christchurch,Small Business,62100.0,TRUE,2024-04-21
+AC000036,Charlotte Whittaker,Person,Auckland,Private,96800.0,TRUE,2023-08-25
+AC000037,Sean Brown,Person,Auckland,Private,92300.0,TRUE,2023-11-13
+AC000038,Neil Baker,Person,Auckland,Private,71600.0,TRUE,2023-09-27
+AC000039,Troy Wong,Person,Wellington,Private,74800.0,TRUE,2023-08-31
+AC000040,Lynette Gore-Currie,Person,Christchurch,Private,79100.0,TRUE,2024-02-13
+AC000041,Lisa Oliver-Carter,Person,Auckland,Private,93500.0,TRUE,2024-01-03
+AC000042,Elizabeth Black,Person,Tauranga,Private,77800.0,TRUE,2024-01-12
+AC000043,John McFarlane-Waller,Person,Auckland,Private,80700.0,TRUE,2024-09-18
+AC000044,Holland PLC,Business,Wellington,Fleet,63900.0,TRUE,2024-05-18
+AC000045,Ashton MacDonald,Person,Wellington,Private,168200.0,TRUE,2023-10-26
+AC000046,Caleb Phillips-Brown,Person,Auckland,Private,90600.0,TRUE,2024-09-25
+AC000047,Gardiner and Sons,Business,Auckland,Fleet,79500.0,TRUE,2024-10-02
+AC000048,Muir-Low,Business,Auckland,Fleet,79600.0,TRUE,2024-06-06
+AC000049,"Rossiter, Bull and Lane",Business,Christchurch,Small Business,76000.0,TRUE,2023-11-13
+AC000050,Gemma Clifford,Person,Christchurch,Private,63300.0,TRUE,2023-03-22
+AC000051,Donald Neilson,Person,Auckland,Private,93400.0,TRUE,2024-08-09
+AC000052,Charlotte Miller,Person,Wellington,Private,70000.0,TRUE,2024-10-27
+AC000053,Paul Cameron,Person,Auckland,Private,61500.0,TRUE,2024-10-06
+AC000054,"Rees, McCallum and Neal",Business,Auckland,Small Business,75500.0,TRUE,2024-10-20
+AC000055,Benjamin Grant,Person,Auckland,Private,96200.0,TRUE,2023-10-27
+AC000056,Andrew Graham-Stewart,Person,Auckland,Private,76600.0,TRUE,2023-09-02
+AC000057,Bell-Gardner,Business,Auckland,Fleet,90600.0,TRUE,2023-04-24
+AC000058,Linda Thomas,Person,Hamilton,Private,97300.0,TRUE,2024-09-09
+AC000059,Levi O'Keefe,Person,Christchurch,Private,64600.0,TRUE,2023-09-04
+AC000060,Lily Wilton-Jones,Person,Hamilton,Private,75800.0,TRUE,2024-01-15
+AC000061,Beard-McMahon,Business,Christchurch,Small Business,159800.0,TRUE,2023-04-10
+AC000062,Beard and Sons,Business,Auckland,Fleet,73000.0,TRUE,2023-04-14
+AC000063,Nathan Clarke,Person,Tauranga,Private,70300.0,TRUE,2023-07-17
+AC000064,Stacey O'Connor,Person,Christchurch,Private,89700.0,TRUE,2024-06-08
+AC000065,Rachael Foote-Baker,Person,Auckland,Private,80300.0,TRUE,2023-06-30
+AC000066,Zane Gledhill,Person,Auckland,Private,87500.0,TRUE,2024-01-11
+AC000067,Amanda Bush,Person,Christchurch,Private,146600.0,TRUE,2024-01-03
+AC000068,Maxwell-Perry,Business,Auckland,Small Business,76000.0,TRUE,2024-11-07
+AC000069,Douglas Butcher,Person,Christchurch,Private,78600.0,TRUE,2023-03-24
+AC000070,Jacob Anderson,Person,Wellington,Private,85600.0,TRUE,2023-09-03
+AC000071,Diane Pollard,Person,Hamilton,Private,63900.0,TRUE,2023-04-15
+AC000072,Phillips-Simmonds,Business,Christchurch,Small Business,65600.0,TRUE,2024-09-14
+AC000073,Darryl Morton,Person,Wellington,Private,94600.0,TRUE,2024-04-10
+AC000074,Harriet Howell,Person,Auckland,Private,83100.0,TRUE,2023-04-05
+AC000075,Hayden Buchanan-Payne,Person,Auckland,Private,94400.0,TRUE,2023-10-16
+AC000076,Hayley Smith,Person,Auckland,Private,72300.0,TRUE,2023-10-15
+AC000077,Gray-Botham,Business,Hamilton,Small Business,73700.0,TRUE,2023-09-08
+AC000078,Anderson-Nelson,Business,Auckland,Small Business,90600.0,TRUE,2024-03-11
+AC000079,Ireland-Davies,Business,Tauranga,Fleet,63100.0,TRUE,2024-07-30
+AC000080,Hinewai Thomas-Beard,Person,Auckland,Private,85400.0,TRUE,2024-03-11
+AC000081,Dean Tucker,Person,Wellington,Private,64100.0,TRUE,2023-09-19
+AC000082,Kenneth Best,Person,Tauranga,Private,87500.0,TRUE,2023-10-21
+AC000083,"O'Connell, Hubbard and Jellyman",Business,Wellington,Small Business,68400.0,TRUE,2023-08-15
+AC000084,Joanne Kay,Person,Tauranga,Private,76300.0,TRUE,2023-09-18
+AC000085,Munro-Clifford,Business,Christchurch,Small Business,94100.0,TRUE,2024-01-27
+AC000086,Paul Stevens,Person,Christchurch,Private,81500.0,TRUE,2023-01-18
+AC000087,Donaldson-Webb,Business,Auckland,Small Business,156000.0,TRUE,2023-08-12
+AC000088,"Wallace, Jackson and Currie",Business,Tauranga,Fleet,74600.0,TRUE,2023-06-12
+AC000089,Monique Connolly,Person,Auckland,Private,94000.0,TRUE,2024-08-06
+AC000090,Lisa O'Connor-Muir,Person,Hamilton,Private,88000.0,TRUE,2023-06-07
+AC000091,Felix Wilton-Field,Person,Auckland,Private,148200.0,TRUE,2023-06-23
+AC000092,Karen Saunders,Person,Auckland,Private,67400.0,TRUE,2023-02-20
+AC000093,Kane Guy,Person,Tauranga,Private,78500.0,TRUE,2023-02-08
+AC000094,Mitchell Morris,Person,Christchurch,Private,149600.0,TRUE,2023-08-30
+AC000095,"Armstrong, Graham and Shailer",Business,Auckland,Small Business,71600.0,TRUE,2023-03-02
+AC000096,Nathaniel Bailey,Person,Auckland,Private,78200.0,TRUE,2023-10-02
+AC000097,Carter Jones,Person,Wellington,Private,85900.0,TRUE,2024-01-04
+AC000098,Margaret Griffin,Person,Auckland,Private,88300.0,TRUE,2023-12-09
+AC000099,Jessica Hills,Person,Hamilton,Private,72600.0,TRUE,2023-09-18
+AC000100,O'Connell Group,Business,Hamilton,Small Business,66200.0,TRUE,2023-11-19
+AC000101,Jennifer Moore,Person,Auckland,Private,85500.0,TRUE,2023-08-18
+AC000102,Steven Gullery,Person,Hamilton,Private,70600.0,TRUE,2023-08-21
+AC000103,Craig and Sons,Business,Hamilton,Fleet,76500.0,TRUE,2024-07-15
+AC000104,Watkins Ltd,Business,Auckland,Small Business,62700.0,TRUE,2024-01-02
+AC000105,Karen Freeman,Person,Wellington,Private,63400.0,TRUE,2024-05-26
+AC000106,John Seymour,Person,Auckland,Private,165100.0,TRUE,2023-12-03
+AC000107,Kora MacKenzie,Person,Auckland,Private,77300.0,TRUE,2024-05-23
+AC000108,Margaret O'Connell,Person,Christchurch,Private,79800.0,TRUE,2024-02-05
+AC000109,Joanna Fairhall,Person,Hamilton,Private,90700.0,TRUE,2023-01-29
+AC000110,Susan MacKay,Person,Christchurch,Private,77300.0,TRUE,2023-03-13
+AC000111,Julie Wheeler,Person,Auckland,Private,156300.0,TRUE,2024-07-01
+AC000112,Reuben Woolley-Poole,Person,Christchurch,Private,84100.0,TRUE,2024-09-04
+AC000113,Jeremy George-Baker,Person,Christchurch,Private,75300.0,TRUE,2024-01-19
+AC000114,Hannah Butler,Person,Auckland,Private,88700.0,TRUE,2024-07-26
+AC000115,Simpson Group,Business,Wellington,Fleet,147700.0,TRUE,2023-09-15
+AC000116,Patrick Brown,Person,Tauranga,Private,93900.0,TRUE,2023-03-12
+AC000117,Hayley Smart,Person,Auckland,Private,63900.0,TRUE,2024-11-08
+AC000118,Daniel Currie,Person,Wellington,Private,83500.0,TRUE,2023-12-30
+AC000119,Tracy Smith-Burrell,Person,Christchurch,Private,155600.0,TRUE,2023-05-08
+AC000120,"Fisher, Smith and Clarke",Business,Auckland,Small Business,92900.0,TRUE,2024-05-13
+AC000121,Sharon Nicholas,Person,Tauranga,Private,92500.0,TRUE,2024-08-18
+AC000122,Laura Whyte,Person,Christchurch,Private,154200.0,TRUE,2023-05-04
+AC000123,Susan West-Morgan,Person,Auckland,Private,256900.0,TRUE,2023-10-20
+AC000124,Amanda Graham,Person,Wellington,Private,70400.0,TRUE,2024-07-01
+AC000125,Paige Browne,Person,Hamilton,Private,90500.0,TRUE,2024-11-26
+AC000126,Murdoch PLC,Business,Tauranga,Small Business,70300.0,TRUE,2024-11-12
+AC000127,Terry Gibbons,Person,Tauranga,Private,83700.0,TRUE,2023-06-25
+AC000128,"Smith, Alexander and Martin",Business,Auckland,Fleet,69800.0,TRUE,2023-12-06
+AC000129,Christine Carter,Person,Hamilton,Private,69900.0,TRUE,2024-03-07
+AC000130,Deborah Webb,Person,Tauranga,Private,76800.0,TRUE,2024-10-21
+AC000131,Emma Middlemiss,Person,Hamilton,Private,96900.0,TRUE,2023-11-07
+AC000132,Ella Thompson,Person,Tauranga,Private,136900.0,TRUE,2023-04-12
+AC000133,Philip Taylor,Person,Christchurch,Private,89200.0,TRUE,2023-05-03
+AC000134,Diane Brown,Person,Wellington,Private,86000.0,TRUE,2023-04-10
+AC000135,Philip Kemp,Person,Auckland,Private,63800.0,TRUE,2024-01-31
+AC000136,Samuel May,Person,Wellington,Private,78200.0,TRUE,2024-06-22
+AC000137,Jackson Ltd,Business,Tauranga,Small Business,74100.0,TRUE,2023-10-12
+AC000138,Lucas Reid,Person,Christchurch,Private,67500.0,TRUE,2024-05-09
+AC000139,Reuben Evans-Stratford,Person,Auckland,Private,73200.0,TRUE,2023-06-14
+AC000140,Richard Bell,Person,Hamilton,Private,88900.0,TRUE,2024-02-12
+AC000141,Brendon Smith-Davies,Person,Auckland,Private,80800.0,TRUE,2023-10-08
+AC000142,"Gillies, Boyce and Claridge",Business,Auckland,Small Business,92400.0,TRUE,2023-03-17
+AC000143,Barry Paton,Person,Auckland,Private,65800.0,TRUE,2024-08-09
+AC000144,Bradley Mercer,Person,Auckland,Private,65000.0,TRUE,2023-11-28
+AC000145,Sally McMahon-Rose,Person,Auckland,Private,83200.0,TRUE,2024-09-04
+AC000146,Harrison Wilton,Person,Hamilton,Private,90600.0,TRUE,2023-01-10
+AC000147,Anita Nicol,Person,Hamilton,Private,78600.0,TRUE,2024-03-16
+AC000148,Sean Steele,Person,Hamilton,Private,89100.0,TRUE,2024-09-19
+AC000149,Nicholson LLC,Business,Wellington,Fleet,72700.0,TRUE,2024-07-29
+AC000150,Nicole Coleman,Person,Christchurch,Private,90500.0,TRUE,2023-04-18
+AC000151,Wendy Knight,Person,Wellington,Private,83500.0,TRUE,2023-03-26
+AC000152,Rebecca Francis,Person,Wellington,Private,89800.0,TRUE,2024-07-27
+AC000153,"Gibbons, Marshall and Jensen",Business,Auckland,Fleet,76900.0,TRUE,2023-12-31
+AC000154,Murphy Group,Business,Tauranga,Small Business,86400.0,TRUE,2023-03-30
+AC000155,Philip Wong,Person,Christchurch,Private,200300.0,TRUE,2023-07-07
+AC000156,Heather Cresswell,Person,Christchurch,Private,85800.0,TRUE,2024-08-11
+AC000157,Christine MacDonald,Person,Hamilton,Private,78500.0,TRUE,2024-06-29
+AC000158,Hamish Burrell-Judd,Person,Auckland,Private,77600.0,TRUE,2023-04-27
+AC000159,Logan Pope-McDonald,Person,Hamilton,Private,95800.0,TRUE,2024-04-11
+AC000160,Parkes Group,Business,Auckland,Small Business,74600.0,TRUE,2023-02-26
+AC000161,Rachel Paton,Person,Christchurch,Private,91300.0,TRUE,2023-06-06
+AC000162,"Dickson, Bryant and Smith",Business,Auckland,Fleet,80300.0,TRUE,2023-11-05
+AC000163,Cook-Robb,Business,Christchurch,Small Business,64600.0,TRUE,2023-05-09
+AC000164,Murray Gardiner-Barrett,Person,Christchurch,Private,95800.0,TRUE,2024-02-07
+AC000165,Rush-Mears,Business,Auckland,Small Business,88800.0,TRUE,2024-03-18
+AC000166,Holly Fowler,Person,Hamilton,Private,74300.0,TRUE,2024-10-03
+AC000167,David Campbell-Davis,Person,Hamilton,Private,156600.0,TRUE,2023-11-23
+AC000168,Hudson Ltd,Business,Auckland,Small Business,70900.0,TRUE,2023-12-27
+AC000169,McDonald Ltd,Business,Auckland,Fleet,78500.0,TRUE,2024-07-24
+AC000170,Emma Bradley,Person,Wellington,Private,86800.0,TRUE,2023-04-01
+AC000171,Mackenzie Murdoch,Person,Christchurch,Private,64700.0,TRUE,2024-11-30
+AC000172,Wallace LLC,Business,Auckland,Fleet,85200.0,TRUE,2024-07-25
+AC000173,Geoffrey Tucker,Person,Hamilton,Private,95100.0,TRUE,2024-01-28
+AC000174,Edward Lambert,Person,Auckland,Private,96200.0,TRUE,2024-10-18
+AC000175,"Morrison, Dyer and Collis",Business,Tauranga,Small Business,91500.0,TRUE,2023-09-06
+AC000176,Ava Smith,Person,Christchurch,Private,96400.0,TRUE,2023-09-14
+AC000177,John Gardner-Edwards,Person,Auckland,Private,75600.0,TRUE,2024-08-25
+AC000178,David Hadfield,Person,Auckland,Private,93600.0,TRUE,2023-09-23
+AC000179,Ryan Dixon,Person,Auckland,Private,91000.0,TRUE,2024-08-03
+AC000180,Mark Gilchrist,Person,Hamilton,Private,66600.0,TRUE,2024-05-27
+AC000181,Charles McGregor,Person,Tauranga,Private,88500.0,TRUE,2024-11-13
+AC000182,Benjamin Parker-Freeman,Person,Wellington,Private,97900.0,TRUE,2024-07-15
+AC000183,Manaia Eaton,Person,Christchurch,Private,71800.0,TRUE,2024-03-03
+AC000184,Richard Fisher,Person,Auckland,Private,77000.0,TRUE,2023-08-19
+AC000185,Wallace-Forrest,Business,Auckland,Fleet,136600.0,TRUE,2023-09-20
+AC000186,Georgia Healy,Person,Hamilton,Private,83800.0,TRUE,2023-06-08
+AC000187,Victoria Harris-Pritchard,Person,Auckland,Private,86000.0,TRUE,2023-11-14
+AC000188,Donald Williams,Person,Christchurch,Private,69900.0,TRUE,2024-08-11
+AC000189,Clinton Williams,Person,Hamilton,Private,73500.0,TRUE,2023-08-17
+AC000190,James McIntosh,Person,Hamilton,Private,89900.0,TRUE,2024-05-24
+AC000191,Fiona Mason,Person,Wellington,Private,218400.0,TRUE,2023-02-21
+AC000192,Oscar Fowler-Hyde,Person,Auckland,Private,87100.0,TRUE,2024-07-28
+AC000193,Robert Parsons-Morton,Person,Auckland,Private,77700.0,TRUE,2023-02-16
+AC000194,Rush PLC,Business,Tauranga,Small Business,78600.0,TRUE,2023-08-18
+AC000195,Michael Gillies,Person,Auckland,Private,94800.0,TRUE,2023-05-18
+AC000196,Arthur Evans,Person,Christchurch,Private,74600.0,TRUE,2023-10-20
+AC000197,Martin Edmonds-Blackwell,Person,Hamilton,Private,90800.0,TRUE,2024-07-27
+AC000198,Brooke McIntosh,Person,Christchurch,Private,88500.0,TRUE,2023-04-04
+AC000199,"Jamieson, Knight and Butler",Business,Wellington,Small Business,85300.0,TRUE,2023-03-05
+AC000200,Anna Jones,Person,Auckland,Private,74400.0,TRUE,2023-08-24
+AC000201,Patricia Holmes,Person,Auckland,Private,91400.0,TRUE,2024-11-21
+AC000202,Benjamin Boniface,Person,Auckland,Private,69600.0,TRUE,2024-05-13
+AC000203,Lucy Smith-Blair,Person,Hamilton,Private,65900.0,TRUE,2023-05-01
+AC000204,Mark Bishell-Gray,Person,Auckland,Private,75300.0,TRUE,2023-04-18
+AC000205,"Stuart, Sixtus and Henderson",Business,Auckland,Fleet,87700.0,TRUE,2024-04-08
+AC000206,Joanne McCormick-Foot,Person,Wellington,Private,150800.0,TRUE,2023-06-08
+AC000207,Helen Graham,Person,Auckland,Private,86700.0,TRUE,2023-05-14
+AC000208,Shane Patchett,Person,Tauranga,Private,238100.0,TRUE,2024-06-23
+AC000209,Fiona Faulkner,Person,Auckland,Private,87600.0,TRUE,2024-08-27
+AC000210,Amelia Thompson,Person,Hamilton,Private,73600.0,TRUE,2023-10-18
+AC000211,Graeme Frost-Jamieson,Person,Tauranga,Private,71000.0,TRUE,2024-05-04
+AC000212,"Gunn, Smith and Millard",Business,Auckland,Small Business,95600.0,TRUE,2023-03-14
+AC000213,Jessica Edwards,Person,Tauranga,Private,72200.0,TRUE,2023-10-20
+AC000214,Marie Hodson,Person,Hamilton,Private,88600.0,TRUE,2024-01-29
+AC000215,Rachel Cameron,Person,Wellington,Private,66200.0,TRUE,2024-04-25
+AC000216,Caitlyn McKay,Person,Christchurch,Private,64000.0,TRUE,2023-03-27
+AC000217,Bronwyn Henry,Person,Auckland,Private,164100.0,TRUE,2024-02-15
+AC000218,Ruby Carson-Lewis,Person,Auckland,Private,96500.0,TRUE,2023-01-16
+AC000219,Liam Scott,Person,Wellington,Private,91400.0,TRUE,2023-08-21
+AC000220,John Thomas,Person,Auckland,Private,68000.0,TRUE,2023-12-11
+AC000221,Joshua McIntyre,Person,Wellington,Private,81400.0,TRUE,2024-01-11
+AC000222,Nicole Day,Person,Christchurch,Private,76400.0,TRUE,2023-04-22
+AC000223,Murdoch-Jensen,Business,Auckland,Small Business,71200.0,TRUE,2024-04-26
+AC000224,Catherine McDonald,Person,Auckland,Private,68800.0,TRUE,2024-03-03
+AC000225,Kelly Bruce-Howell,Person,Auckland,Private,88200.0,TRUE,2024-02-13
+AC000226,Richard Sanders-Harrison,Person,Auckland,Private,85600.0,TRUE,2024-02-24
+AC000227,Emma Smith,Person,Wellington,Private,70000.0,TRUE,2024-11-25
+AC000228,Samuel Field-Herd,Person,Hamilton,Private,81100.0,TRUE,2024-05-14
+AC000229,Joel Fuller,Person,Auckland,Private,95600.0,TRUE,2023-08-11
+AC000230,Simmons-Pratt,Business,Auckland,Small Business,90900.0,TRUE,2024-01-14
+AC000231,Tina Millard,Person,Auckland,Private,85800.0,TRUE,2024-07-02
+AC000232,Malcolm Mason,Person,Hamilton,Private,83600.0,TRUE,2023-12-29
+AC000233,Amy McKinnon,Person,Hamilton,Private,91500.0,TRUE,2023-12-20
+AC000234,"Landon-Lane, Fisher and Aberhart",Business,Tauranga,Small Business,75600.0,TRUE,2023-09-06
+AC000235,Joshua Anderson,Person,Auckland,Private,80400.0,TRUE,2023-09-30
+AC000236,"Christie, Hughes and Harris",Business,Wellington,Small Business,80500.0,TRUE,2024-07-03
+AC000237,Harris-Ingram,Business,Auckland,Fleet,73000.0,TRUE,2023-02-08
+AC000238,Paul Perry,Person,Auckland,Private,82200.0,TRUE,2023-02-16
+AC000239,"Frost, Williams and Findlay",Business,Auckland,Small Business,72100.0,TRUE,2023-11-05
+AC000240,Gregory Rutherford-Satherley,Person,Auckland,Private,73500.0,TRUE,2023-11-09
+AC000241,Sharon Gleeson,Person,Auckland,Private,77600.0,TRUE,2023-04-28
+AC000242,Vanessa Poole,Person,Auckland,Private,76800.0,TRUE,2024-11-22
+AC000243,Sophia Anderson,Person,Auckland,Private,84200.0,TRUE,2023-04-18
+AC000244,Baker Ltd,Business,Christchurch,Small Business,78100.0,TRUE,2023-05-21
+AC000245,Te Ariki Prentice-Nicholson,Person,Auckland,Private,91400.0,TRUE,2023-03-19
+AC000246,Manning Ltd,Business,Hamilton,Small Business,61800.0,TRUE,2024-06-08
+AC000247,Jesse Pike,Person,Christchurch,Private,68900.0,TRUE,2024-09-19
+AC000248,Andrew McMahon,Person,Tauranga,Private,86900.0,TRUE,2024-05-24
+AC000249,Hunter Kelly-Jensen,Person,Auckland,Private,89200.0,TRUE,2024-05-20
+AC000250,Lisa Gifford,Person,Auckland,Private,92700.0,TRUE,2023-02-24
+AC000251,Cody Small,Person,Auckland,Private,63000.0,TRUE,2024-04-20
+AC000252,Gore-Green,Business,Auckland,Small Business,71300.0,TRUE,2024-09-08
+AC000253,Casey Lloyd-Russell,Person,Christchurch,Private,73900.0,TRUE,2024-01-18
+AC000254,Donaldson-Beard,Business,Auckland,Small Business,185000.0,TRUE,2024-09-20
+AC000255,Susan O'Donnell,Person,Auckland,Private,70100.0,TRUE,2024-05-08
+AC000256,Austin Faulkner,Person,Hamilton,Private,191400.0,TRUE,2023-01-30
+AC000257,Gemma Boniface-Paton,Person,Tauranga,Private,87400.0,TRUE,2023-09-12
+AC000258,Sarah Ward,Person,Auckland,Private,79600.0,TRUE,2023-06-12
+AC000259,Sharon Mitchell,Person,Tauranga,Private,82200.0,TRUE,2024-03-02
+AC000260,Lisa Stevenson,Person,Wellington,Private,66400.0,TRUE,2023-02-18
+AC000261,"Wallace, Meads and Fleming",Business,Christchurch,Fleet,75400.0,TRUE,2024-10-18
+AC000262,Aaron Jeffries-Craig,Person,Wellington,Private,158100.0,TRUE,2024-01-28
+AC000263,Thomas McKinnon,Person,Christchurch,Private,87900.0,TRUE,2024-07-06
+AC000264,Richard Adams-Seymour,Person,Hamilton,Private,77100.0,TRUE,2023-07-01
+AC000265,Burgess PLC,Business,Christchurch,Fleet,83200.0,TRUE,2023-08-12
+AC000266,Nicholas Short-Herd,Person,Wellington,Private,85500.0,TRUE,2023-08-16
+AC000267,Watts Ltd,Business,Auckland,Small Business,80700.0,TRUE,2023-03-13
+AC000268,George Gardner,Person,Tauranga,Private,78500.0,TRUE,2023-09-09
+AC000269,Jacqueline Stewart-Horn,Person,Tauranga,Private,68500.0,TRUE,2023-06-23
+AC000270,Piper Gray,Person,Tauranga,Private,90100.0,TRUE,2024-07-28
+AC000271,Robert Willis,Person,Auckland,Private,63800.0,TRUE,2023-05-29
+AC000272,Kylie Marsh,Person,Auckland,Private,79500.0,TRUE,2023-06-22
+AC000273,Dean Gunn,Person,Tauranga,Private,71500.0,TRUE,2024-11-07
+AC000274,Wendy Wallace,Person,Auckland,Private,97900.0,TRUE,2024-04-29
+AC000275,Sally Weston,Person,Christchurch,Private,82600.0,TRUE,2024-02-25
+AC000276,Turner and Sons,Business,Auckland,Fleet,65100.0,TRUE,2023-09-18
+AC000277,Wendy Watkins,Person,Wellington,Private,72700.0,TRUE,2024-06-07
+AC000278,Aria Black,Person,Auckland,Private,67100.0,TRUE,2024-10-02
+AC000279,Lachlan Fowler-Joe,Person,Auckland,Private,88600.0,TRUE,2023-01-26
+AC000280,Mark Booth-Buckley,Person,Auckland,Private,66500.0,TRUE,2024-07-29
+AC000281,Neil Chapman,Person,Auckland,Private,157200.0,TRUE,2023-07-10
+AC000282,Stacey Hope-Riley,Person,Auckland,Private,77700.0,TRUE,2023-05-08
+AC000283,Michael Bright,Person,Tauranga,Private,83100.0,TRUE,2024-09-16
+AC000284,Suzanne Johnston,Person,Auckland,Private,81400.0,TRUE,2024-05-25
+AC000285,Thomas-Jones,Business,Christchurch,Fleet,63100.0,TRUE,2024-07-08
+AC000286,Geoffrey Cox,Person,Auckland,Private,69700.0,TRUE,2024-03-30
+AC000287,David Wilkinson,Person,Auckland,Private,68600.0,TRUE,2023-06-22
+AC000288,Julie Jellyman,Person,Auckland,Private,96800.0,TRUE,2024-02-25
+AC000289,Jessica Hudson,Person,Auckland,Private,89900.0,TRUE,2023-10-28
+AC000290,Stephen Coley,Person,Auckland,Private,179700.0,TRUE,2023-10-11
+AC000291,Maria Bassett,Person,Auckland,Private,93100.0,TRUE,2023-03-18
+AC000292,Allan Gardiner-Saunders,Person,Hamilton,Private,89900.0,TRUE,2023-08-23
+AC000293,Shane Harris,Person,Christchurch,Private,72900.0,TRUE,2024-08-27
+AC000294,Leah Meads,Person,Wellington,Private,89900.0,TRUE,2024-06-27
+AC000295,Angela Morgan,Person,Christchurch,Private,67800.0,TRUE,2023-11-14
+AC000296,Warren Edmonds,Person,Auckland,Private,170500.0,TRUE,2023-10-11
+AC000297,Murray Ritchie,Person,Auckland,Private,68300.0,TRUE,2023-08-28
+AC000298,Wendy Jones-Graham,Person,Hamilton,Private,67700.0,TRUE,2024-08-26
+AC000299,Baldwin and Sons,Business,Hamilton,Small Business,77500.0,TRUE,2023-10-11
+AC000300,Samuel Barrett,Person,Wellington,Private,94700.0,TRUE,2024-09-03
+AC000301,Denise Paul-Patchett,Person,Christchurch,Private,88600.0,TRUE,2024-01-31
+AC000302,Robert Nelson,Person,Christchurch,Private,150600.0,TRUE,2023-05-14
+AC000303,Shane Turner-Stewart,Person,Christchurch,Private,96200.0,TRUE,2024-10-13
+AC000304,Paterson-Mitchell,Business,Tauranga,Small Business,79200.0,TRUE,2023-12-22
+AC000305,Caleb Lucas,Person,Tauranga,Private,77500.0,TRUE,2023-09-06
+AC000306,Mark Smith,Person,Tauranga,Private,162800.0,TRUE,2024-08-19
+AC000307,Andrew Hubbard-Berry,Person,Auckland,Private,167200.0,TRUE,2024-11-30
+AC000308,Jonathan Craig,Person,Hamilton,Private,86400.0,TRUE,2023-03-19
+AC000309,"Howard, Ford and Cook",Business,Wellington,Small Business,87600.0,TRUE,2023-07-13
+AC000310,Amy North-Law,Person,Christchurch,Private,145700.0,TRUE,2023-10-22
+AC000311,Georgia Alexander,Person,Auckland,Private,65600.0,TRUE,2024-01-23
+AC000312,Anthony Webster,Person,Auckland,Private,85500.0,TRUE,2023-10-28
+AC000313,Joanna Mitchell,Person,Christchurch,Private,224600.0,TRUE,2023-09-09
+AC000314,"Horn, Williams and Williams",Business,Auckland,Fleet,61700.0,TRUE,2024-08-21
+AC000315,Catherine Jackson-Parsons,Person,Auckland,Private,88400.0,TRUE,2024-08-02
+AC000316,Leanne Webb-Godfrey,Person,Auckland,Private,89900.0,TRUE,2023-09-28
+AC000317,Gabriella McCallum,Person,Wellington,Private,81800.0,TRUE,2024-09-07
+AC000318,Ashley Kenny,Person,Christchurch,Private,75000.0,TRUE,2024-10-03
+AC000319,Olivia Reid,Person,Auckland,Private,76600.0,TRUE,2024-05-13
+AC000320,Stephanie Williamson,Person,Hamilton,Private,92400.0,TRUE,2023-08-01
+AC000321,Jennifer Miles,Person,Christchurch,Private,91700.0,TRUE,2023-11-28
+AC000322,McEwen-Costello,Business,Auckland,Small Business,94800.0,TRUE,2023-12-18
+AC000323,Vanessa Gilchrist,Person,Christchurch,Private,89200.0,TRUE,2024-11-06
+AC000324,Anika McGrath,Person,Wellington,Private,82800.0,TRUE,2023-03-18
+AC000325,Jason McKinnon,Person,Christchurch,Private,70100.0,TRUE,2024-11-26
+AC000326,Samantha Cooksley,Person,Auckland,Private,141900.0,TRUE,2024-08-24
+AC000327,"Thornton, Hope and Hay",Business,Christchurch,Fleet,89800.0,TRUE,2023-04-13
+AC000328,Imogen Dawson,Person,Christchurch,Private,75400.0,TRUE,2024-01-30
+AC000329,McIsaac-Short,Business,Wellington,Small Business,88800.0,TRUE,2024-02-28
+AC000330,Mathew Clarke-Boyd,Person,Auckland,Private,63200.0,TRUE,2024-06-13
+AC000331,Simpson Group,Business,Wellington,Small Business,64100.0,TRUE,2024-10-13
+AC000332,Scott Phillips,Person,Auckland,Private,96800.0,TRUE,2023-01-16
+AC000333,"Barnes, Pritchard and Stevenson",Business,Hamilton,Small Business,85100.0,TRUE,2024-08-31
+AC000334,Furness-Lambert,Business,Christchurch,Fleet,92900.0,TRUE,2023-05-04
+AC000335,"Andrew, Alexander and Smith",Business,Wellington,Fleet,92900.0,TRUE,2024-09-16
+AC000336,Alexander Morgan-Pritchard,Person,Wellington,Private,169900.0,TRUE,2023-07-31
+AC000337,Holly Henderson,Person,Wellington,Private,67500.0,TRUE,2024-04-01
+AC000338,Luke Dixon,Person,Auckland,Private,81300.0,TRUE,2024-06-04
+AC000339,Peter Hanson,Person,Wellington,Private,146400.0,TRUE,2023-05-29
+AC000340,Mears and Sons,Business,Auckland,Small Business,87700.0,TRUE,2024-10-03
+AC000341,Jessica Harrison,Person,Christchurch,Private,73900.0,TRUE,2024-08-01
+AC000342,Davies-Webb,Business,Hamilton,Fleet,78900.0,TRUE,2023-05-02
+AC000343,"Nelson, Gilmore and Hart",Business,Auckland,Fleet,95400.0,TRUE,2024-08-10
+AC000344,Andrea Thompson-Saunders,Person,Christchurch,Private,66600.0,TRUE,2024-01-14
+AC000345,Katherine Saunders,Person,Auckland,Private,85300.0,TRUE,2023-02-01
+AC000346,Daniel Carr-Larsen,Person,Hamilton,Private,148900.0,TRUE,2024-10-16
+AC000347,Ethan Patterson,Person,Auckland,Private,144200.0,TRUE,2023-02-21
+AC000348,Kirsty Lewis,Person,Christchurch,Private,171400.0,TRUE,2023-12-06
+AC000349,Black PLC,Business,Christchurch,Fleet,76700.0,TRUE,2023-02-15
+AC000350,Aaron Johnston,Person,Auckland,Private,71500.0,TRUE,2024-05-11
+AC000351,Rex Blair,Person,Auckland,Private,153200.0,TRUE,2023-06-30
+AC000352,Grant Smith-Prentice,Person,Auckland,Private,85400.0,TRUE,2023-12-31
+AC000353,Bruce Bartlett,Person,Christchurch,Private,62800.0,TRUE,2023-12-08
+AC000354,Joshua McKenna,Person,Wellington,Private,73800.0,TRUE,2024-08-05
+AC000355,Anna Haines,Person,Christchurch,Private,69300.0,TRUE,2023-03-13
+AC000356,Jayden Lloyd,Person,Auckland,Private,154400.0,TRUE,2023-09-04
+AC000357,Shannon Bird,Person,Tauranga,Private,91600.0,TRUE,2024-03-25
+AC000358,Jennifer Spencer-McKay,Person,Auckland,Private,95000.0,TRUE,2023-11-04
+AC000359,Alison Webb,Person,Auckland,Private,71800.0,TRUE,2024-07-03
+AC000360,Karen Paton-Price,Person,Wellington,Private,92600.0,TRUE,2024-03-31
+AC000361,Sarah Jensen,Person,Auckland,Private,90700.0,TRUE,2024-04-25
+AC000362,"Dixon, Williams and Paul",Business,Tauranga,Small Business,74300.0,TRUE,2023-05-22
+AC000363,Diane Craven,Person,Christchurch,Private,83700.0,TRUE,2023-02-15
+AC000364,Kane Thomas,Person,Christchurch,Private,92400.0,TRUE,2023-01-19
+AC000365,Courtney Terry,Person,Hamilton,Private,93900.0,TRUE,2023-10-16
+AC000366,Pamela Shepherd,Person,Christchurch,Private,83700.0,TRUE,2023-03-06
+AC000367,David Moore,Person,Christchurch,Private,77500.0,TRUE,2024-01-16
+AC000368,Christopher Simpson,Person,Auckland,Private,67000.0,TRUE,2024-04-04
+AC000369,"Williams, Middlemiss and Watts",Business,Christchurch,Small Business,172100.0,TRUE,2024-10-26
+AC000370,Rachel Manning,Person,Auckland,Private,177300.0,TRUE,2024-10-09
+AC000371,Natalie Funnell,Person,Christchurch,Private,73300.0,TRUE,2023-03-31
+AC000372,Hannah Gaskin-Oliver,Person,Wellington,Private,67100.0,TRUE,2024-09-21
+AC000373,Anita Saunders,Person,Auckland,Private,66000.0,TRUE,2023-05-03
+AC000374,Robert Gibbons-Clarke,Person,Auckland,Private,179300.0,TRUE,2024-03-10
+AC000375,George Ford,Person,Auckland,Private,84900.0,TRUE,2023-01-07
+AC000376,Isaac Morris,Person,Tauranga,Private,141400.0,TRUE,2024-08-17
+AC000377,"Howell, Bond and Bishop",Business,Auckland,Small Business,65600.0,TRUE,2024-03-08
+AC000378,Janette Field,Person,Auckland,Private,94200.0,TRUE,2023-11-09
+AC000379,John Dobson,Person,Wellington,Private,95000.0,TRUE,2023-08-15
+AC000380,Graeme Shaw,Person,Auckland,Private,84200.0,TRUE,2023-09-24
+AC000381,William Ferguson,Person,Auckland,Private,95600.0,TRUE,2023-05-23
+AC000382,Ataahua Thompson,Person,Christchurch,Private,88800.0,TRUE,2023-11-23
+AC000383,"Hansen, Parker and Davidson",Business,Auckland,Small Business,64400.0,TRUE,2023-09-16
+AC000384,Kimberley Small,Person,Auckland,Private,73400.0,TRUE,2024-06-29
+AC000385,Jade Miller,Person,Auckland,Private,75900.0,TRUE,2023-12-03
+AC000386,Rebecca Patterson,Person,Auckland,Private,91600.0,TRUE,2023-01-06
+AC000387,Robert Nicol,Person,Hamilton,Private,70500.0,TRUE,2024-10-20
+AC000388,Grant Freeman,Person,Auckland,Private,94300.0,TRUE,2023-12-12
+AC000389,Eva Baxter,Person,Tauranga,Private,77400.0,TRUE,2023-11-23
+AC000390,Sophie Graham-Greer,Person,Wellington,Private,86500.0,TRUE,2024-03-28
+AC000391,Thomas Lewis,Person,Christchurch,Private,74100.0,TRUE,2023-04-09
+AC000392,Caitlin Tucker,Person,Hamilton,Private,83400.0,TRUE,2024-11-26
+AC000393,George Duncan,Person,Auckland,Private,95100.0,TRUE,2023-11-23
+AC000394,Kendall-Hay,Business,Tauranga,Fleet,63200.0,TRUE,2024-01-30
+AC000395,Aroha Jellyman,Person,Wellington,Private,69200.0,TRUE,2023-03-14
+AC000396,Isla Price,Person,Hamilton,Private,91500.0,TRUE,2023-01-17
+AC000397,Wayne Harrison,Person,Hamilton,Private,63300.0,TRUE,2023-07-01
+AC000398,McDonald-Lyon,Business,Auckland,Small Business,83700.0,TRUE,2024-10-07
+AC000399,Barry Franklin,Person,Tauranga,Private,95600.0,TRUE,2024-10-18
+AC000400,Justin Butler,Person,Auckland,Private,89500.0,TRUE,2024-10-22
+AC000401,Amelia Wells,Person,Auckland,Private,62700.0,TRUE,2023-08-13
+AC000402,"Stewart, Duncan and Bell",Business,Wellington,Small Business,63500.0,TRUE,2023-05-14
+AC000403,"McGill, Dobson and Evans",Business,Auckland,Small Business,81500.0,TRUE,2024-07-25
+AC000404,Amy O'Sullivan,Person,Auckland,Private,77100.0,TRUE,2024-09-19
+AC000405,William Small,Person,Auckland,Private,75000.0,TRUE,2023-11-07
+AC000406,Donna Green,Person,Wellington,Private,81000.0,TRUE,2024-04-02
+AC000407,Susan Davis,Person,Auckland,Private,65600.0,TRUE,2024-10-14
+AC000408,Hinewai Page-Miller,Person,Christchurch,Private,76600.0,TRUE,2024-05-22
+AC000409,Kay Pedersen,Person,Auckland,Private,167100.0,TRUE,2024-08-13
+AC000410,Ryan Seymour,Person,Auckland,Private,66200.0,TRUE,2023-03-06
+AC000411,Simon Taylor,Person,Wellington,Private,159800.0,TRUE,2023-01-01
+AC000412,Spelman-Barrett,Business,Christchurch,Fleet,87600.0,TRUE,2023-04-10
+AC000413,Paul Pickering,Person,Auckland,Private,85500.0,TRUE,2023-01-21
+AC000414,Ethan Bishell,Person,Auckland,Private,74400.0,TRUE,2023-06-20
+AC000415,John Lee-Manson,Person,Auckland,Private,144000.0,TRUE,2023-01-12
+AC000416,Vincent Cook,Person,Hamilton,Private,69100.0,TRUE,2023-11-11
+AC000417,Stacey Monk,Person,Tauranga,Private,71100.0,TRUE,2024-10-13
+AC000418,Taylor-Brooks,Business,Wellington,Small Business,68300.0,TRUE,2024-09-23
+AC000419,Jacob Thompson,Person,Auckland,Private,130000.0,TRUE,2023-11-07
+AC000420,Anderson Inc,Business,Wellington,Small Business,68000.0,TRUE,2024-01-14
+AC000421,Robyn Martin,Person,Christchurch,Private,93700.0,TRUE,2024-10-18
+AC000422,Thomas Crawford-Manson,Person,Christchurch,Private,87500.0,TRUE,2023-03-02
+AC000423,Julia Smith,Person,Wellington,Private,80900.0,TRUE,2023-11-28
+AC000424,Alan Reid,Person,Auckland,Private,95100.0,TRUE,2023-06-14
+AC000425,Liam Hawkins,Person,Wellington,Private,83100.0,TRUE,2023-03-21
+AC000426,Jillian Terry,Person,Auckland,Private,86500.0,TRUE,2023-09-07
+AC000427,Gavin Jones,Person,Auckland,Private,80000.0,TRUE,2023-06-15
+AC000428,Megan Munro,Person,Auckland,Private,62100.0,TRUE,2024-11-23
+AC000429,Mitchell Group,Business,Christchurch,Small Business,74900.0,TRUE,2024-08-20
+AC000430,Laura Vercoe-Bird,Person,Auckland,Private,76800.0,TRUE,2023-07-28
+AC000431,Gabriel Smith,Person,Tauranga,Private,95900.0,TRUE,2023-08-19
+AC000432,Elizabeth Day,Person,Christchurch,Private,72700.0,TRUE,2023-07-13
+AC000433,"Fox, McLeod and Price",Business,Wellington,Small Business,63300.0,TRUE,2024-05-18
+AC000434,Leah Baldwin,Person,Tauranga,Private,147300.0,TRUE,2023-11-09
+AC000435,Lily Olsen,Person,Hamilton,Private,95400.0,TRUE,2023-06-06
+AC000436,Jones-O'Brien,Business,Auckland,Small Business,165500.0,TRUE,2023-12-21
+AC000437,Ella Smith,Person,Tauranga,Private,77000.0,TRUE,2023-01-18
+AC000438,Larsen Ltd,Business,Wellington,Small Business,148500.0,TRUE,2023-10-03
+AC000439,Richard Whyte,Person,Christchurch,Private,93900.0,TRUE,2024-04-07
+AC000440,Carol Clarke,Person,Hamilton,Private,84200.0,TRUE,2024-09-25
+AC000441,Samantha Gray,Person,Tauranga,Private,62600.0,TRUE,2024-08-25
+AC000442,Zoe Webster,Person,Auckland,Private,92500.0,TRUE,2024-05-22
+AC000443,Ross Brown,Person,Christchurch,Private,94700.0,TRUE,2023-01-24
+AC000444,Amelia Cameron,Person,Tauranga,Private,76700.0,TRUE,2023-11-27
+AC000445,Hogg LLC,Business,Tauranga,Fleet,71600.0,TRUE,2024-07-08
+AC000446,Keith Berkahn-Douglas,Person,Auckland,Private,84400.0,TRUE,2024-03-24
+AC000447,Andrew Nicol-Morris,Person,Wellington,Private,81600.0,TRUE,2024-05-02
+AC000448,Shaun Hughes,Person,Auckland,Private,70900.0,TRUE,2023-05-28
+AC000449,Porter Group,Business,Christchurch,Small Business,154800.0,TRUE,2023-08-03
+AC000450,Hudson-Strawbridge,Business,Tauranga,Small Business,78100.0,TRUE,2023-10-25
+AC000451,Wells-Edwards,Business,Christchurch,Small Business,75200.0,TRUE,2024-01-26
+AC000452,Jacqueline McNabb,Person,Auckland,Private,66600.0,TRUE,2024-11-17
+AC000453,Robert Hawkins-Williams,Person,Auckland,Private,174800.0,TRUE,2023-01-10
+AC000454,Tia Henderson-Morrison,Person,Auckland,Private,68000.0,TRUE,2024-08-16
+AC000455,Ben Morton,Person,Auckland,Private,89900.0,TRUE,2023-03-10
+AC000456,Rogers-Moran,Business,Auckland,Small Business,83000.0,TRUE,2024-04-27
+AC000457,Nigel Clarke,Person,Auckland,Private,72000.0,TRUE,2023-02-12
+AC000458,Hawkins LLC,Business,Auckland,Small Business,66400.0,TRUE,2023-10-14
+AC000459,Tui Morgan-Murdoch,Person,Auckland,Private,92900.0,TRUE,2024-08-20
+AC000460,Williams Ltd,Business,Hamilton,Small Business,195100.0,TRUE,2024-11-04
+AC000461,Isla Seymour,Person,Auckland,Private,76500.0,TRUE,2024-07-06
+AC000462,Wayne Turner,Person,Tauranga,Private,160200.0,TRUE,2024-10-08
+AC000463,Monique Davidson-Jackson,Person,Christchurch,Private,65800.0,TRUE,2024-10-27
+AC000464,Richard Barnes,Person,Christchurch,Private,77800.0,TRUE,2023-01-27
+AC000465,Trinity Anderson,Person,Auckland,Private,71700.0,TRUE,2023-12-13
+AC000466,Nicholas Kay,Person,Auckland,Private,76600.0,TRUE,2024-02-27
+AC000467,Saunders-Williams,Business,Wellington,Fleet,72600.0,TRUE,2023-10-09
+AC000468,Tapp Group,Business,Auckland,Fleet,85200.0,TRUE,2023-06-01
+AC000469,Melissa Parker,Person,Hamilton,Private,89700.0,TRUE,2024-09-18
+AC000470,Alexander Edwards,Person,Wellington,Private,78800.0,TRUE,2023-10-26
+AC000471,"Gordon, Hope and Allen",Business,Wellington,Small Business,90400.0,TRUE,2024-05-02
+AC000472,Low-Reid,Business,Tauranga,Small Business,63200.0,TRUE,2024-05-24
+AC000473,Faith Sixtus-Burns,Person,Auckland,Private,78200.0,TRUE,2024-05-22
+AC000474,Callum Williams,Person,Christchurch,Private,81100.0,TRUE,2023-02-09
+AC000475,Steven Rogers,Person,Auckland,Private,81100.0,TRUE,2024-02-18
+AC000476,Ross Eglinton,Person,Auckland,Private,184500.0,TRUE,2024-05-02
+AC000477,Michelle Carson,Person,Christchurch,Private,72600.0,TRUE,2023-09-23
+AC000478,Layla Reed,Person,Christchurch,Private,68200.0,TRUE,2023-11-15
+AC000479,Paul Laing,Person,Auckland,Private,79600.0,TRUE,2024-08-01
+AC000480,Robert Allan,Person,Christchurch,Private,82200.0,TRUE,2023-06-23
+AC000481,Manaia Gifford,Person,Tauranga,Private,65700.0,TRUE,2023-08-31
+AC000482,Robert Smith,Person,Christchurch,Private,65200.0,TRUE,2023-07-30
+AC000483,Lisa Smart,Person,Christchurch,Private,83000.0,TRUE,2024-05-31
+AC000484,Caitlin Guthrie,Person,Tauranga,Private,79300.0,TRUE,2023-04-21
+AC000485,George Lyon,Person,Wellington,Private,82800.0,TRUE,2024-10-17
+AC000486,Kirsten Griffin,Person,Wellington,Private,170800.0,TRUE,2023-08-28
+AC000487,Anna Hardie-Ritchie,Person,Christchurch,Private,95500.0,TRUE,2023-12-12
+AC000488,Smart-Pope,Business,Auckland,Small Business,93200.0,TRUE,2024-10-14
+AC000489,Stephen Ellery,Person,Auckland,Private,82700.0,TRUE,2024-01-14
+AC000490,Christine Corlett-Kelly,Person,Christchurch,Private,156500.0,TRUE,2024-11-08
+AC000491,Samuel Pope,Person,Tauranga,Private,64400.0,TRUE,2024-01-30
+AC000492,Christopher Marshall-Carson,Person,Wellington,Private,66600.0,TRUE,2024-04-09
+AC000493,Tracy Rowe,Person,Auckland,Private,89500.0,TRUE,2024-06-29
+AC000494,Scott Neal-Bright,Person,Auckland,Private,68100.0,TRUE,2024-02-21
+AC000495,Emma Parsons,Person,Wellington,Private,84800.0,TRUE,2023-03-06
+AC000496,Laura Brooks-Evans,Person,Auckland,Private,85700.0,TRUE,2024-06-27
+AC000497,Charlotte Herd-Parkes,Person,Christchurch,Private,69100.0,TRUE,2023-07-28
+AC000498,Heather Bowater-Jones,Person,Christchurch,Private,75800.0,TRUE,2023-02-11
+AC000499,Benjamin Jarvis,Person,Hamilton,Private,87300.0,TRUE,2023-06-12
+AC000500,Emily MacDonald-Osborne,Person,Auckland,Private,92600.0,TRUE,2024-11-18

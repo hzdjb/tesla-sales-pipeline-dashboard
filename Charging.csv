@@ -1,0 +1,501 @@
+ChargingId,OpportunityId,RequestDate,ChargerType,InstallStatus,QuoteNZD,StageAtRequest
+CH00001,OP000004,2025-01-25,Wall Connector,Quoted,2800.0,Negotiation
+CH00002,OP000005,2025-12-18,Wall Connector,Requested,3200.0,Long Term Prospect
+CH00003,OP000008,2025-01-08,Wall Connector,Installed,3500.0,Test Drive Completed
+CH00004,OP000011,2025-01-08,Portable Connector Upgrade,Quoted,1800.0,Test Drive Completed
+CH00005,OP000020,2025-01-10,Portable Connector Upgrade,Cancelled,1700.0,Test Drive Completed
+CH00006,OP000021,2025-03-10,Wall Connector,Cancelled,3200.0,Order Placed
+CH00007,OP000022,2025-01-20,Wall Connector,Installed,3200.0,Order Placed
+CH00008,OP000023,2025-02-19,Wall Connector,Installed,1200.0,Order Placed
+CH00009,OP000025,2025-01-11,Wall Connector,Quoted,1700.0,Test Drive Completed
+CH00010,OP000026,2025-01-08,Wall Connector,Quoted,3200.0,Test Drive Scheduled
+CH00011,OP000030,2025-01-26,Wall Connector,Installed,2700.0,Order Placed
+CH00012,OP000031,2025-01-23,Wall Connector,Requested,3400.0,Negotiation
+CH00013,OP000032,2025-02-08,Wall Connector,Requested,1800.0,Negotiation
+CH00014,OP000037,2025-01-07,Wall Connector,Requested,2200.0,Test Drive Scheduled
+CH00015,OP000038,2025-01-20,Wall Connector,Cancelled,2900.0,Test Drive Completed
+CH00016,OP000039,2025-01-09,Wall Connector,Installed,3500.0,Test Drive Scheduled
+CH00017,OP000042,2025-01-08,Wall Connector,Requested,1400.0,Test Drive Scheduled
+CH00018,OP000043,2025-02-22,Wall Connector,Installed,3300.0,Order Placed
+CH00019,OP000044,2025-01-14,Wall Connector,Scheduled,1400.0,Test Drive Completed
+CH00020,OP000045,2025-02-17,Wall Connector,Scheduled,2400.0,Negotiation
+CH00021,OP000046,2025-02-15,Portable Connector Upgrade,Requested,3100.0,Negotiation
+CH00022,OP000047,2025-02-23,Wall Connector,Quoted,1400.0,Order Placed
+CH00023,OP000051,2025-02-01,Wall Connector,Requested,1900.0,Negotiation
+CH00024,OP000054,2025-01-21,Wall Connector,Installed,3200.0,Test Drive Completed
+CH00025,OP000059,2025-01-20,Wall Connector,Installed,2200.0,Test Drive Completed
+CH00026,OP000062,2026-07-26,Portable Connector Upgrade,Cancelled,1600.0,Long Term Prospect
+CH00027,OP000069,2025-01-30,Portable Connector Upgrade,Scheduled,2800.0,Test Drive Completed
+CH00028,OP000071,2025-01-27,Wall Connector,Quoted,2400.0,Test Drive Completed
+CH00029,OP000079,2025-01-27,Wall Connector,Installed,2700.0,Test Drive Completed
+CH00030,OP000080,2025-02-01,Wall Connector,Requested,2600.0,Order Placed
+CH00031,OP000083,2025-01-17,Wall Connector,Requested,1800.0,Test Drive Completed
+CH00032,OP000085,2025-01-19,Wall Connector,Quoted,2800.0,Test Drive Scheduled
+CH00033,OP000087,2025-02-10,Destination Charging (Business),Requested,3400.0,Order Placed
+CH00034,OP000092,2025-01-14,Portable Connector Upgrade,Installed,1300.0,Test Drive Scheduled
+CH00035,OP000094,2025-01-15,Wall Connector,Quoted,3100.0,Test Drive Scheduled
+CH00036,OP000098,2025-01-31,Portable Connector Upgrade,Requested,2000.0,Closed Lost
+CH00037,OP000108,2025-01-19,Wall Connector,Requested,2800.0,Test Drive Completed
+CH00038,OP000109,2025-01-25,Wall Connector,Requested,1600.0,Closed Lost
+CH00039,OP000110,2025-03-07,Wall Connector,Scheduled,1900.0,Order Placed
+CH00040,OP000114,2025-01-23,Wall Connector,Requested,3500.0,Test Drive Scheduled
+CH00041,OP000119,2025-02-12,Portable Connector Upgrade,Cancelled,3500.0,Test Drive Completed
+CH00042,OP000122,2026-05-21,Wall Connector,Requested,2100.0,Long Term Prospect
+CH00043,OP000123,2025-01-29,Wall Connector,Scheduled,2800.0,Test Drive Completed
+CH00044,OP000124,2025-01-21,Portable Connector Upgrade,Cancelled,3300.0,Test Drive Completed
+CH00045,OP000125,2025-01-18,Portable Connector Upgrade,Installed,1200.0,Test Drive Scheduled
+CH00046,OP000126,2025-02-07,Portable Connector Upgrade,Installed,1800.0,Test Drive Completed
+CH00047,OP000127,2025-02-11,Wall Connector,Installed,2800.0,Order Placed
+CH00048,OP000128,2025-01-28,Destination Charging (Business),Requested,2500.0,Test Drive Completed
+CH00049,OP000129,2025-02-24,Destination Charging (Business),Requested,2300.0,Closed Won
+CH00050,OP000133,2025-02-10,Wall Connector,Installed,1400.0,Negotiation
+CH00051,OP000134,2025-01-22,Wall Connector,Cancelled,1500.0,Test Drive Scheduled
+CH00052,OP000137,2025-01-28,Wall Connector,Requested,3200.0,Test Drive Completed
+CH00053,OP000140,2025-01-20,Wall Connector,Installed,2200.0,Test Drive Scheduled
+CH00054,OP000143,2025-02-25,Wall Connector,Cancelled,1600.0,Test Drive Completed
+CH00055,OP000145,2025-04-04,Destination Charging (Business),Installed,1300.0,Order Placed
+CH00056,OP000146,2025-01-22,Wall Connector,Requested,3400.0,Test Drive Scheduled
+CH00057,OP000149,2025-01-25,Wall Connector,Quoted,2300.0,Test Drive Scheduled
+CH00058,OP000151,2026-01-18,Portable Connector Upgrade,Scheduled,1800.0,Long Term Prospect
+CH00059,OP000158,2025-02-12,Wall Connector,Installed,2300.0,Negotiation
+CH00060,OP000160,2025-01-31,Portable Connector Upgrade,Cancelled,2900.0,Negotiation
+CH00061,OP000161,2025-02-03,Wall Connector,Installed,3000.0,Negotiation
+CH00062,OP000163,2025-09-12,Wall Connector,Cancelled,2600.0,Long Term Prospect
+CH00063,OP000164,2025-02-24,Wall Connector,Cancelled,2500.0,Negotiation
+CH00064,OP000165,2025-02-09,Wall Connector,Installed,2800.0,Test Drive Completed
+CH00065,OP000167,2025-02-02,Portable Connector Upgrade,Installed,3000.0,Test Drive Completed
+CH00066,OP000168,2025-01-26,Wall Connector,Installed,3200.0,Test Drive Completed
+CH00067,OP000169,2025-02-05,Wall Connector,Scheduled,3300.0,Test Drive Completed
+CH00068,OP000178,2025-02-01,Portable Connector Upgrade,Scheduled,2800.0,Test Drive Scheduled
+CH00069,OP000179,2025-06-06,Destination Charging (Business),Installed,2400.0,Order Placed
+CH00070,OP000180,2026-08-02,Portable Connector Upgrade,Requested,3000.0,Long Term Prospect
+CH00071,OP000181,2025-02-09,Wall Connector,Requested,2700.0,Test Drive Completed
+CH00072,OP000189,2026-03-16,Wall Connector,Quoted,2400.0,Long Term Prospect
+CH00073,OP000190,2025-07-16,Wall Connector,Quoted,3100.0,Long Term Prospect
+CH00074,OP000193,2025-04-18,Wall Connector,Requested,1600.0,Long Term Prospect
+CH00075,OP000196,2025-07-18,Portable Connector Upgrade,Quoted,3100.0,Long Term Prospect
+CH00076,OP000197,2025-03-05,Wall Connector,Quoted,2700.0,Negotiation
+CH00077,OP000198,2025-01-29,Portable Connector Upgrade,Installed,2000.0,Test Drive Scheduled
+CH00078,OP000199,2025-01-26,Wall Connector,Quoted,1800.0,Test Drive Scheduled
+CH00079,OP000202,2025-02-19,Wall Connector,Cancelled,3300.0,Negotiation
+CH00080,OP000205,2025-01-27,Portable Connector Upgrade,Scheduled,1700.0,Test Drive Scheduled
+CH00081,OP000207,2025-02-22,Wall Connector,Cancelled,3500.0,Negotiation
+CH00082,OP000211,2025-02-03,Wall Connector,Installed,1800.0,Negotiation
+CH00083,OP000219,2025-02-18,Wall Connector,Installed,2000.0,Test Drive Completed
+CH00084,OP000220,2025-03-14,Destination Charging (Business),Requested,1900.0,Negotiation
+CH00085,OP000226,2025-02-25,Wall Connector,Cancelled,2400.0,Negotiation
+CH00086,OP000227,2025-01-30,Wall Connector,Cancelled,2100.0,Test Drive Scheduled
+CH00087,OP000234,2025-02-01,Wall Connector,Cancelled,3200.0,Test Drive Scheduled
+CH00088,OP000235,2025-02-05,Wall Connector,Quoted,1200.0,Test Drive Completed
+CH00089,OP000239,2025-02-18,Wall Connector,Cancelled,2000.0,Test Drive Completed
+CH00090,OP000243,2025-02-23,Destination Charging (Business),Installed,1600.0,Order Placed
+CH00091,OP000246,2025-02-18,Wall Connector,Requested,2800.0,Order Placed
+CH00092,OP000247,2025-02-01,Wall Connector,Quoted,1600.0,Test Drive Scheduled
+CH00093,OP000248,2025-03-06,Wall Connector,Quoted,3000.0,Order Placed
+CH00094,OP000250,2025-04-07,Portable Connector Upgrade,Scheduled,1300.0,Long Term Prospect
+CH00095,OP000251,2025-08-15,Wall Connector,Requested,1300.0,Long Term Prospect
+CH00096,OP000252,2025-03-19,Destination Charging (Business),Quoted,1400.0,Order Placed
+CH00097,OP000255,2025-02-20,Portable Connector Upgrade,Quoted,3200.0,Test Drive Completed
+CH00098,OP000256,2025-02-03,Wall Connector,Cancelled,2000.0,Test Drive Scheduled
+CH00099,OP000258,2025-02-16,Portable Connector Upgrade,Requested,2900.0,Test Drive Completed
+CH00100,OP000259,2025-03-06,Wall Connector,Installed,3200.0,Order Placed
+CH00101,OP000262,2026-08-21,Wall Connector,Scheduled,1400.0,Long Term Prospect
+CH00102,OP000263,2025-02-18,Wall Connector,Requested,2600.0,Test Drive Completed
+CH00103,OP000266,2026-04-18,Wall Connector,Cancelled,2800.0,Long Term Prospect
+CH00104,OP000270,2026-04-22,Wall Connector,Quoted,1200.0,Long Term Prospect
+CH00105,OP000272,2025-03-09,Destination Charging (Business),Quoted,1900.0,Negotiation
+CH00106,OP000273,2025-11-25,Wall Connector,Quoted,1500.0,Long Term Prospect
+CH00107,OP000274,2025-02-05,Wall Connector,Requested,1500.0,Test Drive Scheduled
+CH00108,OP000277,2025-03-05,Wall Connector,Scheduled,3500.0,Order Placed
+CH00109,OP000279,2025-03-17,Wall Connector,Scheduled,1600.0,Negotiation
+CH00110,OP000280,2025-02-16,Portable Connector Upgrade,Cancelled,2700.0,Negotiation
+CH00111,OP000294,2025-11-01,Wall Connector,Quoted,1800.0,Long Term Prospect
+CH00112,OP000295,2025-02-06,Wall Connector,Requested,2500.0,Test Drive Scheduled
+CH00113,OP000298,2025-02-06,Wall Connector,Requested,1700.0,Test Drive Scheduled
+CH00114,OP000300,2025-02-27,Wall Connector,Installed,2000.0,Negotiation
+CH00115,OP000302,2025-03-11,Wall Connector,Quoted,2800.0,Negotiation
+CH00116,OP000311,2025-02-07,Destination Charging (Business),Quoted,2400.0,Test Drive Scheduled
+CH00117,OP000313,2025-03-04,Destination Charging (Business),Installed,3100.0,Test Drive Completed
+CH00118,OP000322,2025-03-02,Destination Charging (Business),Quoted,2500.0,Order Placed
+CH00119,OP000323,2025-02-19,Portable Connector Upgrade,Installed,2900.0,Test Drive Completed
+CH00120,OP000324,2025-02-13,Wall Connector,Cancelled,2300.0,Test Drive Completed
+CH00121,OP000326,2025-03-22,Wall Connector,Installed,2600.0,Closed Won
+CH00122,OP000328,2025-03-26,Wall Connector,Quoted,1700.0,Negotiation
+CH00123,OP000330,2025-02-26,Portable Connector Upgrade,Cancelled,3100.0,Test Drive Completed
+CH00124,OP000331,2025-03-06,Wall Connector,Installed,2600.0,Negotiation
+CH00125,OP000333,2025-03-04,Wall Connector,Scheduled,1300.0,Negotiation
+CH00126,OP000337,2025-06-18,Wall Connector,Quoted,2100.0,Long Term Prospect
+CH00127,OP000340,2025-03-20,Wall Connector,Requested,1700.0,Negotiation
+CH00128,OP000344,2026-04-12,Destination Charging (Business),Scheduled,1700.0,Long Term Prospect
+CH00129,OP000345,2025-03-04,Portable Connector Upgrade,Installed,2700.0,Test Drive Completed
+CH00130,OP000348,2025-02-21,Wall Connector,Installed,2800.0,Test Drive Completed
+CH00131,OP000349,2025-02-18,Wall Connector,Installed,1700.0,Test Drive Completed
+CH00132,OP000350,2025-03-13,Wall Connector,Quoted,2700.0,Negotiation
+CH00133,OP000351,2025-03-12,Wall Connector,Installed,3000.0,Order Placed
+CH00134,OP000354,2025-02-19,Wall Connector,Quoted,2400.0,Test Drive Completed
+CH00135,OP000368,2025-03-25,Destination Charging (Business),Requested,2500.0,Long Term Prospect
+CH00136,OP000374,2025-02-25,Wall Connector,Installed,2000.0,Test Drive Completed
+CH00137,OP000376,2025-03-14,Wall Connector,Quoted,2500.0,Negotiation
+CH00138,OP000380,2025-03-17,Portable Connector Upgrade,Requested,1500.0,Negotiation
+CH00139,OP000381,2025-02-28,Wall Connector,Quoted,2900.0,Test Drive Scheduled
+CH00140,OP000383,2025-02-16,Wall Connector,Requested,2000.0,Test Drive Scheduled
+CH00141,OP000384,2025-02-14,Wall Connector,Requested,2800.0,Test Drive Scheduled
+CH00142,OP000386,2025-03-07,Wall Connector,Quoted,1500.0,Test Drive Completed
+CH00143,OP000387,2025-03-05,Wall Connector,Quoted,1400.0,Test Drive Completed
+CH00144,OP000388,2025-02-16,Destination Charging (Business),Cancelled,3500.0,Test Drive Scheduled
+CH00145,OP000396,2025-02-26,Portable Connector Upgrade,Installed,2200.0,Test Drive Completed
+CH00146,OP000400,2025-04-08,Wall Connector,Quoted,1600.0,Negotiation
+CH00147,OP000401,2025-03-07,Wall Connector,Requested,1900.0,Test Drive Completed
+CH00148,OP000402,2025-02-19,Destination Charging (Business),Quoted,3500.0,Test Drive Scheduled
+CH00149,OP000405,2025-08-01,Wall Connector,Scheduled,1900.0,Long Term Prospect
+CH00150,OP000412,2025-03-09,Destination Charging (Business),Installed,3200.0,Order Placed
+CH00151,OP000413,2025-04-16,Wall Connector,Requested,2600.0,Long Term Prospect
+CH00152,OP000414,2025-03-28,Portable Connector Upgrade,Cancelled,1700.0,Negotiation
+CH00153,OP000417,2025-02-22,Wall Connector,Requested,3500.0,Test Drive Completed
+CH00154,OP000418,2026-08-10,Wall Connector,Quoted,2300.0,Long Term Prospect
+CH00155,OP000419,2025-03-29,Destination Charging (Business),Quoted,2100.0,Negotiation
+CH00156,OP000422,2025-03-05,Destination Charging (Business),Cancelled,1500.0,Test Drive Completed
+CH00157,OP000424,2025-02-20,Portable Connector Upgrade,Requested,2900.0,Test Drive Scheduled
+CH00158,OP000426,2025-07-03,Destination Charging (Business),Requested,2200.0,Long Term Prospect
+CH00159,OP000429,2025-02-28,Wall Connector,Installed,3200.0,Test Drive Completed
+CH00160,OP000437,2025-04-10,Wall Connector,Installed,3000.0,Order Placed
+CH00161,OP000441,2025-03-22,Wall Connector,Installed,2200.0,Test Drive Completed
+CH00162,OP000443,2025-04-28,Wall Connector,Installed,1300.0,Order Placed
+CH00163,OP000447,2025-03-31,Wall Connector,Quoted,2000.0,Order Placed
+CH00164,OP000452,2025-02-23,Wall Connector,Requested,1600.0,Test Drive Scheduled
+CH00165,OP000453,2025-02-24,Wall Connector,Scheduled,3200.0,Test Drive Scheduled
+CH00166,OP000455,2025-03-25,Wall Connector,Scheduled,3400.0,Negotiation
+CH00167,OP000456,2025-03-31,Wall Connector,Installed,3500.0,Order Placed
+CH00168,OP000462,2025-02-24,Wall Connector,Quoted,2900.0,Test Drive Completed
+CH00169,OP000467,2025-03-13,Wall Connector,Installed,2400.0,Negotiation
+CH00170,OP000468,2025-03-21,Wall Connector,Quoted,1200.0,Negotiation
+CH00171,OP000470,2025-04-01,Wall Connector,Requested,2000.0,Negotiation
+CH00172,OP000478,2025-02-24,Destination Charging (Business),Quoted,1900.0,Test Drive Scheduled
+CH00173,OP000479,2025-04-27,Wall Connector,Installed,1300.0,Order Placed
+CH00174,OP000480,2025-03-28,Portable Connector Upgrade,Requested,1900.0,Negotiation
+CH00175,OP000482,2025-02-28,Wall Connector,Requested,1500.0,Test Drive Completed
+CH00176,OP000483,2025-03-20,Wall Connector,Installed,2300.0,Negotiation
+CH00177,OP000484,2025-02-28,Wall Connector,Quoted,2800.0,Test Drive Scheduled
+CH00178,OP000486,2025-07-12,Wall Connector,Scheduled,2300.0,Long Term Prospect
+CH00179,OP000494,2025-03-11,Wall Connector,Quoted,2600.0,Closed Lost
+CH00180,OP000495,2025-03-16,Portable Connector Upgrade,Installed,1300.0,Test Drive Completed
+CH00181,OP000496,2025-03-16,Wall Connector,Cancelled,1300.0,Negotiation
+CH00182,OP000498,2025-03-24,Wall Connector,Scheduled,3000.0,Negotiation
+CH00183,OP000503,2025-04-19,Wall Connector,Installed,3300.0,Order Placed
+CH00184,OP000504,2025-04-28,Portable Connector Upgrade,Quoted,3300.0,Long Term Prospect
+CH00185,OP000506,2025-03-03,Wall Connector,Quoted,1500.0,Test Drive Completed
+CH00186,OP000508,2025-06-08,Destination Charging (Business),Installed,1900.0,Closed Won
+CH00187,OP000509,2025-03-26,Portable Connector Upgrade,Quoted,1500.0,Negotiation
+CH00188,OP000510,2025-03-18,Wall Connector,Quoted,3300.0,Negotiation
+CH00189,OP000515,2025-03-28,Portable Connector Upgrade,Installed,2600.0,Closed Won
+CH00190,OP000516,2025-03-04,Wall Connector,Quoted,2600.0,Test Drive Completed
+CH00191,OP000517,2026-04-12,Wall Connector,Quoted,2600.0,Long Term Prospect
+CH00192,OP000518,2025-04-07,Destination Charging (Business),Quoted,3200.0,Negotiation
+CH00193,OP000526,2025-03-17,Wall Connector,Cancelled,1400.0,Negotiation
+CH00194,OP000527,2025-03-24,Wall Connector,Scheduled,1900.0,Order Placed
+CH00195,OP000528,2026-07-24,Portable Connector Upgrade,Quoted,3500.0,Long Term Prospect
+CH00196,OP000531,2025-04-14,Wall Connector,Quoted,1700.0,Negotiation
+CH00197,OP000532,2025-03-05,Wall Connector,Requested,3100.0,Test Drive Completed
+CH00198,OP000535,2025-03-14,Wall Connector,Installed,1400.0,Negotiation
+CH00199,OP000539,2025-03-02,Wall Connector,Installed,1300.0,Test Drive Scheduled
+CH00200,OP000540,2025-03-03,Wall Connector,Quoted,1500.0,Test Drive Scheduled
+CH00201,OP000541,2025-03-12,Wall Connector,Installed,2100.0,Test Drive Completed
+CH00202,OP000542,2025-03-09,Wall Connector,Quoted,3200.0,Test Drive Completed
+CH00203,OP000543,2025-03-03,Wall Connector,Scheduled,1900.0,Test Drive Scheduled
+CH00204,OP000544,2026-01-04,Wall Connector,Quoted,1300.0,Long Term Prospect
+CH00205,OP000551,2025-03-29,Wall Connector,Quoted,1800.0,Negotiation
+CH00206,OP000556,2025-04-09,Wall Connector,Quoted,3200.0,Negotiation
+CH00207,OP000557,2026-08-12,Destination Charging (Business),Quoted,2800.0,Long Term Prospect
+CH00208,OP000561,2025-04-12,Wall Connector,Installed,2700.0,Order Placed
+CH00209,OP000564,2025-04-02,Wall Connector,Installed,1700.0,Order Placed
+CH00210,OP000568,2025-04-13,Wall Connector,Installed,3400.0,Order Placed
+CH00211,OP000570,2025-03-05,Wall Connector,Quoted,1300.0,Test Drive Scheduled
+CH00212,OP000571,2025-03-30,Portable Connector Upgrade,Scheduled,1600.0,Order Placed
+CH00213,OP000573,2026-02-14,Wall Connector,Scheduled,3100.0,Long Term Prospect
+CH00214,OP000576,2025-03-26,Wall Connector,Quoted,2800.0,Negotiation
+CH00215,OP000577,2025-10-10,Wall Connector,Quoted,3000.0,Long Term Prospect
+CH00216,OP000579,2025-04-09,Wall Connector,Quoted,2700.0,Order Placed
+CH00217,OP000582,2025-03-18,Wall Connector,Installed,1400.0,Negotiation
+CH00218,OP000583,2025-03-17,Wall Connector,Installed,1200.0,Test Drive Completed
+CH00219,OP000587,2025-05-25,Wall Connector,Installed,3000.0,Order Placed
+CH00220,OP000591,2025-09-14,Wall Connector,Quoted,2500.0,Long Term Prospect
+CH00221,OP000597,2025-03-29,Wall Connector,Installed,2100.0,Negotiation
+CH00222,OP000600,2025-03-09,Wall Connector,Cancelled,2700.0,Test Drive Scheduled
+CH00223,OP000606,2025-03-12,Wall Connector,Installed,2600.0,Test Drive Scheduled
+CH00224,OP000608,2025-03-09,Wall Connector,Cancelled,2600.0,Test Drive Scheduled
+CH00225,OP000621,2025-06-01,Portable Connector Upgrade,Scheduled,1800.0,Order Placed
+CH00226,OP000625,2025-04-16,Wall Connector,Installed,1700.0,Order Placed
+CH00227,OP000627,2025-03-15,Wall Connector,Quoted,2900.0,Closed Lost
+CH00228,OP000629,2025-04-07,Portable Connector Upgrade,Quoted,1800.0,Negotiation
+CH00229,OP000639,2025-04-05,Wall Connector,Quoted,2600.0,Negotiation
+CH00230,OP000641,2025-03-24,Wall Connector,Quoted,2100.0,Test Drive Completed
+CH00231,OP000642,2025-03-22,Wall Connector,Quoted,1400.0,Test Drive Completed
+CH00232,OP000644,2025-04-23,Wall Connector,Installed,2500.0,Order Placed
+CH00233,OP000645,2025-03-19,Portable Connector Upgrade,Quoted,3200.0,Test Drive Completed
+CH00234,OP000646,2025-03-19,Wall Connector,Cancelled,1600.0,Test Drive Completed
+CH00235,OP000649,2025-04-09,Portable Connector Upgrade,Cancelled,1700.0,Negotiation
+CH00236,OP000650,2025-03-27,Destination Charging (Business),Requested,3300.0,Order Placed
+CH00237,OP000652,2025-03-23,Wall Connector,Cancelled,2100.0,Test Drive Scheduled
+CH00238,OP000663,2025-03-27,Portable Connector Upgrade,Requested,1900.0,Negotiation
+CH00239,OP000670,2025-03-17,Portable Connector Upgrade,Requested,3300.0,Closed Lost
+CH00240,OP000671,2025-03-23,Wall Connector,Quoted,2300.0,Test Drive Completed
+CH00241,OP000681,2025-04-10,Portable Connector Upgrade,Quoted,2000.0,Test Drive Completed
+CH00242,OP000683,2025-03-21,Destination Charging (Business),Requested,1600.0,Test Drive Completed
+CH00243,OP000687,2025-03-25,Wall Connector,Quoted,2200.0,Test Drive Completed
+CH00244,OP000689,2025-03-24,Wall Connector,Installed,1200.0,Test Drive Completed
+CH00245,OP000692,2026-08-17,Portable Connector Upgrade,Cancelled,1500.0,Long Term Prospect
+CH00246,OP000696,2025-03-19,Wall Connector,Quoted,2300.0,Test Drive Completed
+CH00247,OP000697,2025-03-27,Destination Charging (Business),Installed,2700.0,Test Drive Completed
+CH00248,OP000704,2025-03-20,Portable Connector Upgrade,Scheduled,1900.0,Test Drive Scheduled
+CH00249,OP000706,2025-03-22,Portable Connector Upgrade,Cancelled,1700.0,Test Drive Completed
+CH00250,OP000707,2025-04-08,Wall Connector,Installed,3200.0,Order Placed
+CH00251,OP000709,2025-06-01,Portable Connector Upgrade,Installed,3100.0,Order Placed
+CH00252,OP000711,2025-03-23,Portable Connector Upgrade,Quoted,3100.0,Test Drive Scheduled
+CH00253,OP000716,2025-06-08,Wall Connector,Requested,3000.0,Long Term Prospect
+CH00254,OP000719,2025-04-02,Wall Connector,Quoted,3000.0,Negotiation
+CH00255,OP000722,2025-04-08,Wall Connector,Installed,2800.0,Negotiation
+CH00256,OP000724,2025-03-23,Destination Charging (Business),Cancelled,2100.0,Test Drive Completed
+CH00257,OP000725,2025-12-01,Wall Connector,Quoted,3500.0,Long Term Prospect
+CH00258,OP000726,2026-06-21,Wall Connector,Scheduled,2000.0,Long Term Prospect
+CH00259,OP000735,2026-05-07,Wall Connector,Requested,3500.0,Long Term Prospect
+CH00260,OP000736,2025-09-22,Wall Connector,Scheduled,1700.0,Long Term Prospect
+CH00261,OP000741,2025-05-07,Wall Connector,Cancelled,3300.0,Long Term Prospect
+CH00262,OP000744,2025-11-07,Wall Connector,Requested,1800.0,Long Term Prospect
+CH00263,OP000745,2025-03-26,Destination Charging (Business),Quoted,2300.0,Test Drive Scheduled
+CH00264,OP000747,2025-03-29,Wall Connector,Installed,1700.0,Test Drive Completed
+CH00265,OP000754,2025-10-15,Wall Connector,Scheduled,2800.0,Long Term Prospect
+CH00266,OP000755,2026-09-08,Wall Connector,Scheduled,2400.0,Long Term Prospect
+CH00267,OP000758,2025-04-13,Destination Charging (Business),Quoted,1400.0,Order Placed
+CH00268,OP000760,2025-04-11,Wall Connector,Cancelled,2500.0,Negotiation
+CH00269,OP000767,2025-06-08,Portable Connector Upgrade,Installed,1700.0,Order Placed
+CH00270,OP000770,2026-05-09,Wall Connector,Requested,2900.0,Long Term Prospect
+CH00271,OP000775,2025-04-12,Portable Connector Upgrade,Installed,1600.0,Order Placed
+CH00272,OP000776,2025-06-06,Portable Connector Upgrade,Installed,1300.0,Order Placed
+CH00273,OP000780,2025-07-09,Wall Connector,Cancelled,2600.0,Long Term Prospect
+CH00274,OP000787,2025-04-03,Wall Connector,Quoted,2100.0,Test Drive Completed
+CH00275,OP000789,2025-05-01,Destination Charging (Business),Scheduled,1600.0,Negotiation
+CH00276,OP000797,2026-09-04,Destination Charging (Business),Quoted,1600.0,Long Term Prospect
+CH00277,OP000800,2025-12-02,Wall Connector,Quoted,2400.0,Long Term Prospect
+CH00278,OP000806,2025-05-13,Wall Connector,Installed,1800.0,Closed Won
+CH00279,OP000809,2025-04-18,Portable Connector Upgrade,Installed,1300.0,Test Drive Completed
+CH00280,OP000811,2025-04-18,Wall Connector,Installed,3300.0,Order Placed
+CH00281,OP000812,2025-05-11,Wall Connector,Installed,3400.0,Order Placed
+CH00282,OP000817,2025-04-27,Wall Connector,Quoted,1200.0,Order Placed
+CH00283,OP000819,2025-04-03,Wall Connector,Cancelled,3100.0,Test Drive Scheduled
+CH00284,OP000823,2025-04-09,Wall Connector,Quoted,1200.0,Test Drive Completed
+CH00285,OP000827,2025-04-03,Wall Connector,Quoted,1500.0,Test Drive Scheduled
+CH00286,OP000829,2025-04-02,Portable Connector Upgrade,Quoted,2400.0,Test Drive Completed
+CH00287,OP000833,2025-04-16,Wall Connector,Installed,3400.0,Order Placed
+CH00288,OP000834,2025-04-27,Wall Connector,Requested,3100.0,Order Placed
+CH00289,OP000838,2025-04-17,Wall Connector,Requested,2900.0,Order Placed
+CH00290,OP000839,2026-07-04,Wall Connector,Cancelled,2600.0,Long Term Prospect
+CH00291,OP000841,2025-04-01,Portable Connector Upgrade,Requested,1900.0,Test Drive Scheduled
+CH00292,OP000844,2025-09-03,Wall Connector,Requested,3200.0,Long Term Prospect
+CH00293,OP000845,2025-05-10,Wall Connector,Installed,1900.0,Order Placed
+CH00294,OP000848,2025-05-06,Wall Connector,Installed,1400.0,Order Placed
+CH00295,OP000849,2025-04-18,Wall Connector,Cancelled,1400.0,Test Drive Completed
+CH00296,OP000852,2025-05-20,Portable Connector Upgrade,Requested,1600.0,Negotiation
+CH00297,OP000853,2025-04-29,Wall Connector,Installed,2300.0,Negotiation
+CH00298,OP000854,2025-04-03,Destination Charging (Business),Cancelled,2700.0,Test Drive Completed
+CH00299,OP000856,2025-04-04,Wall Connector,Quoted,3300.0,Test Drive Completed
+CH00300,OP000857,2025-05-06,Portable Connector Upgrade,Scheduled,3200.0,Negotiation
+CH00301,OP000867,2025-04-17,Portable Connector Upgrade,Requested,1300.0,Test Drive Completed
+CH00302,OP000871,2025-04-12,Portable Connector Upgrade,Requested,1900.0,Test Drive Completed
+CH00303,OP000873,2025-04-12,Wall Connector,Scheduled,2100.0,Test Drive Completed
+CH00304,OP000874,2025-04-07,Wall Connector,Quoted,3000.0,Test Drive Completed
+CH00305,OP000876,2025-05-05,Portable Connector Upgrade,Cancelled,1700.0,Negotiation
+CH00306,OP000877,2025-04-01,Wall Connector,Cancelled,3500.0,Test Drive Scheduled
+CH00307,OP000880,2026-02-19,Wall Connector,Quoted,2600.0,Long Term Prospect
+CH00308,OP000882,2025-04-21,Wall Connector,Requested,2200.0,Negotiation
+CH00309,OP000887,2026-09-12,Portable Connector Upgrade,Scheduled,1500.0,Long Term Prospect
+CH00310,OP000901,2025-04-07,Wall Connector,Quoted,2000.0,Test Drive Scheduled
+CH00311,OP000902,2025-04-05,Portable Connector Upgrade,Requested,3000.0,Test Drive Scheduled
+CH00312,OP000904,2025-04-11,Wall Connector,Scheduled,1500.0,Negotiation
+CH00313,OP000907,2025-07-19,Wall Connector,Cancelled,2700.0,Long Term Prospect
+CH00314,OP000912,2025-04-30,Wall Connector,Quoted,2900.0,Negotiation
+CH00315,OP000922,2025-04-13,Wall Connector,Cancelled,2100.0,Test Drive Completed
+CH00316,OP000923,2025-05-07,Wall Connector,Scheduled,3500.0,Closed Lost
+CH00317,OP000924,2025-05-10,Portable Connector Upgrade,Installed,1600.0,Closed Won
+CH00318,OP000925,2025-05-04,Wall Connector,Installed,2700.0,Order Placed
+CH00319,OP000926,2025-05-18,Wall Connector,Installed,3500.0,Order Placed
+CH00320,OP000930,2025-04-24,Wall Connector,Scheduled,2500.0,Test Drive Completed
+CH00321,OP000934,2025-04-23,Wall Connector,Installed,1800.0,Negotiation
+CH00322,OP000935,2025-09-22,Destination Charging (Business),Scheduled,2000.0,Long Term Prospect
+CH00323,OP000936,2025-04-14,Portable Connector Upgrade,Scheduled,1700.0,Test Drive Completed
+CH00324,OP000939,2025-04-17,Wall Connector,Quoted,3200.0,Test Drive Completed
+CH00325,OP000940,2025-09-10,Destination Charging (Business),Quoted,1400.0,Long Term Prospect
+CH00326,OP000942,2025-04-16,Wall Connector,Quoted,1800.0,Test Drive Completed
+CH00327,OP000949,2025-05-13,Wall Connector,Installed,2600.0,Closed Won
+CH00328,OP000951,2025-04-25,Destination Charging (Business),Installed,3000.0,Test Drive Completed
+CH00329,OP000956,2025-04-29,Portable Connector Upgrade,Quoted,3000.0,Negotiation
+CH00330,OP000959,2025-04-27,Wall Connector,Scheduled,1800.0,Negotiation
+CH00331,OP000960,2025-05-09,Wall Connector,Installed,2900.0,Order Placed
+CH00332,OP000963,2025-05-30,Destination Charging (Business),Requested,1200.0,Negotiation
+CH00333,OP000964,2025-05-09,Portable Connector Upgrade,Quoted,3200.0,Closed Lost
+CH00334,OP000967,2025-06-22,Wall Connector,Requested,1500.0,Long Term Prospect
+CH00335,OP000970,2025-04-26,Wall Connector,Installed,3500.0,Test Drive Completed
+CH00336,OP000980,2025-04-22,Wall Connector,Scheduled,2600.0,Test Drive Completed
+CH00337,OP000985,2025-10-02,Wall Connector,Cancelled,1200.0,Long Term Prospect
+CH00338,OP000986,2025-04-27,Wall Connector,Quoted,1800.0,Negotiation
+CH00339,OP000988,2025-04-27,Wall Connector,Requested,2300.0,Negotiation
+CH00340,OP000993,2025-04-26,Wall Connector,Scheduled,2200.0,Test Drive Completed
+CH00341,OP000998,2025-04-16,Wall Connector,Scheduled,3500.0,Test Drive Scheduled
+CH00342,OP000999,2025-05-16,Wall Connector,Cancelled,2800.0,Negotiation
+CH00343,OP001000,2025-04-28,Wall Connector,Cancelled,1200.0,Negotiation
+CH00344,OP001001,2025-05-06,Portable Connector Upgrade,Requested,2600.0,Negotiation
+CH00345,OP001002,2025-04-13,Wall Connector,Quoted,2500.0,Test Drive Scheduled
+CH00346,OP001004,2025-05-09,Wall Connector,Requested,3300.0,Test Drive Completed
+CH00347,OP001005,2025-05-14,Wall Connector,Cancelled,3300.0,Negotiation
+CH00348,OP001009,2025-04-30,Wall Connector,Scheduled,3200.0,Negotiation
+CH00349,OP001013,2025-05-21,Wall Connector,Scheduled,1600.0,Order Placed
+CH00350,OP001015,2025-05-16,Wall Connector,Scheduled,1800.0,Test Drive Completed
+CH00351,OP001024,2025-05-11,Wall Connector,Cancelled,3000.0,Negotiation
+CH00352,OP001034,2025-05-21,Wall Connector,Installed,1500.0,Order Placed
+CH00353,OP001042,2025-05-01,Wall Connector,Scheduled,2800.0,Negotiation
+CH00354,OP001043,2025-05-01,Wall Connector,Cancelled,1700.0,Negotiation
+CH00355,OP001050,2025-06-04,Destination Charging (Business),Installed,3000.0,Order Placed
+CH00356,OP001052,2025-05-27,Portable Connector Upgrade,Installed,1400.0,Order Placed
+CH00357,OP001055,2025-07-05,Portable Connector Upgrade,Installed,1300.0,Order Placed
+CH00358,OP001059,2025-04-29,Destination Charging (Business),Quoted,2800.0,Test Drive Completed
+CH00359,OP001062,2025-04-27,Wall Connector,Scheduled,3200.0,Test Drive Completed
+CH00360,OP001064,2025-04-30,Wall Connector,Requested,3100.0,Test Drive Completed
+CH00361,OP001066,2025-06-14,Wall Connector,Installed,1500.0,Order Placed
+CH00362,OP001067,2025-05-17,Portable Connector Upgrade,Scheduled,2800.0,Order Placed
+CH00363,OP001071,2025-05-17,Wall Connector,Quoted,2600.0,Negotiation
+CH00364,OP001074,2025-06-07,Portable Connector Upgrade,Installed,3100.0,Order Placed
+CH00365,OP001077,2025-05-03,Portable Connector Upgrade,Installed,2000.0,Test Drive Completed
+CH00366,OP001078,2025-05-17,Wall Connector,Installed,1300.0,Negotiation
+CH00367,OP001080,2025-05-22,Wall Connector,Requested,2800.0,Negotiation
+CH00368,OP001085,2025-04-28,Wall Connector,Quoted,2500.0,Test Drive Completed
+CH00369,OP001090,2025-06-18,Portable Connector Upgrade,Cancelled,3300.0,Long Term Prospect
+CH00370,OP001091,2025-07-04,Wall Connector,Installed,1800.0,Order Placed
+CH00371,OP001094,2025-04-29,Wall Connector,Requested,1800.0,Test Drive Completed
+CH00372,OP001095,2025-05-13,Wall Connector,Quoted,2100.0,Test Drive Completed
+CH00373,OP001097,2025-05-11,Wall Connector,Installed,2000.0,Negotiation
+CH00374,OP001098,2025-05-02,Wall Connector,Quoted,1300.0,Test Drive Completed
+CH00375,OP001111,2025-05-27,Wall Connector,Quoted,2500.0,Test Drive Completed
+CH00376,OP001113,2025-05-05,Wall Connector,Requested,2000.0,Test Drive Completed
+CH00377,OP001115,2025-04-28,Wall Connector,Cancelled,1500.0,Closed Lost
+CH00378,OP001122,2025-05-25,Wall Connector,Cancelled,3400.0,Negotiation
+CH00379,OP001124,2025-05-22,Wall Connector,Quoted,1200.0,Negotiation
+CH00380,OP001125,2025-06-23,Wall Connector,Installed,1900.0,Order Placed
+CH00381,OP001127,2026-02-08,Wall Connector,Requested,2800.0,Long Term Prospect
+CH00382,OP001128,2025-05-14,Portable Connector Upgrade,Scheduled,2600.0,Negotiation
+CH00383,OP001133,2025-12-16,Wall Connector,Requested,1800.0,Long Term Prospect
+CH00384,OP001135,2025-05-19,Wall Connector,Scheduled,3400.0,Negotiation
+CH00385,OP001136,2025-05-16,Wall Connector,Quoted,3000.0,Negotiation
+CH00386,OP001140,2025-05-17,Wall Connector,Installed,2400.0,Negotiation
+CH00387,OP001141,2025-05-12,Wall Connector,Quoted,1500.0,Test Drive Completed
+CH00388,OP001144,2025-05-24,Portable Connector Upgrade,Installed,2600.0,Order Placed
+CH00389,OP001151,2025-09-10,Wall Connector,Cancelled,2200.0,Long Term Prospect
+CH00390,OP001155,2025-08-07,Portable Connector Upgrade,Quoted,2600.0,Long Term Prospect
+CH00391,OP001157,2025-05-04,Wall Connector,Scheduled,1400.0,Test Drive Scheduled
+CH00392,OP001158,2025-05-23,Wall Connector,Installed,3200.0,Order Placed
+CH00393,OP001162,2025-05-02,Wall Connector,Scheduled,3500.0,Test Drive Scheduled
+CH00394,OP001163,2025-04-30,Wall Connector,Quoted,2300.0,Test Drive Completed
+CH00395,OP001165,2025-05-23,Destination Charging (Business),Scheduled,2400.0,Negotiation
+CH00396,OP001172,2025-05-12,Wall Connector,Requested,1800.0,Test Drive Completed
+CH00397,OP001174,2025-06-27,Wall Connector,Installed,1400.0,Order Placed
+CH00398,OP001175,2025-05-13,Wall Connector,Scheduled,3500.0,Test Drive Completed
+CH00399,OP001178,2025-04-30,Wall Connector,Scheduled,1400.0,Test Drive Scheduled
+CH00400,OP001182,2025-05-27,Wall Connector,Requested,3300.0,Test Drive Completed
+CH00401,OP001183,2025-06-15,Wall Connector,Installed,2800.0,Order Placed
+CH00402,OP001185,2025-05-16,Portable Connector Upgrade,Installed,1300.0,Negotiation
+CH00403,OP001186,2025-06-06,Portable Connector Upgrade,Installed,2100.0,Order Placed
+CH00404,OP001193,2025-12-01,Wall Connector,Requested,2000.0,Long Term Prospect
+CH00405,OP001196,2025-05-28,Destination Charging (Business),Cancelled,1400.0,Long Term Prospect
+CH00406,OP001201,2025-05-07,Wall Connector,Requested,1400.0,Closed Lost
+CH00407,OP001202,2025-06-12,Wall Connector,Installed,2900.0,Order Placed
+CH00408,OP001203,2026-07-17,Wall Connector,Quoted,1400.0,Long Term Prospect
+CH00409,OP001205,2025-05-26,Destination Charging (Business),Quoted,3500.0,Negotiation
+CH00410,OP001206,2025-05-25,Wall Connector,Requested,1200.0,Negotiation
+CH00411,OP001207,2025-05-11,Wall Connector,Quoted,2800.0,Negotiation
+CH00412,OP001210,2025-06-08,Portable Connector Upgrade,Cancelled,2900.0,Long Term Prospect
+CH00413,OP001212,2025-06-05,Portable Connector Upgrade,Requested,3400.0,Negotiation
+CH00414,OP001214,2025-05-19,Wall Connector,Requested,2100.0,Test Drive Completed
+CH00415,OP001223,2025-11-02,Wall Connector,Quoted,1600.0,Long Term Prospect
+CH00416,OP001228,2025-05-25,Wall Connector,Quoted,2000.0,Test Drive Completed
+CH00417,OP001239,2026-08-15,Wall Connector,Quoted,3300.0,Long Term Prospect
+CH00418,OP001241,2025-07-26,Portable Connector Upgrade,Cancelled,3100.0,Long Term Prospect
+CH00419,OP001243,2025-07-01,Wall Connector,Quoted,1900.0,Test Drive Completed
+CH00420,OP001244,2025-05-13,Wall Connector,Quoted,2000.0,Test Drive Completed
+CH00421,OP001246,2025-06-04,Wall Connector,Requested,2700.0,Test Drive Completed
+CH00422,OP001253,2025-10-08,Wall Connector,Cancelled,1400.0,Long Term Prospect
+CH00423,OP001254,2025-05-17,Wall Connector,Requested,1500.0,Test Drive Completed
+CH00424,OP001256,2026-07-29,Destination Charging (Business),Quoted,1600.0,Long Term Prospect
+CH00425,OP001259,2025-10-22,Wall Connector,Requested,1700.0,Long Term Prospect
+CH00426,OP001260,2025-05-14,Destination Charging (Business),Quoted,3100.0,Test Drive Scheduled
+CH00427,OP001269,2025-06-08,Portable Connector Upgrade,Requested,3300.0,Negotiation
+CH00428,OP001271,2025-05-19,Wall Connector,Installed,3000.0,Test Drive Completed
+CH00429,OP001272,2025-06-13,Wall Connector,Cancelled,2200.0,Order Placed
+CH00430,OP001273,2025-05-30,Wall Connector,Requested,3000.0,Negotiation
+CH00431,OP001275,2025-06-28,Portable Connector Upgrade,Requested,2700.0,Negotiation
+CH00432,OP001276,2025-05-25,Portable Connector Upgrade,Cancelled,1800.0,Closed Lost
+CH00433,OP001278,2025-07-27,Wall Connector,Quoted,3200.0,Order Placed
+CH00434,OP001282,2025-06-01,Portable Connector Upgrade,Installed,1300.0,Test Drive Completed
+CH00435,OP001286,2025-06-03,Wall Connector,Quoted,3300.0,Order Placed
+CH00436,OP001287,2025-06-06,Wall Connector,Requested,2300.0,Negotiation
+CH00437,OP001289,2025-06-04,Wall Connector,Cancelled,3000.0,Negotiation
+CH00438,OP001292,2026-05-22,Portable Connector Upgrade,Requested,2000.0,Long Term Prospect
+CH00439,OP001294,2026-04-21,Destination Charging (Business),Requested,3000.0,Long Term Prospect
+CH00440,OP001297,2025-05-20,Wall Connector,Requested,1600.0,Test Drive Completed
+CH00441,OP001299,2025-06-03,Portable Connector Upgrade,Requested,1800.0,Test Drive Completed
+CH00442,OP001300,2025-06-13,Wall Connector,Quoted,1800.0,Negotiation
+CH00443,OP001305,2025-05-15,Wall Connector,Requested,3300.0,Test Drive Completed
+CH00444,OP001306,2025-06-02,Wall Connector,Cancelled,1400.0,Test Drive Completed
+CH00445,OP001313,2025-05-24,Wall Connector,Scheduled,1300.0,Test Drive Scheduled
+CH00446,OP001317,2025-05-20,Portable Connector Upgrade,Installed,1600.0,Test Drive Scheduled
+CH00447,OP001325,2025-05-17,Portable Connector Upgrade,Scheduled,2700.0,Test Drive Scheduled
+CH00448,OP001330,2025-05-30,Wall Connector,Cancelled,2400.0,Test Drive Completed
+CH00449,OP001331,2026-05-14,Wall Connector,Cancelled,1400.0,Long Term Prospect
+CH00450,OP001336,2025-05-28,Wall Connector,Quoted,2200.0,Test Drive Completed
+CH00451,OP001337,2025-07-01,Wall Connector,Cancelled,1800.0,Negotiation
+CH00452,OP001338,2025-05-22,Wall Connector,Cancelled,3300.0,Test Drive Scheduled
+CH00453,OP001342,2025-08-26,Portable Connector Upgrade,Quoted,2200.0,Long Term Prospect
+CH00454,OP001344,2025-05-31,Wall Connector,Requested,1200.0,Test Drive Completed
+CH00455,OP001345,2025-05-20,Wall Connector,Installed,1900.0,Test Drive Scheduled
+CH00456,OP001348,2025-05-29,Wall Connector,Requested,2200.0,Negotiation
+CH00457,OP001349,2025-06-24,Wall Connector,Cancelled,2500.0,Negotiation
+CH00458,OP001350,2025-05-31,Portable Connector Upgrade,Installed,1900.0,Test Drive Completed
+CH00459,OP001355,2025-05-29,Portable Connector Upgrade,Quoted,2000.0,Test Drive Completed
+CH00460,OP001358,2025-05-19,Wall Connector,Requested,2200.0,Test Drive Scheduled
+CH00461,OP001361,2025-05-19,Portable Connector Upgrade,Requested,2500.0,Test Drive Scheduled
+CH00462,OP001362,2025-08-03,Wall Connector,Installed,2800.0,Order Placed
+CH00463,OP001365,2025-06-08,Portable Connector Upgrade,Installed,3300.0,Order Placed
+CH00464,OP001368,2025-06-05,Wall Connector,Quoted,3400.0,Negotiation
+CH00465,OP001369,2025-06-14,Portable Connector Upgrade,Quoted,2200.0,Test Drive Completed
+CH00466,OP001370,2025-06-05,Wall Connector,Scheduled,2100.0,Negotiation
+CH00467,OP001371,2025-05-21,Wall Connector,Cancelled,1400.0,Test Drive Scheduled
+CH00468,OP001372,2026-01-19,Portable Connector Upgrade,Cancelled,3200.0,Long Term Prospect
+CH00469,OP001376,2025-05-22,Wall Connector,Cancelled,1400.0,Test Drive Scheduled
+CH00470,OP001383,2025-05-29,Wall Connector,Cancelled,2500.0,Test Drive Completed
+CH00471,OP001389,2025-06-24,Wall Connector,Quoted,2700.0,Negotiation
+CH00472,OP001392,2025-05-30,Wall Connector,Requested,2900.0,Test Drive Completed
+CH00473,OP001393,2025-05-31,Wall Connector,Quoted,2900.0,Test Drive Completed
+CH00474,OP001396,2025-05-25,Portable Connector Upgrade,Quoted,2800.0,Test Drive Scheduled
+CH00475,OP001397,2025-09-05,Portable Connector Upgrade,Quoted,1800.0,Long Term Prospect
+CH00476,OP001400,2025-05-30,Wall Connector,Scheduled,2600.0,Test Drive Completed
+CH00477,OP001401,2025-05-25,Wall Connector,Quoted,3000.0,Test Drive Scheduled
+CH00478,OP001402,2025-07-08,Destination Charging (Business),Requested,2400.0,Long Term Prospect
+CH00479,OP001404,2025-07-13,Portable Connector Upgrade,Requested,2500.0,Negotiation
+CH00480,OP001405,2025-06-07,Wall Connector,Quoted,2300.0,Test Drive Completed
+CH00481,OP001406,2025-05-25,Wall Connector,Quoted,1200.0,Test Drive Scheduled
+CH00482,OP001408,2025-05-28,Wall Connector,Quoted,2200.0,Test Drive Scheduled
+CH00483,OP001414,2025-06-03,Wall Connector,Scheduled,2400.0,Closed Lost
+CH00484,OP001415,2025-06-02,Wall Connector,Installed,2700.0,Test Drive Completed
+CH00485,OP001416,2025-07-27,Wall Connector,Installed,2800.0,Order Placed
+CH00486,OP001420,2025-07-23,Destination Charging (Business),Installed,2000.0,Order Placed
+CH00487,OP001423,2025-06-12,Portable Connector Upgrade,Installed,1300.0,Negotiation
+CH00488,OP001424,2025-07-19,Wall Connector,Quoted,2000.0,Long Term Prospect
+CH00489,OP001425,2025-06-03,Wall Connector,Cancelled,1800.0,Test Drive Completed
+CH00490,OP001426,2025-06-06,Wall Connector,Cancelled,1300.0,Test Drive Completed
+CH00491,OP001431,2025-07-22,Portable Connector Upgrade,Cancelled,1500.0,Negotiation
+CH00492,OP001433,2025-07-11,Portable Connector Upgrade,Cancelled,1900.0,Order Placed
+CH00493,OP001434,2025-08-12,Wall Connector,Quoted,3500.0,Long Term Prospect
+CH00494,OP001441,2025-06-08,Portable Connector Upgrade,Quoted,1600.0,Test Drive Completed
+CH00495,OP001443,2025-06-16,Wall Connector,Quoted,1700.0,Negotiation
+CH00496,OP001444,2025-06-15,Wall Connector,Installed,2600.0,Test Drive Completed
+CH00497,OP001445,2025-06-12,Wall Connector,Quoted,1900.0,Negotiation
+CH00498,OP001446,2025-06-02,Wall Connector,Cancelled,1400.0,Closed Lost
+CH00499,OP001450,2025-06-13,Wall Connector,Installed,2900.0,Negotiation
+CH00500,OP001453,2026-02-23,Portable Connector Upgrade,Requested,2200.0,Long Term Prospect

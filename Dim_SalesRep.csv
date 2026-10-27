@@ -1,0 +1,43 @@
+SalesRepId,RepName,StoreId,Role,HireDate,LeaveDate,TenureMonths,ManagerName,IsActive
+SR001,Alex Morgan,ST01,Store Manager,2020-02-23,,79,,TRUE
+SR002,Cameron Harris,ST01,Senior Owner Advisor,2022-06-26,,51,Alex Morgan,TRUE
+SR003,Annette Grant,ST01,Senior Owner Advisor,2022-04-04,,53,Alex Morgan,TRUE
+SR004,Benjamin Mason,ST01,Owner Advisor,2024-04-27,,29,Alex Morgan,TRUE
+SR005,Amanda Ward-Satherley,ST01,Owner Advisor,2023-04-05,2026-03-18,35,Alex Morgan,FALSE
+SR006,Jessica Ferguson,ST01,Owner Advisor,2024-08-02,,25,Alex Morgan,TRUE
+SR007,Rory Smith-Wills,ST01,Owner Advisor,2025-12-09,,9,Alex Morgan,TRUE
+SR008,Helen Hart,ST01,Owner Advisor,2024-07-18,,26,Alex Morgan,TRUE
+SR009,Ava Fisher,ST01,Owner Advisor,2023-05-21,,40,Alex Morgan,TRUE
+SR010,Scarlett Holmes,ST01,Owner Advisor,2023-07-20,,38,Alex Morgan,TRUE
+SR011,Peter Wilkinson,ST02,Store Manager,2021-07-10,,62,,TRUE
+SR012,Anna Morrison,ST02,Senior Owner Advisor,2021-10-09,,59,Peter Wilkinson,TRUE
+SR013,Stella Price-McDonald,ST02,Senior Owner Advisor,2022-07-30,,50,Peter Wilkinson,TRUE
+SR014,Andrew Adams,ST02,Owner Advisor,2024-08-22,2025-10-30,14,Peter Wilkinson,FALSE
+SR015,Manaia Bond-Law,ST02,Owner Advisor,2023-04-12,2025-12-30,32,Peter Wilkinson,FALSE
+SR016,Emma Burgess,ST02,Owner Advisor,2025-08-02,,13,Peter Wilkinson,TRUE
+SR017,Chelsea Gibson,ST02,Owner Advisor,2025-06-29,,15,Peter Wilkinson,TRUE
+SR018,Oliver Chandler-Brown,ST02,Owner Advisor,2025-02-09,,19,Peter Wilkinson,TRUE
+SR019,Kyle Jensen,ST03,Store Manager,2020-07-31,,73,,TRUE
+SR020,Jane Burr,ST03,Senior Owner Advisor,2021-11-08,,58,Kyle Jensen,TRUE
+SR021,Destiny Webb,ST03,Senior Owner Advisor,2022-09-18,,48,Kyle Jensen,TRUE
+SR022,David Anderson,ST03,Owner Advisor,2025-01-15,2026-05-31,16,Kyle Jensen,FALSE
+SR023,Jennifer Brown,ST03,Owner Advisor,2024-02-05,2025-11-12,21,Kyle Jensen,FALSE
+SR024,Sophie Oliver-Coley,ST04,Store Manager,2020-11-23,,70,,TRUE
+SR025,Stacey Alexander,ST04,Senior Owner Advisor,2021-04-19,,65,Sophie Oliver-Coley,TRUE
+SR026,Donald Parker,ST04,Senior Owner Advisor,2022-06-05,,51,Sophie Oliver-Coley,TRUE
+SR027,Lauren Prentice,ST04,Owner Advisor,2025-01-21,,20,Sophie Oliver-Coley,TRUE
+SR028,Susan Kennedy,ST04,Owner Advisor,2024-02-08,,31,Sophie Oliver-Coley,TRUE
+SR029,Te Ariki Martin,ST05,Store Manager,2021-08-03,,61,,TRUE
+SR030,Aria Jones,ST05,Senior Owner Advisor,2022-09-26,,48,Te Ariki Martin,TRUE
+SR031,Charlie Hart,ST05,Senior Owner Advisor,2021-09-17,,60,Te Ariki Martin,TRUE
+SR032,Mackenzie O'Brien,ST05,Owner Advisor,2023-03-25,2025-11-13,31,Te Ariki Martin,FALSE
+SR033,Tia Lane-Gaskin,ST05,Owner Advisor,2024-05-24,,28,Te Ariki Martin,TRUE
+SR034,Nicholas Thomas,ST05,Owner Advisor,2023-05-23,2026-01-04,31,Te Ariki Martin,FALSE
+SR035,Rachael Griffin,ST05,Owner Advisor,2025-01-06,,20,Te Ariki Martin,TRUE
+SR036,Bella Nicholson,ST06,Store Manager,2020-04-06,,77,,TRUE
+SR037,Abigail Barr,ST06,Senior Owner Advisor,2022-08-06,,49,Bella Nicholson,TRUE
+SR038,William Nolan-Allan,ST06,Senior Owner Advisor,2022-03-17,,54,Bella Nicholson,TRUE
+SR039,Simon Stevens,ST06,Owner Advisor,2025-02-09,,19,Bella Nicholson,TRUE
+SR040,Maree Simpson,ST06,Owner Advisor,2025-04-24,,17,Bella Nicholson,TRUE
+SR041,Lance Craig,ST06,Owner Advisor,2025-07-04,,14,Bella Nicholson,TRUE
+SR042,Tania Waters,ST06,Owner Advisor,2025-09-14,,12,Bella Nicholson,TRUE

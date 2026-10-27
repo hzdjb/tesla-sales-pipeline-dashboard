@@ -1,0 +1,98 @@
+// =====================================================================
+// calculated_columns.dax
+// Create each column with: Table view > select the table > New column > paste.
+// Create these BEFORE the measures (the measure 'Stale LTP' uses Opportunity[IsStale]).
+// "Snapshot" = last lead creation date in the data (2026-09-30), used as "today".
+// =====================================================================
+
+// ---------- Dim_Date ----------
+
+// Dim_Date[YearMonth]  - label for monthly axes, e.g. 2026-09
+YearMonth = FORMAT ( Dim_Date[Date], "YYYY-MM" )
+
+// Dim_Date[MonthYear]  - friendly label, e.g. Sep 2026. Sort by column: MonthYearSort
+MonthYear = FORMAT ( Dim_Date[Date], "MMM YYYY" )
+
+// Dim_Date[MonthYearSort]  - numeric sort key, e.g. 202609. Set as Sort by column for YearMonth and MonthYear
+MonthYearSort = Dim_Date[Year] * 100 + Dim_Date[MonthNo]
+
+// Dim_Date[IsReportingWindow]  - TRUE for dates that have actuals (first to last lead date).
+// Use as a report-level filter = TRUE so Oct-Dec 2026 targets do not inflate totals.
+IsReportingWindow =
+VAR FirstDay = MIN ( Lead[CreatedDate] )
+VAR LastDay = MAX ( Lead[CreatedDate] )
+RETURN
+    Dim_Date[Date] >= FirstDay && Dim_Date[Date] <= LastDay
+
+// ---------- Account ----------
+// Segment is already delivered in Account.csv. If your source lacks it, this rule reproduces it:
+// Segment = IF ( Account[AccountType] = "Person", "Private", IF ( Account[CustomerLifetimeValue] >= 300000, "Fleet", "Small Business" ) )
+
+// ---------- Opportunity ----------
+
+// Opportunity[DaysInStage]  - days in the current stage; blank once won or lost
+DaysInStage =
+VAR Snap = MAX ( Lead[CreatedDate] )
+RETURN
+    IF ( NOT Opportunity[IsClosed], DATEDIFF ( Opportunity[StageEnteredDate], Snap, DAY ) )
+
+// Opportunity[DaysSinceLastContact]
+DaysSinceLastContact =
+VAR Snap = MAX ( Lead[CreatedDate] )
+RETURN
+    IF ( NOT ISBLANK ( Opportunity[LastContactDate] ), DATEDIFF ( Opportunity[LastContactDate], Snap, DAY ) )
+
+// Opportunity[IsStale]  - Long Term Prospect with no contact for more than 30 days (or never contacted)
+IsStale =
+VAR Snap = MAX ( Lead[CreatedDate] )
+RETURN
+    Opportunity[Stage] = "Long Term Prospect"
+        && (
+            ISBLANK ( Opportunity[LastContactDate] )
+                || DATEDIFF ( Opportunity[LastContactDate], Snap, DAY ) > 30
+        )
+
+// Opportunity[StageOrder]  - sort key for funnel visuals. Set as Sort by column for Opportunity[Stage]
+StageOrder =
+SWITCH (
+    Opportunity[Stage],
+    "Test Drive Scheduled", 1,
+    "Test Drive Completed", 2,
+    "Negotiation", 3,
+    "Order Placed", 4,
+    "Closed Won", 5,
+    "Long Term Prospect", 6,
+    "Closed Lost", 7
+)
+
+// ---------- Lead ----------
+
+// Lead[DaysSinceCreated]
+DaysSinceCreated =
+VAR Snap = MAX ( Lead[CreatedDate] )
+RETURN
+    DATEDIFF ( Lead[CreatedDate], Snap, DAY )
+
+// Lead[ResponseBand]  - buckets for the SLA detail page
+ResponseBand =
+SWITCH (
+    TRUE (),
+    ISBLANK ( Lead[FirstResponseHours] ), "No contact",
+    Lead[FirstResponseHours] <= 1, "< 1h",
+    Lead[FirstResponseHours] <= 4, "1-4h",
+    Lead[FirstResponseHours] <= 24, "4-24h",
+    Lead[FirstResponseHours] <= 72, "24-72h",
+    "> 72h"
+)
+
+// ---------- Dim_SalesRep ----------
+
+// Dim_SalesRep[TenureBand]  - groups advisors for the "tenure vs SLA" view
+TenureBand =
+SWITCH (
+    TRUE (),
+    Dim_SalesRep[TenureMonths] < 12, "< 12 months",
+    Dim_SalesRep[TenureMonths] < 24, "12-24 months",
+    Dim_SalesRep[TenureMonths] < 48, "24-48 months",
+    "48+ months"
+)

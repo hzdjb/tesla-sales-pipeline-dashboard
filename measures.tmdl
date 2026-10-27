@@ -1,0 +1,410 @@
+/// measures.tmdl - paste into Power BI Desktop TMDL view, click Apply.
+/// Adds every measure with format string, display folder and description.
+
+createOrReplace
+
+	ref table Lead
+
+		/// Leads created in the selected period (Lead[CreatedDate]).
+		measure 'Total Leads' = COUNTROWS ( Lead )
+			formatString: #,0
+			displayFolder: 1 Funnel
+
+		/// Leads from the selected creation cohort that were converted to an Opportunity.
+		measure 'Converted Leads' = CALCULATE ( COUNTROWS ( Lead ), Lead[Status] = "Converted" )
+			formatString: #,0
+			displayFolder: 1 Funnel
+
+		/// Cohort conversion: converted leads / leads created in the period.
+		measure 'Lead to Opp %' = DIVIDE ( [Converted Leads], [Total Leads] )
+			formatString: 0.0%
+			displayFolder: 1 Funnel
+
+		/// Share of leads with a first response within 24 hours. Leads never contacted count as a miss.
+		measure 'Lead SLA 24h %' = DIVIDE ( CALCULATE ( COUNTROWS ( Lead ), Lead[IsLeadSLA24hMet] = TRUE () ), [Total Leads] )
+			formatString: 0.0%
+			displayFolder: 2 SLA
+
+		/// Leads released to the public pool (no contact within 72h, or owner left).
+		measure 'Public Pool Leads' = CALCULATE ( COUNTROWS ( Lead ), Lead[IsPublicPool] = TRUE () )
+			formatString: #,0
+			displayFolder: 5 Public Pool
+
+		/// Share of leads that reached the public pool.
+		measure 'Public Pool Lead %' = DIVIDE ( [Public Pool Leads], [Total Leads] )
+			formatString: 0.0%
+			displayFolder: 5 Public Pool
+
+		/// Pool leads claimed by another advisor.
+		measure 'Reactivated Pool Leads' = CALCULATE ( COUNTROWS ( Lead ), Lead[IsPublicPool] = TRUE (), Lead[IsReactivated] = TRUE () )
+			formatString: #,0
+			displayFolder: 5 Public Pool
+
+		/// Share of pool leads claimed by another advisor.
+		measure 'Public Pool Reactivation %' = DIVIDE ( [Reactivated Pool Leads], [Public Pool Leads] )
+			formatString: 0.0%
+			displayFolder: 5 Public Pool
+
+		/// Pool leads that still became an Opportunity - the value recovered by the pool.
+		measure 'Pool Leads Converted' = CALCULATE ( COUNTROWS ( Lead ), Lead[IsPublicPool] = TRUE (), Lead[Status] = "Converted" )
+			formatString: #,0
+			displayFolder: 5 Public Pool
+
+	ref table Fact_LeadConversion
+
+		/// Conversion events dated in the period (Fact_LeadConversion[ConversionDate]).
+		measure 'Conversions' = COUNTROWS ( Fact_LeadConversion )
+			formatString: #,0
+			displayFolder: 1 Funnel
+
+		/// Average days from lead creation to conversion.
+		measure 'Avg Days to Convert' = AVERAGE ( Fact_LeadConversion[DaysToConvert] )
+			formatString: 0.0
+			displayFolder: 1 Funnel
+
+	ref table Opportunity
+
+		/// Opportunities created in the period, including ones not sourced from a Lead.
+		measure 'Total Opportunities' = COUNTROWS ( Opportunity )
+			formatString: #,0
+			displayFolder: 1 Funnel
+
+		/// Won opportunities from the creation cohort.
+		measure 'Closed Won' = CALCULATE ( COUNTROWS ( Opportunity ), Opportunity[IsWon] = TRUE () )
+			formatString: #,0
+			displayFolder: 1 Funnel
+
+		/// Lost opportunities from the creation cohort.
+		measure 'Closed Lost' = CALCULATE ( COUNTROWS ( Opportunity ), Opportunity[Stage] = "Closed Lost" )
+			formatString: #,0
+			displayFolder: 1 Funnel
+
+		/// Opportunities not yet won or lost (includes Long Term Prospect).
+		measure 'Open Opportunities' = CALCULATE ( COUNTROWS ( Opportunity ), Opportunity[IsClosed] = FALSE () )
+			formatString: #,0
+			displayFolder: 1 Funnel
+
+		/// Win rate on closed opportunities: won / (won + lost).
+		measure 'Close Won %' = DIVIDE ( [Closed Won], [Closed Won] + [Closed Lost] )
+			formatString: 0.0%
+			displayFolder: 1 Funnel
+
+		/// Won opportunities / leads in the same period (blended, includes direct opportunities).
+		measure 'Lead to Won %' = DIVIDE ( [Closed Won], [Total Leads] )
+			formatString: 0.0%
+			displayFolder: 1 Funnel
+
+		/// Share of opportunities with a test drive booked within 48 hours of creation.
+		measure 'TD SLA 48h %' =
+				DIVIDE (
+				    CALCULATE ( COUNTROWS ( Opportunity ), Opportunity[IsTDSLA48hMet] = TRUE () ),
+				    CALCULATE ( COUNTROWS ( Opportunity ), NOT ISBLANK ( Opportunity[IsTDSLA48hMet] ) )
+				)
+			formatString: 0.0%
+			displayFolder: 2 SLA
+
+		/// Share of completed test drives followed up within 7 days.
+		measure 'FollowUp SLA 7d %' =
+				DIVIDE (
+				    CALCULATE ( COUNTROWS ( Opportunity ), Opportunity[IsFollowUpSLA7dMet] = TRUE () ),
+				    CALCULATE ( COUNTROWS ( Opportunity ), NOT ISBLANK ( Opportunity[IsFollowUpSLA7dMet] ) )
+				)
+			formatString: 0.0%
+			displayFolder: 2 SLA
+
+		/// Snapshot: share of Long Term Prospects contacted in the last 30 days.
+		measure 'LTP SLA 30d %' =
+				DIVIDE (
+				    CALCULATE ( COUNTROWS ( Opportunity ), Opportunity[IsLTPSLA30dMet] = TRUE () ),
+				    CALCULATE ( COUNTROWS ( Opportunity ), NOT ISBLANK ( Opportunity[IsLTPSLA30dMet] ) )
+				)
+			formatString: 0.0%
+			displayFolder: 2 SLA
+
+		/// Delivered revenue, dated by delivery (CloseDate) via the inactive relationship.
+		measure 'Total Revenue NZD' =
+				CALCULATE (
+				    SUM ( Opportunity[ExpectedRevenue] ),
+				    Opportunity[IsWon] = TRUE (),
+				    USERELATIONSHIP ( Opportunity[CloseDate], Dim_Date[Date] )
+				)
+			formatString: $#,0
+			displayFolder: 4 Revenue & Pipeline
+
+		/// Closed won opportunities dated by delivery date.
+		measure 'Deliveries' =
+				CALCULATE (
+				    COUNTROWS ( Opportunity ),
+				    Opportunity[IsWon] = TRUE (),
+				    USERELATIONSHIP ( Opportunity[CloseDate], Dim_Date[Date] )
+				)
+			formatString: #,0
+			displayFolder: 4 Revenue & Pipeline
+
+		/// Average delivered order value.
+		measure 'Avg Order NZD' = DIVIDE ( [Total Revenue NZD], [Deliveries] )
+			formatString: $#,0
+			displayFolder: 4 Revenue & Pipeline
+
+		/// Delivery attainment.
+		measure 'Deliveries vs Target %' = DIVIDE ( [Deliveries], [Closed Won Target] )
+			formatString: 0.0%
+			displayFolder: 4 Revenue & Pipeline
+
+		/// Last date in the data; used as 'today' for snapshot measures.
+		measure 'Snapshot Date' = CALCULATE ( MAX ( Lead[CreatedDate] ), REMOVEFILTERS () )
+			formatString: yyyy-mm-dd
+			displayFolder: 4 Revenue & Pipeline
+
+		/// Unweighted value of open opportunities.
+		measure 'Open Pipeline NZD' = CALCULATE ( SUM ( Opportunity[ExpectedRevenue] ), Opportunity[IsClosed] = FALSE () )
+			formatString: $#,0
+			displayFolder: 4 Revenue & Pipeline
+
+		/// Open pipeline weighted by stage probability.
+		measure 'Weighted Pipeline' = CALCULATE ( SUM ( Opportunity[WeightedRevenue] ), Opportunity[IsClosed] = FALSE () )
+			formatString: $#,0
+			displayFolder: 4 Revenue & Pipeline
+
+		/// Revenue target for the three months after the snapshot date (respects store filters).
+		measure 'Next Quarter Revenue Target' =
+				VAR Snap = [Snapshot Date]
+				VAR QStart = EOMONTH ( Snap, 0 ) + 1
+				VAR QEnd = EOMONTH ( Snap, 3 )
+				RETURN
+				    CALCULATE (
+				        [Revenue Target],
+				        REMOVEFILTERS ( Dim_Date ),
+				        Dim_Date[Date] >= QStart,
+				        Dim_Date[Date] <= QEnd
+				    )
+			formatString: $#,0
+			displayFolder: 4 Revenue & Pipeline
+
+		/// All open weighted pipeline / next quarter revenue target. Ignores the date slicer by design.
+		measure 'Pipeline Coverage %' = DIVIDE ( CALCULATE ( [Weighted Pipeline], REMOVEFILTERS ( Dim_Date ) ), [Next Quarter Revenue Target] )
+			formatString: 0.0%
+			displayFolder: 4 Revenue & Pipeline
+
+		/// Opportunities released (owner left, or LTP without contact for 45+ days).
+		measure 'Public Pool Opps' = CALCULATE ( COUNTROWS ( Opportunity ), Opportunity[IsPublicPool] = TRUE () )
+			formatString: #,0
+			displayFolder: 5 Public Pool
+
+		/// Pool opportunities claimed by another advisor.
+		measure 'Reactivated Pool Opps' = CALCULATE ( COUNTROWS ( Opportunity ), Opportunity[IsPublicPool] = TRUE (), Opportunity[IsReactivated] = TRUE () )
+			formatString: #,0
+			displayFolder: 5 Public Pool
+
+		/// Share of pool opportunities claimed by another advisor.
+		measure 'Opp Pool Reactivation %' = DIVIDE ( [Reactivated Pool Opps], [Public Pool Opps] )
+			formatString: 0.0%
+			displayFolder: 5 Public Pool
+
+		/// Long Term Prospects without contact for more than 30 days (calculated column).
+		measure 'Stale LTP' = CALCULATE ( COUNTROWS ( Opportunity ), Opportunity[IsStale] = TRUE () )
+			formatString: #,0
+			displayFolder: 5 Public Pool
+
+	ref table Dim_Target
+
+		/// Monthly lead targets summed over the selection.
+		measure 'Leads Target' = CALCULATE ( SUM ( Dim_Target[TargetValue] ), Dim_Target[MetricName] = "Leads" )
+			formatString: #,0
+			displayFolder: 3 Targets
+
+		/// Delivery (closed won) targets summed over the selection.
+		measure 'Closed Won Target' = CALCULATE ( SUM ( Dim_Target[TargetValue] ), Dim_Target[MetricName] = "ClosedWon" )
+			formatString: #,0
+			displayFolder: 3 Targets
+
+		/// Revenue targets (NZD) summed over the selection.
+		measure 'Revenue Target' = CALCULATE ( SUM ( Dim_Target[TargetValue] ), Dim_Target[MetricName] = "Revenue" )
+			formatString: $#,0
+			displayFolder: 3 Targets
+
+		/// Average Lead SLA target across selected store-months.
+		measure 'Lead SLA Target' = CALCULATE ( AVERAGE ( Dim_Target[TargetValue] ), Dim_Target[MetricName] = "LeadSLA24h" )
+			formatString: 0.0%
+			displayFolder: 3 Targets
+
+		/// Average TD SLA target across selected store-months.
+		measure 'TD SLA Target' = CALCULATE ( AVERAGE ( Dim_Target[TargetValue] ), Dim_Target[MetricName] = "TDSLA48h" )
+			formatString: 0.0%
+			displayFolder: 3 Targets
+
+		/// Average FollowUp SLA target across selected store-months.
+		measure 'FollowUp SLA Target' = CALCULATE ( AVERAGE ( Dim_Target[TargetValue] ), Dim_Target[MetricName] = "FollowUpSLA7d" )
+			formatString: 0.0%
+			displayFolder: 3 Targets
+
+		/// Average LTP SLA target across selected store-months.
+		measure 'LTP SLA Target' = CALCULATE ( AVERAGE ( Dim_Target[TargetValue] ), Dim_Target[MetricName] = "LTPSLA30d" )
+			formatString: 0.0%
+			displayFolder: 3 Targets
+
+		/// Percentage-point gap to target. Negative = behind.
+		measure 'Lead SLA vs Target' = IF ( NOT ISBLANK ( [Lead SLA 24h %] ), [Lead SLA 24h %] - [Lead SLA Target] )
+			formatString: +0.0%;-0.0%;0.0%
+			displayFolder: 3 Targets
+
+		/// Percentage-point gap to target.
+		measure 'TD SLA vs Target' = IF ( NOT ISBLANK ( [TD SLA 48h %] ), [TD SLA 48h %] - [TD SLA Target] )
+			formatString: +0.0%;-0.0%;0.0%
+			displayFolder: 3 Targets
+
+		/// Percentage-point gap to target.
+		measure 'FollowUp SLA vs Target' = IF ( NOT ISBLANK ( [FollowUp SLA 7d %] ), [FollowUp SLA 7d %] - [FollowUp SLA Target] )
+			formatString: +0.0%;-0.0%;0.0%
+			displayFolder: 3 Targets
+
+		/// Percentage-point gap to target.
+		measure 'LTP SLA vs Target' = IF ( NOT ISBLANK ( [LTP SLA 30d %] ), [LTP SLA 30d %] - [LTP SLA Target] )
+			formatString: +0.0%;-0.0%;0.0%
+			displayFolder: 3 Targets
+
+		/// Lead volume attainment.
+		measure 'Leads vs Target %' = DIVIDE ( [Total Leads], [Leads Target] )
+			formatString: 0.0%
+			displayFolder: 3 Targets
+
+		/// Revenue attainment (revenue by delivery date).
+		measure 'Revenue vs Target %' = DIVIDE ( [Total Revenue NZD], [Revenue Target] )
+			formatString: 0.0%
+			displayFolder: 3 Targets
+
+		/// Green = at or above target; Yellow = within 5 pp; Red = more than 5 pp behind.
+		measure 'Lead SLA Alert' =
+				VAR Gap = [Lead SLA vs Target]
+				RETURN
+				    IF (
+				        NOT ISBLANK ( Gap ),
+				        SWITCH ( TRUE (), Gap >= 0, "Green", Gap >= -0.05, "Yellow", "Red" )
+				    )
+			displayFolder: 3 Targets
+
+		/// Hex colour for conditional formatting (Format > Field value).
+		measure 'Lead SLA Alert Colour' = SWITCH ( [Lead SLA Alert], "Green", "#2E9E5B", "Yellow", "#E0A526", "Red", "#E82127" )
+			displayFolder: 3 Targets
+
+		/// Green = at or above target; Yellow = within 5 pp; Red = more than 5 pp behind.
+		measure 'TD SLA Alert' =
+				VAR Gap = [TD SLA vs Target]
+				RETURN
+				    IF (
+				        NOT ISBLANK ( Gap ),
+				        SWITCH ( TRUE (), Gap >= 0, "Green", Gap >= -0.05, "Yellow", "Red" )
+				    )
+			displayFolder: 3 Targets
+
+		/// Hex colour for conditional formatting (Format > Field value).
+		measure 'TD SLA Alert Colour' = SWITCH ( [TD SLA Alert], "Green", "#2E9E5B", "Yellow", "#E0A526", "Red", "#E82127" )
+			displayFolder: 3 Targets
+
+		/// Green = at or above target; Yellow = within 5 pp; Red = more than 5 pp behind.
+		measure 'FollowUp SLA Alert' =
+				VAR Gap = [FollowUp SLA vs Target]
+				RETURN
+				    IF (
+				        NOT ISBLANK ( Gap ),
+				        SWITCH ( TRUE (), Gap >= 0, "Green", Gap >= -0.05, "Yellow", "Red" )
+				    )
+			displayFolder: 3 Targets
+
+		/// Hex colour for conditional formatting (Format > Field value).
+		measure 'FollowUp SLA Alert Colour' = SWITCH ( [FollowUp SLA Alert], "Green", "#2E9E5B", "Yellow", "#E0A526", "Red", "#E82127" )
+			displayFolder: 3 Targets
+
+		/// Green = at or above target; Yellow = within 5 pp; Red = more than 5 pp behind.
+		measure 'LTP SLA Alert' =
+				VAR Gap = [LTP SLA vs Target]
+				RETURN
+				    IF (
+				        NOT ISBLANK ( Gap ),
+				        SWITCH ( TRUE (), Gap >= 0, "Green", Gap >= -0.05, "Yellow", "Red" )
+				    )
+			displayFolder: 3 Targets
+
+		/// Hex colour for conditional formatting (Format > Field value).
+		measure 'LTP SLA Alert Colour' = SWITCH ( [LTP SLA Alert], "Green", "#2E9E5B", "Yellow", "#E0A526", "Red", "#E82127" )
+			displayFolder: 3 Targets
+
+		/// Worst status across the four SLAs; use as the headline alert.
+		measure 'SLA Alert' =
+				VAR Alerts = { [Lead SLA Alert], [TD SLA Alert], [FollowUp SLA Alert], [LTP SLA Alert] }
+				VAR Reds = COUNTROWS ( FILTER ( Alerts, [Value] = "Red" ) )
+				VAR Yellows = COUNTROWS ( FILTER ( Alerts, [Value] = "Yellow" ) )
+				VAR Known = COUNTROWS ( FILTER ( Alerts, NOT ISBLANK ( [Value] ) ) )
+				RETURN
+				    IF ( Known > 0, SWITCH ( TRUE (), Reds > 0, "Red", Yellows > 0, "Yellow", "Green" ) )
+			displayFolder: 3 Targets
+
+		/// Hex colour for the headline alert.
+		measure 'SLA Alert Colour' = SWITCH ( [SLA Alert], "Green", "#2E9E5B", "Yellow", "#E0A526", "Red", "#E82127" )
+			displayFolder: 3 Targets
+
+	ref table Vehicle
+
+		/// Average days from order to delivery.
+		measure 'Avg Delivery Days' = AVERAGEX ( Vehicle, DATEDIFF ( Vehicle[OrderDate], Vehicle[DeliveryDate], DAY ) )
+			formatString: 0.0
+			displayFolder: 4 Revenue & Pipeline
+
+		/// Share of deliveries taking more than 30 days after order.
+		measure 'Delayed Delivery %' =
+				DIVIDE (
+				    COUNTROWS ( FILTER ( Vehicle, DATEDIFF ( Vehicle[OrderDate], Vehicle[DeliveryDate], DAY ) > 30 ) ),
+				    COUNTROWS ( Vehicle )
+				)
+			formatString: 0.0%
+			displayFolder: 4 Revenue & Pipeline
+
+	ref table Charging
+
+		/// Share of opportunities with a home/business charging request.
+		measure 'Charging Attach %' = DIVIDE ( DISTINCTCOUNT ( Charging[OpportunityId] ), [Total Opportunities] )
+			formatString: 0.0%
+			displayFolder: 4 Revenue & Pipeline
+
+	ref table TradeIn
+
+		/// Share of opportunities with a trade-in appraisal.
+		measure 'Trade-in Attach %' = DIVIDE ( DISTINCTCOUNT ( TradeIn[OpportunityId] ), [Total Opportunities] )
+			formatString: 0.0%
+			displayFolder: 4 Revenue & Pipeline
+
+		/// Average appraised trade-in value.
+		measure 'Avg Trade-in Value NZD' = AVERAGE ( TradeIn[AppraisedValueNZD] )
+			formatString: $#,0
+			displayFolder: 4 Revenue & Pipeline
+
+	ref table Fact_Activity
+
+		/// Logged calls, messages, test drives and visits.
+		measure 'Activity Count' = COUNTROWS ( Fact_Activity )
+			formatString: #,0
+			displayFolder: 6 Activity
+
+		/// Share of activities where the customer was reached.
+		measure 'Connected Rate' = DIVIDE ( CALCULATE ( COUNTROWS ( Fact_Activity ), Fact_Activity[IsConnected] = TRUE () ), [Activity Count] )
+			formatString: 0.0%
+			displayFolder: 6 Activity
+
+		/// Positive outcomes / connected activities.
+		measure 'Positive Outcome Rate' =
+				DIVIDE (
+				    CALCULATE ( COUNTROWS ( Fact_Activity ), Fact_Activity[IsPositive] = TRUE () ),
+				    CALCULATE ( COUNTROWS ( Fact_Activity ), Fact_Activity[IsConnected] = TRUE () )
+				)
+			formatString: 0.0%
+			displayFolder: 6 Activity
+
+		/// Average days until the next planned action.
+		measure 'Avg Next Action Days' = AVERAGE ( Fact_Activity[NextActionDays] )
+			formatString: 0.0
+			displayFolder: 6 Activity
+
+		/// Activity intensity on opportunities (note: Fact_Activity is filtered by its own date, not by opportunity cohort).
+		measure 'Activities per Opportunity' = DIVIDE ( CALCULATE ( [Activity Count], NOT ISBLANK ( Fact_Activity[OpportunityId] ) ), [Total Opportunities] )
+			formatString: 0.0
+			displayFolder: 6 Activity

@@ -1,0 +1,57 @@
+{
+  "name": "EV Sales Pipeline Dark",
+  "dataColors": ["#E82127", "#D0D3D9", "#8A8F98", "#5B6069", "#3E7BFA", "#2E9E5B", "#E0A526", "#B34BD9"],
+  "background": "#0F1115",
+  "foreground": "#FFFFFF",
+  "tableAccent": "#E82127",
+  "good": "#2E9E5B",
+  "neutral": "#E0A526",
+  "bad": "#E82127",
+  "maximum": "#E82127",
+  "center": "#5B6069",
+  "minimum": "#1A1D23",
+  "textClasses": {
+    "callout": { "fontSize": 28, "fontFace": "Segoe UI Semibold", "color": "#FFFFFF" },
+    "title": { "fontSize": 12, "fontFace": "Segoe UI Semibold", "color": "#FFFFFF" },
+    "header": { "fontSize": 12, "fontFace": "Segoe UI Semibold", "color": "#FFFFFF" },
+    "label": { "fontSize": 10, "fontFace": "Segoe UI", "color": "#D0D3D9" }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [{ "show": true, "color": { "solid": { "color": "#1A1D23" } }, "transparency": 0 }],
+        "border": [{ "show": true, "color": { "solid": { "color": "#2A2E36" } }, "radius": 6 }],
+        "title": [{ "show": true, "fontColor": { "solid": { "color": "#FFFFFF" } }, "fontFamily": "Segoe UI Semibold", "fontSize": 11 }],
+        "categoryAxis": [{ "labelColor": { "solid": { "color": "#D0D3D9" } }, "fontFamily": "Segoe UI", "gridlineColor": { "solid": { "color": "#2A2E36" } } }],
+        "valueAxis": [{ "labelColor": { "solid": { "color": "#D0D3D9" } }, "fontFamily": "Segoe UI", "gridlineColor": { "solid": { "color": "#2A2E36" } } }],
+        "legend": [{ "labelColor": { "solid": { "color": "#D0D3D9" } }, "fontFamily": "Segoe UI" }],
+        "labels": [{ "color": { "solid": { "color": "#FFFFFF" } }, "fontFamily": "Segoe UI" }]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [{ "color": { "solid": { "color": "#0F1115" } }, "transparency": 0 }],
+        "outspace": [{ "color": { "solid": { "color": "#0F1115" } }, "transparency": 0 }]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [{ "color": { "solid": { "color": "#FFFFFF" } }, "fontSize": 26, "fontFamily": "Segoe UI Semibold" }],
+        "categoryLabels": [{ "show": true, "color": { "solid": { "color": "#8A8F98" } }, "fontSize": 10, "fontFamily": "Segoe UI" }]
+      }
+    },
+    "tableEx": {
+      "*": {
+        "grid": [{ "gridHorizontal": true, "gridHorizontalColor": { "solid": { "color": "#2A2E36" } }, "gridVertical": false, "rowPadding": 4 }],
+        "columnHeaders": [{ "fontColor": { "solid": { "color": "#FFFFFF" } }, "backColor": { "solid": { "color": "#22262E" } }, "fontFamily": "Segoe UI Semibold" }],
+        "values": [{ "fontColorPrimary": { "solid": { "color": "#D0D3D9" } }, "backColorPrimary": { "solid": { "color": "#1A1D23" } }, "fontColorSecondary": { "solid": { "color": "#D0D3D9" } }, "backColorSecondary": { "solid": { "color": "#1E2128" } }, "fontFamily": "Segoe UI" }]
+      }
+    },
+    "slicer": {
+      "*": {
+        "items": [{ "fontColor": { "solid": { "color": "#FFFFFF" } }, "background": { "solid": { "color": "#1A1D23" } } }],
+        "header": [{ "fontColor": { "solid": { "color": "#8A8F98" } } }]
+      }
+    }
+  }
+}

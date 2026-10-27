@@ -1,0 +1,1877 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Interactive EV sales pipeline dashboard built from simulated NZ retail CRM data.">
+<style>body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+<title>EV Sales Pipeline Dashboard</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Barlow:wght@400;500;600&display=swap">
+<style>
+/* Layout: report canvas like the Power BI file - page tabs on top, a 12-column grid of tiles per page */
+:root {
+  --bg: #0F1115; --panel: #1A1D23; --panel-2: #22262E; --line: #2C3038;
+  --fg: #FFFFFF; --fg-2: #C9CDD4; --muted: #8A8F98;
+  --accent: #E82127; --s2: #4C86F7; --s3: #17A091; --ref: #8A8F98;
+  --good: #2E9E5B; --warn: #E0A526; --bad: #FF4D52;
+  --display: "Barlow Condensed", "Arial Narrow", "Segoe UI", sans-serif;
+  --body: "Barlow", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font: 14px/1.45 var(--body); }
+.wrap { max-width: 1320px; margin: 0 auto; padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+h1 { font: 600 30px/1.05 var(--display); letter-spacing: .02em; text-transform: uppercase; margin: 0; text-wrap: balance; }
+h1 span { color: var(--accent); }
+.meta { color: var(--muted); font-size: 12.5px; }
+.meta b { color: var(--fg-2); font-weight: 500; }
+nav { display: flex; gap: 4px; margin: 18px 0 16px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+nav a { color: var(--muted); text-decoration: none; padding: 10px 14px; font: 600 15px var(--display); letter-spacing: .04em;
+  text-transform: uppercase; border-bottom: 2px solid transparent; white-space: nowrap; }
+nav a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--accent); }
+nav a:hover { color: var(--fg); }
+nav a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid var(--s2); outline-offset: 2px; }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; }
+.tile { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; min-width: 0; }
+.tile h2 { margin: 0 0 2px; font: 600 15px var(--display); letter-spacing: .05em; text-transform: uppercase; color: var(--fg); }
+.tile .sub { color: var(--muted); font-size: 12px; margin: 0 0 10px; }
+.c2 { grid-column: span 2; } .c3 { grid-column: span 3; } .c4 { grid-column: span 4; } .c5 { grid-column: span 5; }
+.c6 { grid-column: span 6; } .c7 { grid-column: span 7; } .c8 { grid-column: span 8; } .c12 { grid-column: span 12; }
+@media (max-width: 980px) { .c2, .c3 { grid-column: span 6; } .c4, .c5, .c6, .c7, .c8 { grid-column: span 12; } }
+@media (max-width: 520px) { .c2, .c3 { grid-column: span 12; } }
+.kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+.kpi .value { font: 600 34px/1.1 var(--display); font-variant-numeric: tabular-nums; margin-top: 4px; }
+.kpi .foot { font-size: 12.5px; color: var(--fg-2); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.chip { display: inline-flex; align-items: center; gap: 5px; padding: 1px 8px 1px 6px; border-radius: 999px; font-size: 12px;
+  font-weight: 600; border: 1px solid currentColor; white-space: nowrap; }
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.chip.Green { color: var(--good); } .chip.Yellow { color: var(--warn); } .chip.Red { color: var(--bad); }
+.chip.Green::after { content: "On target"; } .chip.Yellow::after { content: "Within 5 pp"; } .chip.Red::after { content: "Behind"; }
+.chip.compact::after { content: none; }
+.chart { width: 100%; position: relative; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart text { fill: var(--fg-2); font: 12px var(--body); font-variant-numeric: tabular-nums; }
+.chart .axis text { fill: var(--muted); font-size: 11px; }
+.chart .grid line { stroke: var(--line); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--fg-2); margin-bottom: 6px; }
+.legend i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+.legend i.dash { background: repeating-linear-gradient(90deg, var(--ref) 0 4px, transparent 4px 7px) !important; }
+.tip { position: absolute; pointer-events: none; background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px;
+  padding: 8px 10px; font-size: 12px; color: var(--fg); white-space: nowrap; z-index: 5; box-shadow: 0 6px 18px rgba(0,0,0,.4); }
+.tip b { display: block; font-weight: 600; margin-bottom: 2px; }
+.tip .row { display: flex; gap: 12px; justify-content: space-between; color: var(--fg-2); }
+.tip .row span:last-child { color: var(--fg); font-variant-numeric: tabular-nums; }
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 13px; }
+th { text-align: left; font-weight: 600; color: var(--fg-2); background: var(--panel-2); padding: 7px 10px; white-space: nowrap;
+  font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+th button { all: unset; cursor: pointer; }
+th button::after { content: " ↕"; color: var(--muted); }
+td { padding: 6px 10px; border-top: 1px solid var(--line); white-space: nowrap; color: var(--fg-2); }
+td.num, th.num { text-align: right; }
+td.name { color: var(--fg); }
+tr.pool td { color: var(--muted); font-style: italic; }
+.cell-bar { display: inline-block; height: 6px; border-radius: 3px; background: var(--accent); vertical-align: middle; margin-left: 8px; opacity: .85; }
+.note { color: var(--muted); font-size: 12px; margin-top: 8px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-bottom: 10px; font-size: 12.5px; color: var(--muted); }
+select { background: var(--panel-2); color: var(--fg); border: 1px solid var(--line); border-radius: 4px; padding: 4px 8px; font: inherit; }
+.banner { border: 1px dashed var(--line); border-radius: 6px; padding: 10px 14px; color: var(--fg-2); font-size: 12.5px; margin-top: 16px; }
+.banner b { color: var(--fg); font-weight: 600; }
+.sla-row { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: baseline; }
+.meter { grid-column: 1 / -1; height: 8px; background: var(--panel-2); border-radius: 4px; position: relative; margin-top: 8px; }
+.meter .fill { position: absolute; inset: 0 auto 0 0; border-radius: 4px; background: var(--fg-2); }
+.meter .tgt { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--fg); }
+@media (prefers-reduced-motion: no-preference) { .tile { transition: border-color .15s; } .tile:hover { border-color: #3A3F49; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>EV Sales <span>Pipeline</span></h1>
+      <div class="meta" id="meta"></div>
+    </div>
+    <div class="meta">NZ retail network · 6 stores · NZD · simulated data</div>
+  </header>
+  <nav id="nav" aria-label="Report pages">
+    <a href="#executive">Executive summary</a>
+    <a href="#funnel">Funnel &amp; SLA</a>
+    <a href="#stores">Store, rep &amp; public pool</a>
+    <a href="#loss">SLA detail &amp; loss</a>
+  </nav>
+
+  <section id="p-executive" class="grid" aria-label="Executive summary"></section>
+  <section id="p-funnel" class="grid" aria-label="Funnel and SLA" hidden></section>
+  <section id="p-stores" class="grid" aria-label="Store, rep and public pool" hidden></section>
+  <section id="p-loss" class="grid" aria-label="SLA detail and loss" hidden></section>
+
+  <div class="banner"><b>Preview of the Power BI report.</b> Every number here was computed by <code>tools/validate_model.py</code>,
+    which re-implements the DAX measures with Power BI filter propagation over the generated CSVs. Data is simulated and is not real Tesla data.</div>
+</div>
+
+<script>
+const D = {
+ "snapshot": "2026-09-30",
+ "window": [
+  "2025-01-01",
+  "2026-09-30"
+ ],
+ "kpi": {
+  "Total Leads": 19765,
+  "Converted Leads": 5564,
+  "Total Opportunities": 6545,
+  "Closed Won": 2082,
+  "Closed Lost": 3085,
+  "Open Opportunities": 1378,
+  "Conversions": 5564,
+  "Lead SLA 24h %": 0.8410827219833038,
+  "TD SLA 48h %": 0.7440293937538273,
+  "FollowUp SLA 7d %": 0.7149765990639626,
+  "LTP SLA 30d %": 0.6095534787123572,
+  "Total Revenue NZD": 166351800.0,
+  "Deliveries": 2082,
+  "Weighted Pipeline": 18009175.0,
+  "Open Pipeline NZD": 110695200.0,
+  "Next Quarter Revenue Target": 31289000.0,
+  "Pipeline Coverage %": 0.5755752820480041,
+  "Public Pool Leads": 2738,
+  "Reactivated Pool Leads": 673,
+  "Pool Leads Converted": 40,
+  "Public Pool Opps": 398,
+  "Reactivated Pool Opps": 159,
+  "Stale LTP": 376,
+  "Activity Count": 77050,
+  "Connected Rate": 0.6551849448410123,
+  "Positive Outcome Rate": 0.5143417455726794,
+  "Leads Target": 20714.0,
+  "Closed Won Target": 2253.0,
+  "Revenue Target": 178288000.0,
+  "Lead SLA Target": 0.8732380952380953,
+  "TD SLA Target": 0.769357142857143,
+  "FollowUp SLA Target": 0.7448809523809526,
+  "LTP SLA Target": 0.6469920634920635,
+  "Charging Attach %": 0.3547746371275783,
+  "Trade-in Attach %": 0.24690603514132925,
+  "Lead to Opp %": 0.2815077156589932,
+  "Close Won %": 0.4029417456938262,
+  "Lead to Won %": 0.10533771818871743,
+  "Avg Order NZD": 79900.0,
+  "Public Pool Lead %": 0.1385277004806476,
+  "Public Pool Reactivation %": 0.24579985390796202,
+  "Opp Pool Reactivation %": 0.39949748743718594,
+  "Revenue vs Target %": 0.9330510185766849,
+  "Leads vs Target %": 0.9541855749734479,
+  "Deliveries vs Target %": 0.9241011984021305,
+  "Lead SLA Alert": "Yellow",
+  "Lead SLA vs Target": -0.03215537325479145,
+  "TD SLA Alert": "Yellow",
+  "TD SLA vs Target": -0.0253277491033157,
+  "FollowUp SLA Alert": "Yellow",
+  "FollowUp SLA vs Target": -0.02990435331699004,
+  "LTP SLA Alert": "Yellow",
+  "LTP SLA vs Target": -0.037438584779706297,
+  "SLA Alert": "Yellow"
+ },
+ "stores": {
+  "Auckland Central": {
+   "Total Leads": 4925,
+   "Converted Leads": 1416,
+   "Total Opportunities": 1642,
+   "Closed Won": 516,
+   "Closed Lost": 801,
+   "Open Opportunities": 325,
+   "Conversions": 1416,
+   "Lead SLA 24h %": 0.8467005076142132,
+   "TD SLA 48h %": 0.7570036540803897,
+   "FollowUp SLA 7d %": 0.7124142233312539,
+   "LTP SLA 30d %": 0.5515695067264574,
+   "Total Revenue NZD": 41146400.0,
+   "Deliveries": 516,
+   "Weighted Pipeline": 4261585.0,
+   "Open Pipeline NZD": 25820500.0,
+   "Next Quarter Revenue Target": 8731000.0,
+   "Pipeline Coverage %": 0.48809815599587675,
+   "Public Pool Leads": 540,
+   "Reactivated Pool Leads": 133,
+   "Pool Leads Converted": 9,
+   "Public Pool Opps": 92,
+   "Reactivated Pool Opps": 31,
+   "Stale LTP": 100,
+   "Activity Count": 19229,
+   "Connected Rate": 0.6579125279525716,
+   "Positive Outcome Rate": 0.5148209627697415,
+   "Leads Target": 5155.0,
+   "Closed Won Target": 547.0,
+   "Revenue Target": 44033000.0,
+   "Lead SLA Target": 0.8744761904761903,
+   "TD SLA Target": 0.7636190476190476,
+   "FollowUp SLA Target": 0.7238095238095239,
+   "LTP SLA Target": 0.6376190476190476,
+   "Charging Attach %": 0.3440925700365408,
+   "Trade-in Attach %": 0.2570036540803898,
+   "Lead to Opp %": 0.28751269035532995,
+   "Close Won %": 0.3917995444191344,
+   "Lead to Won %": 0.10477157360406092,
+   "Avg Order NZD": 79741.08527131783,
+   "Public Pool Lead %": 0.10964467005076142,
+   "Public Pool Reactivation %": 0.2462962962962963,
+   "Opp Pool Reactivation %": 0.33695652173913043,
+   "Revenue vs Target %": 0.9344446210796448,
+   "Leads vs Target %": 0.9553831231813773,
+   "Deliveries vs Target %": 0.943327239488117,
+   "Lead SLA Alert": "Yellow",
+   "Lead SLA vs Target": -0.02777568286197707,
+   "TD SLA Alert": "Yellow",
+   "TD SLA vs Target": -0.006615393538657921,
+   "FollowUp SLA Alert": "Yellow",
+   "FollowUp SLA vs Target": -0.011395300478269976,
+   "LTP SLA Alert": "Red",
+   "LTP SLA vs Target": -0.0860495408925902,
+   "SLA Alert": "Red"
+  },
+  "Auckland North Shore": {
+   "Total Leads": 3969,
+   "Converted Leads": 1161,
+   "Total Opportunities": 1350,
+   "Closed Won": 450,
+   "Closed Lost": 609,
+   "Open Opportunities": 291,
+   "Conversions": 1161,
+   "Lead SLA 24h %": 0.8382464096749811,
+   "TD SLA 48h %": 0.7431328878990349,
+   "FollowUp SLA 7d %": 0.7267924528301887,
+   "LTP SLA 30d %": 0.6559633027522935,
+   "Total Revenue NZD": 35803000.0,
+   "Deliveries": 450,
+   "Weighted Pipeline": 3182330.0,
+   "Open Pipeline NZD": 23491900.0,
+   "Next Quarter Revenue Target": 4601000.0,
+   "Pipeline Coverage %": 0.6916605085850902,
+   "Public Pool Leads": 715,
+   "Reactivated Pool Leads": 180,
+   "Pool Leads Converted": 8,
+   "Public Pool Opps": 82,
+   "Reactivated Pool Opps": 34,
+   "Stale LTP": 75,
+   "Activity Count": 15760,
+   "Connected Rate": 0.6498730964467005,
+   "Positive Outcome Rate": 0.5202108963093146,
+   "Leads Target": 4160.0,
+   "Closed Won Target": 481.0,
+   "Revenue Target": 37878000.0,
+   "Lead SLA Target": 0.914095238095238,
+   "TD SLA Target": 0.8080952380952381,
+   "FollowUp SLA Target": 0.8054761904761905,
+   "LTP SLA Target": 0.6849047619047619,
+   "Charging Attach %": 0.36074074074074075,
+   "Trade-in Attach %": 0.24888888888888888,
+   "Lead to Opp %": 0.2925170068027211,
+   "Close Won %": 0.42492917847025496,
+   "Lead to Won %": 0.11337868480725624,
+   "Avg Order NZD": 79562.22222222222,
+   "Public Pool Lead %": 0.18014613252708492,
+   "Public Pool Reactivation %": 0.2517482517482518,
+   "Opp Pool Reactivation %": 0.4146341463414634,
+   "Revenue vs Target %": 0.9452188605522995,
+   "Leads vs Target %": 0.9540865384615385,
+   "Deliveries vs Target %": 0.9355509355509356,
+   "Lead SLA Alert": "Red",
+   "Lead SLA vs Target": -0.07584882842025686,
+   "TD SLA Alert": "Red",
+   "TD SLA vs Target": -0.06496235019620322,
+   "FollowUp SLA Alert": "Red",
+   "FollowUp SLA vs Target": -0.07868373764600178,
+   "LTP SLA Alert": "Yellow",
+   "LTP SLA vs Target": -0.028941459152468374,
+   "SLA Alert": "Red"
+  },
+  "Hamilton": {
+   "Total Leads": 2150,
+   "Converted Leads": 620,
+   "Total Opportunities": 742,
+   "Closed Won": 242,
+   "Closed Lost": 357,
+   "Open Opportunities": 143,
+   "Conversions": 620,
+   "Lead SLA 24h %": 0.8497674418604652,
+   "TD SLA 48h %": 0.7418918918918919,
+   "FollowUp SLA 7d %": 0.7187928669410151,
+   "LTP SLA 30d %": 0.45544554455445546,
+   "Total Revenue NZD": 19486800.0,
+   "Deliveries": 242,
+   "Weighted Pipeline": 1929890.0,
+   "Open Pipeline NZD": 11521700.0,
+   "Next Quarter Revenue Target": 3619000.0,
+   "Pipeline Coverage %": 0.5332660956065212,
+   "Public Pool Leads": 613,
+   "Reactivated Pool Leads": 151,
+   "Pool Leads Converted": 6,
+   "Public Pool Opps": 75,
+   "Reactivated Pool Opps": 34,
+   "Stale LTP": 55,
+   "Activity Count": 8480,
+   "Connected Rate": 0.6683962264150943,
+   "Positive Outcome Rate": 0.516407904022583,
+   "Leads Target": 2277.0,
+   "Closed Won Target": 266.0,
+   "Revenue Target": 21700000.0,
+   "Lead SLA Target": 0.813809523809524,
+   "TD SLA Target": 0.7136666666666667,
+   "FollowUp SLA Target": 0.7054761904761906,
+   "LTP SLA Target": 0.591047619047619,
+   "Charging Attach %": 0.36792452830188677,
+   "Trade-in Attach %": 0.215633423180593,
+   "Lead to Opp %": 0.28837209302325584,
+   "Close Won %": 0.4040066777963272,
+   "Lead to Won %": 0.11255813953488372,
+   "Avg Order NZD": 80523.96694214876,
+   "Public Pool Lead %": 0.28511627906976744,
+   "Public Pool Reactivation %": 0.2463295269168026,
+   "Opp Pool Reactivation %": 0.4533333333333333,
+   "Revenue vs Target %": 0.8980092165898618,
+   "Leads vs Target %": 0.9442248572683355,
+   "Deliveries vs Target %": 0.9097744360902256,
+   "Lead SLA Alert": "Green",
+   "Lead SLA vs Target": 0.03595791805094117,
+   "TD SLA Alert": "Green",
+   "TD SLA vs Target": 0.028225225225225192,
+   "FollowUp SLA Alert": "Green",
+   "FollowUp SLA vs Target": 0.013316676464824484,
+   "LTP SLA Alert": "Red",
+   "LTP SLA vs Target": -0.13560207449316358,
+   "SLA Alert": "Red"
+  },
+  "Tauranga": {
+   "Total Leads": 1957,
+   "Converted Leads": 525,
+   "Total Opportunities": 622,
+   "Closed Won": 197,
+   "Closed Lost": 294,
+   "Open Opportunities": 131,
+   "Conversions": 525,
+   "Lead SLA 24h %": 0.8482370975983649,
+   "TD SLA 48h %": 0.7483870967741936,
+   "FollowUp SLA 7d %": 0.7197346600331676,
+   "LTP SLA 30d %": 0.7333333333333333,
+   "Total Revenue NZD": 15780300.0,
+   "Deliveries": 197,
+   "Weighted Pipeline": 2288765.0,
+   "Open Pipeline NZD": 10459900.0,
+   "Next Quarter Revenue Target": 3438000.0,
+   "Pipeline Coverage %": 0.6657257126236183,
+   "Public Pool Leads": 106,
+   "Reactivated Pool Leads": 21,
+   "Pool Leads Converted": 2,
+   "Public Pool Opps": 18,
+   "Reactivated Pool Opps": 5,
+   "Stale LTP": 20,
+   "Activity Count": 7525,
+   "Connected Rate": 0.6538205980066445,
+   "Positive Outcome Rate": 0.508130081300813,
+   "Leads Target": 2069.0,
+   "Closed Won Target": 218.0,
+   "Revenue Target": 17549000.0,
+   "Lead SLA Target": 0.893095238095238,
+   "TD SLA Target": 0.7748571428571428,
+   "FollowUp SLA Target": 0.753047619047619,
+   "LTP SLA Target": 0.6548095238095237,
+   "Charging Attach %": 0.3392282958199357,
+   "Trade-in Attach %": 0.2491961414790997,
+   "Lead to Opp %": 0.2682677567705672,
+   "Close Won %": 0.40122199592668023,
+   "Lead to Won %": 0.10066428206438426,
+   "Avg Order NZD": 80103.04568527918,
+   "Public Pool Lead %": 0.054164537557485945,
+   "Public Pool Reactivation %": 0.19811320754716982,
+   "Opp Pool Reactivation %": 0.2777777777777778,
+   "Revenue vs Target %": 0.899213630406291,
+   "Leads vs Target %": 0.9458675688738521,
+   "Deliveries vs Target %": 0.9036697247706422,
+   "Lead SLA Alert": "Yellow",
+   "Lead SLA vs Target": -0.0448581404968732,
+   "TD SLA Alert": "Yellow",
+   "TD SLA vs Target": -0.026470046082949228,
+   "FollowUp SLA Alert": "Yellow",
+   "FollowUp SLA vs Target": -0.033312959014451415,
+   "LTP SLA Alert": "Green",
+   "LTP SLA vs Target": 0.07852380952380955,
+   "SLA Alert": "Yellow"
+  },
+  "Wellington": {
+   "Total Leads": 3397,
+   "Converted Leads": 955,
+   "Total Opportunities": 1113,
+   "Closed Won": 342,
+   "Closed Lost": 535,
+   "Open Opportunities": 236,
+   "Conversions": 955,
+   "Lead SLA 24h %": 0.8392699440682956,
+   "TD SLA 48h %": 0.7272727272727273,
+   "FollowUp SLA 7d %": 0.7253649635036497,
+   "LTP SLA 30d %": 0.6190476190476191,
+   "Total Revenue NZD": 27296800.0,
+   "Deliveries": 342,
+   "Weighted Pipeline": 3133155.0,
+   "Open Pipeline NZD": 19067400.0,
+   "Next Quarter Revenue Target": 5416000.0,
+   "Pipeline Coverage %": 0.5784998153618907,
+   "Public Pool Leads": 573,
+   "Reactivated Pool Leads": 149,
+   "Pool Leads Converted": 13,
+   "Public Pool Opps": 84,
+   "Reactivated Pool Opps": 40,
+   "Stale LTP": 64,
+   "Activity Count": 13129,
+   "Connected Rate": 0.6522202757254932,
+   "Positive Outcome Rate": 0.514539296975359,
+   "Leads Target": 3482.0,
+   "Closed Won Target": 373.0,
+   "Revenue Target": 28599000.0,
+   "Lead SLA Target": 0.8204761904761904,
+   "TD SLA Target": 0.7207619047619047,
+   "FollowUp SLA Target": 0.7145714285714286,
+   "LTP SLA Target": 0.6107619047619047,
+   "Charging Attach %": 0.36208445642407905,
+   "Trade-in Attach %": 0.24797843665768193,
+   "Lead to Opp %": 0.2811304091845746,
+   "Close Won %": 0.3899657924743444,
+   "Lead to Won %": 0.10067706800117751,
+   "Avg Order NZD": 79815.20467836257,
+   "Public Pool Lead %": 0.16867824551074478,
+   "Public Pool Reactivation %": 0.2600349040139616,
+   "Opp Pool Reactivation %": 0.47619047619047616,
+   "Revenue vs Target %": 0.9544669394034756,
+   "Leads vs Target %": 0.9755887421022401,
+   "Deliveries vs Target %": 0.9168900804289544,
+   "Lead SLA Alert": "Green",
+   "Lead SLA vs Target": 0.018793753592105222,
+   "TD SLA Alert": "Green",
+   "TD SLA vs Target": 0.006510822510822578,
+   "FollowUp SLA Alert": "Green",
+   "FollowUp SLA vs Target": 0.010793534932221016,
+   "LTP SLA Alert": "Green",
+   "LTP SLA vs Target": 0.00828571428571434,
+   "SLA Alert": "Green"
+  },
+  "Christchurch": {
+   "Total Leads": 3367,
+   "Converted Leads": 887,
+   "Total Opportunities": 1076,
+   "Closed Won": 335,
+   "Closed Lost": 489,
+   "Open Opportunities": 252,
+   "Conversions": 887,
+   "Lead SLA 24h %": 0.8283338283338283,
+   "TD SLA 48h %": 0.7416044776119403,
+   "FollowUp SLA 7d %": 0.6878557874762808,
+   "LTP SLA 30d %": 0.651685393258427,
+   "Total Revenue NZD": 26838500.0,
+   "Deliveries": 335,
+   "Weighted Pipeline": 3213450.0,
+   "Open Pipeline NZD": 20333800.0,
+   "Next Quarter Revenue Target": 5484000.0,
+   "Pipeline Coverage %": 0.5859682713347921,
+   "Public Pool Leads": 191,
+   "Reactivated Pool Leads": 39,
+   "Pool Leads Converted": 2,
+   "Public Pool Opps": 47,
+   "Reactivated Pool Opps": 15,
+   "Stale LTP": 62,
+   "Activity Count": 12927,
+   "Connected Rate": 0.6527423222712153,
+   "Positive Outcome Rate": 0.5085328276842854,
+   "Leads Target": 3571.0,
+   "Closed Won Target": 368.0,
+   "Revenue Target": 28529000.0,
+   "Lead SLA Target": 0.9234761904761903,
+   "TD SLA Target": 0.8351428571428572,
+   "FollowUp SLA Target": 0.7669047619047618,
+   "LTP SLA Target": 0.7028095238095239,
+   "Charging Attach %": 0.3559479553903346,
+   "Trade-in Attach %": 0.24814126394052044,
+   "Lead to Opp %": 0.26343926343926344,
+   "Close Won %": 0.4065533980582524,
+   "Lead to Won %": 0.09949509949509949,
+   "Avg Order NZD": 80114.92537313433,
+   "Public Pool Lead %": 0.056727056727056725,
+   "Public Pool Reactivation %": 0.20418848167539266,
+   "Opp Pool Reactivation %": 0.3191489361702128,
+   "Revenue vs Target %": 0.9407445055908024,
+   "Leads vs Target %": 0.9428731447773733,
+   "Deliveries vs Target %": 0.9103260869565217,
+   "Lead SLA Alert": "Red",
+   "Lead SLA vs Target": -0.09514236214236205,
+   "TD SLA Alert": "Red",
+   "TD SLA vs Target": -0.09353837953091693,
+   "FollowUp SLA Alert": "Red",
+   "FollowUp SLA vs Target": -0.07904897442848091,
+   "LTP SLA Alert": "Red",
+   "LTP SLA vs Target": -0.05112413055109688,
+   "SLA Alert": "Red"
+  }
+ },
+ "monthly": [
+  {
+   "month": "2025-01",
+   "Total Leads": 736,
+   "Converted Leads": 217,
+   "Total Revenue NZD": 96900.0,
+   "Revenue Target": 4816000.0,
+   "Deliveries": 1,
+   "Closed Won Target": 65.0,
+   "Lead SLA 24h %": 0.8641304347826086,
+   "Lead SLA Target": 0.8945,
+   "TD SLA 48h %": 0.7510548523206751,
+   "TD SLA Target": 0.7761666666666667,
+   "FollowUp SLA 7d %": 0.7257383966244726,
+   "FollowUp SLA Target": 0.7745000000000001,
+   "Public Pool Leads": 150,
+   "Leads Target": 786.0
+  },
+  {
+   "month": "2025-02",
+   "Total Leads": 912,
+   "Converted Leads": 251,
+   "Total Revenue NZD": 3184100.0,
+   "Revenue Target": 3342000.0,
+   "Deliveries": 39,
+   "Closed Won Target": 41.0,
+   "Lead SLA 24h %": 0.8267543859649122,
+   "Lead SLA Target": 0.8504999999999999,
+   "TD SLA 48h %": 0.7544483985765125,
+   "TD SLA Target": 0.7775,
+   "FollowUp SLA 7d %": 0.6761565836298933,
+   "FollowUp SLA Target": 0.6675,
+   "Public Pool Leads": 183,
+   "Leads Target": 926.0
+  },
+  {
+   "month": "2025-03",
+   "Total Leads": 1006,
+   "Converted Leads": 298,
+   "Total Revenue NZD": 7449700.0,
+   "Revenue Target": 8195000.0,
+   "Deliveries": 93,
+   "Closed Won Target": 95.0,
+   "Lead SLA 24h %": 0.841948310139165,
+   "Lead SLA Target": 0.8936666666666667,
+   "TD SLA 48h %": 0.7598870056497176,
+   "TD SLA Target": 0.8078333333333334,
+   "FollowUp SLA 7d %": 0.7259887005649718,
+   "FollowUp SLA Target": 0.7518333333333334,
+   "Public Pool Leads": 194,
+   "Leads Target": 1030.0
+  },
+  {
+   "month": "2025-04",
+   "Total Leads": 882,
+   "Converted Leads": 262,
+   "Total Revenue NZD": 8256900.0,
+   "Revenue Target": 8483000.0,
+   "Deliveries": 101,
+   "Closed Won Target": 112.0,
+   "Lead SLA 24h %": 0.8560090702947846,
+   "Lead SLA Target": 0.8791666666666665,
+   "TD SLA 48h %": 0.7588424437299035,
+   "TD SLA Target": 0.7691666666666667,
+   "FollowUp SLA 7d %": 0.6913183279742765,
+   "FollowUp SLA Target": 0.7085,
+   "Public Pool Leads": 160,
+   "Leads Target": 938.0
+  },
+  {
+   "month": "2025-05",
+   "Total Leads": 909,
+   "Converted Leads": 229,
+   "Total Revenue NZD": 7048100.0,
+   "Revenue Target": 7057000.0,
+   "Deliveries": 89,
+   "Closed Won Target": 93.0,
+   "Lead SLA 24h %": 0.8294829482948295,
+   "Lead SLA Target": 0.8913333333333332,
+   "TD SLA 48h %": 0.762962962962963,
+   "TD SLA Target": 0.7561666666666668,
+   "FollowUp SLA 7d %": 0.6777777777777778,
+   "FollowUp SLA Target": 0.7028333333333333,
+   "Public Pool Leads": 194,
+   "Leads Target": 903.0
+  },
+  {
+   "month": "2025-06",
+   "Total Leads": 1006,
+   "Converted Leads": 277,
+   "Total Revenue NZD": 8599200.0,
+   "Revenue Target": 8792000.0,
+   "Deliveries": 108,
+   "Closed Won Target": 111.0,
+   "Lead SLA 24h %": 0.8489065606361829,
+   "Lead SLA Target": 0.8731666666666668,
+   "TD SLA 48h %": 0.7181818181818181,
+   "TD SLA Target": 0.7433333333333333,
+   "FollowUp SLA 7d %": 0.693939393939394,
+   "FollowUp SLA Target": 0.7338333333333334,
+   "Public Pool Leads": 213,
+   "Leads Target": 1024.0
+  },
+  {
+   "month": "2025-07",
+   "Total Leads": 912,
+   "Converted Leads": 251,
+   "Total Revenue NZD": 7547600.0,
+   "Revenue Target": 7987000.0,
+   "Deliveries": 94,
+   "Closed Won Target": 100.0,
+   "Lead SLA 24h %": 0.8475877192982456,
+   "Lead SLA Target": 0.8598333333333334,
+   "TD SLA 48h %": 0.7687074829931972,
+   "TD SLA Target": 0.7935,
+   "FollowUp SLA 7d %": 0.7346938775510204,
+   "FollowUp SLA Target": 0.754,
+   "Public Pool Leads": 175,
+   "Leads Target": 967.0
+  },
+  {
+   "month": "2025-08",
+   "Total Leads": 876,
+   "Converted Leads": 232,
+   "Total Revenue NZD": 7135000.0,
+   "Revenue Target": 7351000.0,
+   "Deliveries": 90,
+   "Closed Won Target": 92.0,
+   "Lead SLA 24h %": 0.8447488584474886,
+   "Lead SLA Target": 0.8933333333333334,
+   "TD SLA 48h %": 0.7306397306397306,
+   "TD SLA Target": 0.7271666666666667,
+   "FollowUp SLA 7d %": 0.7205387205387206,
+   "FollowUp SLA Target": 0.7273333333333333,
+   "Public Pool Leads": 161,
+   "Leads Target": 917.0
+  },
+  {
+   "month": "2025-09",
+   "Total Leads": 988,
+   "Converted Leads": 281,
+   "Total Revenue NZD": 9834600.0,
+   "Revenue Target": 10030000.0,
+   "Deliveries": 124,
+   "Closed Won Target": 132.0,
+   "Lead SLA 24h %": 0.8370445344129555,
+   "Lead SLA Target": 0.8454999999999999,
+   "TD SLA 48h %": 0.8,
+   "TD SLA Target": 0.8414999999999999,
+   "FollowUp SLA 7d %": 0.74375,
+   "FollowUp SLA Target": 0.7806666666666665,
+   "Public Pool Leads": 192,
+   "Leads Target": 1044.0
+  },
+  {
+   "month": "2025-10",
+   "Total Leads": 914,
+   "Converted Leads": 265,
+   "Total Revenue NZD": 7536400.0,
+   "Revenue Target": 8028000.0,
+   "Deliveries": 96,
+   "Closed Won Target": 102.0,
+   "Lead SLA 24h %": 0.811816192560175,
+   "Lead SLA Target": 0.8391666666666667,
+   "TD SLA 48h %": 0.7024221453287197,
+   "TD SLA Target": 0.7486666666666667,
+   "FollowUp SLA 7d %": 0.71280276816609,
+   "FollowUp SLA Target": 0.7331666666666666,
+   "Public Pool Leads": 182,
+   "Leads Target": 959.0
+  },
+  {
+   "month": "2025-11",
+   "Total Leads": 914,
+   "Converted Leads": 255,
+   "Total Revenue NZD": 8063800.0,
+   "Revenue Target": 8510000.0,
+   "Deliveries": 102,
+   "Closed Won Target": 110.0,
+   "Lead SLA 24h %": 0.849015317286652,
+   "Lead SLA Target": 0.8806666666666666,
+   "TD SLA 48h %": 0.7435897435897436,
+   "TD SLA Target": 0.7726666666666665,
+   "FollowUp SLA 7d %": 0.7275641025641025,
+   "FollowUp SLA Target": 0.7719999999999999,
+   "Public Pool Leads": 140,
+   "Leads Target": 996.0
+  },
+  {
+   "month": "2025-12",
+   "Total Leads": 953,
+   "Converted Leads": 290,
+   "Total Revenue NZD": 11553500.0,
+   "Revenue Target": 12077000.0,
+   "Deliveries": 145,
+   "Closed Won Target": 146.0,
+   "Lead SLA 24h %": 0.863588667366212,
+   "Lead SLA Target": 0.898,
+   "TD SLA 48h %": 0.759375,
+   "TD SLA Target": 0.7735,
+   "FollowUp SLA 7d %": 0.696875,
+   "FollowUp SLA Target": 0.7231666666666666,
+   "Public Pool Leads": 126,
+   "Leads Target": 1036.0
+  },
+  {
+   "month": "2026-01",
+   "Total Leads": 752,
+   "Converted Leads": 220,
+   "Total Revenue NZD": 7806000.0,
+   "Revenue Target": 8323000.0,
+   "Deliveries": 100,
+   "Closed Won Target": 107.0,
+   "Lead SLA 24h %": 0.8297872340425532,
+   "Lead SLA Target": 0.8728333333333333,
+   "TD SLA 48h %": 0.7456445993031359,
+   "TD SLA Target": 0.7845,
+   "FollowUp SLA 7d %": 0.7038327526132404,
+   "FollowUp SLA Target": 0.7486666666666667,
+   "Public Pool Leads": 72,
+   "Leads Target": 815.0
+  },
+  {
+   "month": "2026-02",
+   "Total Leads": 921,
+   "Converted Leads": 268,
+   "Total Revenue NZD": 7109100.0,
+   "Revenue Target": 7390000.0,
+   "Deliveries": 89,
+   "Closed Won Target": 93.0,
+   "Lead SLA 24h %": 0.8425624321389794,
+   "Lead SLA Target": 0.9049999999999999,
+   "TD SLA 48h %": 0.7210884353741497,
+   "TD SLA Target": 0.7311666666666666,
+   "FollowUp SLA 7d %": 0.7210884353741497,
+   "FollowUp SLA Target": 0.7494999999999999,
+   "Public Pool Leads": 94,
+   "Leads Target": 958.0
+  },
+  {
+   "month": "2026-03",
+   "Total Leads": 1023,
+   "Converted Leads": 286,
+   "Total Revenue NZD": 8986800.0,
+   "Revenue Target": 9770000.0,
+   "Deliveries": 112,
+   "Closed Won Target": 117.0,
+   "Lead SLA 24h %": 0.852394916911046,
+   "Lead SLA Target": 0.8860000000000001,
+   "TD SLA 48h %": 0.6978851963746223,
+   "TD SLA Target": 0.7301666666666667,
+   "FollowUp SLA 7d %": 0.7129909365558912,
+   "FollowUp SLA Target": 0.7088333333333333,
+   "Public Pool Leads": 93,
+   "Leads Target": 1031.0
+  },
+  {
+   "month": "2026-04",
+   "Total Leads": 972,
+   "Converted Leads": 279,
+   "Total Revenue NZD": 7444800.0,
+   "Revenue Target": 7684000.0,
+   "Deliveries": 92,
+   "Closed Won Target": 95.0,
+   "Lead SLA 24h %": 0.8425925925925926,
+   "Lead SLA Target": 0.8456666666666668,
+   "TD SLA 48h %": 0.7604790419161677,
+   "TD SLA Target": 0.8066666666666666,
+   "FollowUp SLA 7d %": 0.6946107784431138,
+   "FollowUp SLA Target": 0.7221666666666667,
+   "Public Pool Leads": 88,
+   "Leads Target": 1007.0
+  },
+  {
+   "month": "2026-05",
+   "Total Leads": 1005,
+   "Converted Leads": 271,
+   "Total Revenue NZD": 8335700.0,
+   "Revenue Target": 8525000.0,
+   "Deliveries": 103,
+   "Closed Won Target": 112.0,
+   "Lead SLA 24h %": 0.826865671641791,
+   "Lead SLA Target": 0.8541666666666666,
+   "TD SLA 48h %": 0.7024539877300614,
+   "TD SLA Target": 0.7290000000000001,
+   "FollowUp SLA 7d %": 0.7269938650306749,
+   "FollowUp SLA Target": 0.7681666666666667,
+   "Public Pool Leads": 88,
+   "Leads Target": 1066.0
+  },
+  {
+   "month": "2026-06",
+   "Total Leads": 1101,
+   "Converted Leads": 335,
+   "Total Revenue NZD": 11125200.0,
+   "Revenue Target": 11254000.0,
+   "Deliveries": 138,
+   "Closed Won Target": 149.0,
+   "Lead SLA 24h %": 0.8537693006357856,
+   "Lead SLA Target": 0.8793333333333333,
+   "TD SLA 48h %": 0.7596685082872928,
+   "TD SLA Target": 0.7811666666666667,
+   "FollowUp SLA 7d %": 0.712707182320442,
+   "FollowUp SLA Target": 0.7571666666666667,
+   "Public Pool Leads": 58,
+   "Leads Target": 1170.0
+  },
+  {
+   "month": "2026-07",
+   "Total Leads": 961,
+   "Converted Leads": 271,
+   "Total Revenue NZD": 10421100.0,
+   "Revenue Target": 10785000.0,
+   "Deliveries": 129,
+   "Closed Won Target": 127.0,
+   "Lead SLA 24h %": 0.8335067637877211,
+   "Lead SLA Target": 0.86,
+   "TD SLA 48h %": 0.7198795180722891,
+   "TD SLA Target": 0.7484999999999999,
+   "FollowUp SLA 7d %": 0.6807228915662651,
+   "FollowUp SLA Target": 0.7141666666666667,
+   "Public Pool Leads": 54,
+   "Leads Target": 1023.0
+  },
+  {
+   "month": "2026-08",
+   "Total Leads": 918,
+   "Converted Leads": 261,
+   "Total Revenue NZD": 8060800.0,
+   "Revenue Target": 8610000.0,
+   "Deliveries": 102,
+   "Closed Won Target": 107.0,
+   "Lead SLA 24h %": 0.8420479302832244,
+   "Lead SLA Target": 0.8845000000000001,
+   "TD SLA 48h %": 0.7403846153846154,
+   "TD SLA Target": 0.7616666666666666,
+   "FollowUp SLA 7d %": 0.7313915857605178,
+   "FollowUp SLA Target": 0.7746666666666666,
+   "Public Pool Leads": 48,
+   "Leads Target": 983.0
+  },
+  {
+   "month": "2026-09",
+   "Total Leads": 1104,
+   "Converted Leads": 265,
+   "Total Revenue NZD": 10756500.0,
+   "Revenue Target": 11279000.0,
+   "Deliveries": 135,
+   "Closed Won Target": 147.0,
+   "Lead SLA 24h %": 0.8215579710144928,
+   "Lead SLA Target": 0.8516666666666667,
+   "TD SLA 48h %": 0.7669616519174042,
+   "TD SLA Target": 0.7965,
+   "FollowUp SLA 7d %": 0.8363636363636363,
+   "FollowUp SLA Target": 0.8698333333333332,
+   "Public Pool Leads": 73,
+   "Leads Target": 1135.0
+  }
+ ],
+ "reps": [
+  {
+   "rep": "Cameron Harris",
+   "store": "Auckland Central",
+   "tenure": 51,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 630,
+   "Lead SLA 24h %": 0.9095238095238095,
+   "TD SLA 48h %": 0.7894736842105263,
+   "FollowUp SLA 7d %": 0.7842323651452282,
+   "Close Won %": 0.4068627450980392,
+   "Deliveries": 83,
+   "Total Revenue NZD": 6573700.0,
+   "Public Pool Leads": 20,
+   "Connected Rate": 0.6949458483754513
+  },
+  {
+   "rep": "Annette Grant",
+   "store": "Auckland Central",
+   "tenure": 53,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 597,
+   "Lead SLA 24h %": 0.8860971524288107,
+   "TD SLA 48h %": 0.8357487922705314,
+   "FollowUp SLA 7d %": 0.7722772277227723,
+   "Close Won %": 0.46745562130177515,
+   "Deliveries": 79,
+   "Total Revenue NZD": 6328100.0,
+   "Public Pool Leads": 24,
+   "Connected Rate": 0.6746160064672595
+  },
+  {
+   "rep": "Benjamin Mason",
+   "store": "Auckland Central",
+   "tenure": 29,
+   "band": "24-48 months",
+   "active": true,
+   "Total Leads": 608,
+   "Lead SLA 24h %": 0.8865131578947368,
+   "TD SLA 48h %": 0.7718446601941747,
+   "FollowUp SLA 7d %": 0.6954314720812182,
+   "Close Won %": 0.4451219512195122,
+   "Deliveries": 73,
+   "Total Revenue NZD": 5693700.0,
+   "Public Pool Leads": 16,
+   "Connected Rate": 0.6577561765897124
+  },
+  {
+   "rep": "Amanda Ward-Satherley",
+   "store": "Auckland Central",
+   "tenure": 35,
+   "band": "24-48 months",
+   "active": false,
+   "Total Leads": 122,
+   "Lead SLA 24h %": 0.9344262295081968,
+   "TD SLA 48h %": 0.7843137254901961,
+   "FollowUp SLA 7d %": 0.6470588235294118,
+   "Close Won %": 0.46078431372549017,
+   "Deliveries": 47,
+   "Total Revenue NZD": 3729300.0,
+   "Public Pool Leads": 4,
+   "Connected Rate": 0.673848439821694
+  },
+  {
+   "rep": "Jessica Ferguson",
+   "store": "Auckland Central",
+   "tenure": 25,
+   "band": "24-48 months",
+   "active": true,
+   "Total Leads": 554,
+   "Lead SLA 24h %": 0.8357400722021661,
+   "TD SLA 48h %": 0.6988636363636364,
+   "FollowUp SLA 7d %": 0.6091954022988506,
+   "Close Won %": 0.34285714285714286,
+   "Deliveries": 48,
+   "Total Revenue NZD": 3905200.0,
+   "Public Pool Leads": 25,
+   "Connected Rate": 0.6202588130298974
+  },
+  {
+   "rep": "Rory Smith-Wills",
+   "store": "Auckland Central",
+   "tenure": 9,
+   "band": "< 12 months",
+   "active": true,
+   "Total Leads": 286,
+   "Lead SLA 24h %": 0.8531468531468531,
+   "TD SLA 48h %": 0.717948717948718,
+   "FollowUp SLA 7d %": 0.6027397260273972,
+   "Close Won %": 0.2542372881355932,
+   "Deliveries": 15,
+   "Total Revenue NZD": 1191500.0,
+   "Public Pool Leads": 2,
+   "Connected Rate": 0.6327345309381237
+  },
+  {
+   "rep": "Helen Hart",
+   "store": "Auckland Central",
+   "tenure": 26,
+   "band": "24-48 months",
+   "active": true,
+   "Total Leads": 574,
+   "Lead SLA 24h %": 0.8780487804878049,
+   "TD SLA 48h %": 0.6203208556149733,
+   "FollowUp SLA 7d %": 0.6758241758241759,
+   "Close Won %": 0.33986928104575165,
+   "Deliveries": 52,
+   "Total Revenue NZD": 4118800.0,
+   "Public Pool Leads": 13,
+   "Connected Rate": 0.6526867627785059
+  },
+  {
+   "rep": "Ava Fisher",
+   "store": "Auckland Central",
+   "tenure": 40,
+   "band": "24-48 months",
+   "active": true,
+   "Total Leads": 584,
+   "Lead SLA 24h %": 0.8921232876712328,
+   "TD SLA 48h %": 0.8138297872340425,
+   "FollowUp SLA 7d %": 0.7362637362637363,
+   "Close Won %": 0.4129032258064516,
+   "Deliveries": 64,
+   "Total Revenue NZD": 5133600.0,
+   "Public Pool Leads": 16,
+   "Connected Rate": 0.6471354166666666
+  },
+  {
+   "rep": "Scarlett Holmes",
+   "store": "Auckland Central",
+   "tenure": 38,
+   "band": "24-48 months",
+   "active": true,
+   "Total Leads": 563,
+   "Lead SLA 24h %": 0.8987566607460036,
+   "TD SLA 48h %": 0.7631578947368421,
+   "FollowUp SLA 7d %": 0.7566137566137566,
+   "Close Won %": 0.3216374269005848,
+   "Deliveries": 55,
+   "Total Revenue NZD": 4472500.0,
+   "Public Pool Leads": 13,
+   "Connected Rate": 0.6499571550985432
+  },
+  {
+   "rep": "Anna Morrison",
+   "store": "Auckland North Shore",
+   "tenure": 59,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 772,
+   "Lead SLA 24h %": 0.8717616580310881,
+   "TD SLA 48h %": 0.8078291814946619,
+   "FollowUp SLA 7d %": 0.7717391304347826,
+   "Close Won %": 0.4266666666666667,
+   "Deliveries": 96,
+   "Total Revenue NZD": 7701400.0,
+   "Public Pool Leads": 45,
+   "Connected Rate": 0.6613545816733067
+  },
+  {
+   "rep": "Stella Price-McDonald",
+   "store": "Auckland North Shore",
+   "tenure": 50,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 776,
+   "Lead SLA 24h %": 0.9059278350515464,
+   "TD SLA 48h %": 0.7666666666666667,
+   "FollowUp SLA 7d %": 0.7884615384615384,
+   "Close Won %": 0.49282296650717705,
+   "Deliveries": 103,
+   "Total Revenue NZD": 8190700.0,
+   "Public Pool Leads": 41,
+   "Connected Rate": 0.6774494556765164
+  },
+  {
+   "rep": "Andrew Adams",
+   "store": "Auckland North Shore",
+   "tenure": 14,
+   "band": "12-24 months",
+   "active": false,
+   "Total Leads": 83,
+   "Lead SLA 24h %": 0.8554216867469879,
+   "TD SLA 48h %": 0.68,
+   "FollowUp SLA 7d %": 0.5466666666666666,
+   "Close Won %": 0.30666666666666664,
+   "Deliveries": 23,
+   "Total Revenue NZD": 1749700.0,
+   "Public Pool Leads": 6,
+   "Connected Rate": 0.6120603015075377
+  },
+  {
+   "rep": "Manaia Bond-Law",
+   "store": "Auckland North Shore",
+   "tenure": 32,
+   "band": "24-48 months",
+   "active": false,
+   "Total Leads": 130,
+   "Lead SLA 24h %": 0.9153846153846154,
+   "TD SLA 48h %": 0.75,
+   "FollowUp SLA 7d %": 0.6923076923076923,
+   "Close Won %": 0.3942307692307692,
+   "Deliveries": 41,
+   "Total Revenue NZD": 3254900.0,
+   "Public Pool Leads": 20,
+   "Connected Rate": 0.6459480723839497
+  },
+  {
+   "rep": "Emma Burgess",
+   "store": "Auckland North Shore",
+   "tenure": 13,
+   "band": "12-24 months",
+   "active": true,
+   "Total Leads": 466,
+   "Lead SLA 24h %": 0.8669527896995708,
+   "TD SLA 48h %": 0.7,
+   "FollowUp SLA 7d %": 0.6470588235294118,
+   "Close Won %": 0.43137254901960786,
+   "Deliveries": 44,
+   "Total Revenue NZD": 3485600.0,
+   "Public Pool Leads": 14,
+   "Connected Rate": 0.6259625962596259
+  },
+  {
+   "rep": "Chelsea Gibson",
+   "store": "Auckland North Shore",
+   "tenure": 15,
+   "band": "12-24 months",
+   "active": true,
+   "Total Leads": 516,
+   "Lead SLA 24h %": 0.8624031007751938,
+   "TD SLA 48h %": 0.7341040462427746,
+   "FollowUp SLA 7d %": 0.6686046511627907,
+   "Close Won %": 0.3741496598639456,
+   "Deliveries": 55,
+   "Total Revenue NZD": 4323500.0,
+   "Public Pool Leads": 15,
+   "Connected Rate": 0.6493566176470589
+  },
+  {
+   "rep": "Oliver Chandler-Brown",
+   "store": "Auckland North Shore",
+   "tenure": 19,
+   "band": "12-24 months",
+   "active": true,
+   "Total Leads": 691,
+   "Lead SLA 24h %": 0.8755426917510853,
+   "TD SLA 48h %": 0.68359375,
+   "FollowUp SLA 7d %": 0.7677165354330708,
+   "Close Won %": 0.4467005076142132,
+   "Deliveries": 88,
+   "Total Revenue NZD": 7097200.0,
+   "Public Pool Leads": 39,
+   "Connected Rate": 0.6369953673064196
+  },
+  {
+   "rep": "Jane Burr",
+   "store": "Hamilton",
+   "tenure": 58,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 723,
+   "Lead SLA 24h %": 0.8755186721991701,
+   "TD SLA 48h %": 0.7451737451737451,
+   "FollowUp SLA 7d %": 0.7470355731225297,
+   "Close Won %": 0.4039408866995074,
+   "Deliveries": 82,
+   "Total Revenue NZD": 6591800.0,
+   "Public Pool Leads": 68,
+   "Connected Rate": 0.6893787575150301
+  },
+  {
+   "rep": "Destiny Webb",
+   "store": "Hamilton",
+   "tenure": 48,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 741,
+   "Lead SLA 24h %": 0.8960863697705803,
+   "TD SLA 48h %": 0.75,
+   "FollowUp SLA 7d %": 0.702928870292887,
+   "Close Won %": 0.435,
+   "Deliveries": 87,
+   "Total Revenue NZD": 7070300.0,
+   "Public Pool Leads": 69,
+   "Connected Rate": 0.6585612968591692
+  },
+  {
+   "rep": "David Anderson",
+   "store": "Hamilton",
+   "tenure": 16,
+   "band": "12-24 months",
+   "active": false,
+   "Total Leads": 158,
+   "Lead SLA 24h %": 0.9177215189873418,
+   "TD SLA 48h %": 0.75,
+   "FollowUp SLA 7d %": 0.75,
+   "Close Won %": 0.3602941176470588,
+   "Deliveries": 49,
+   "Total Revenue NZD": 3964100.0,
+   "Public Pool Leads": 10,
+   "Connected Rate": 0.6610757663389243
+  },
+  {
+   "rep": "Jennifer Brown",
+   "store": "Hamilton",
+   "tenure": 21,
+   "band": "12-24 months",
+   "active": false,
+   "Total Leads": 66,
+   "Lead SLA 24h %": 0.8787878787878788,
+   "TD SLA 48h %": 0.7166666666666667,
+   "FollowUp SLA 7d %": 0.6,
+   "Close Won %": 0.4,
+   "Deliveries": 24,
+   "Total Revenue NZD": 1860600.0,
+   "Public Pool Leads": 4,
+   "Connected Rate": 0.6419597989949749
+  },
+  {
+   "rep": "Stacey Alexander",
+   "store": "Tauranga",
+   "tenure": 65,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 480,
+   "Lead SLA 24h %": 0.89375,
+   "TD SLA 48h %": 0.7368421052631579,
+   "FollowUp SLA 7d %": 0.722972972972973,
+   "Close Won %": 0.38095238095238093,
+   "Deliveries": 48,
+   "Total Revenue NZD": 3862200.0,
+   "Public Pool Leads": 6,
+   "Connected Rate": 0.6306400839454355
+  },
+  {
+   "rep": "Donald Parker",
+   "store": "Tauranga",
+   "tenure": 51,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 497,
+   "Lead SLA 24h %": 0.8953722334004024,
+   "TD SLA 48h %": 0.8303030303030303,
+   "FollowUp SLA 7d %": 0.7654320987654321,
+   "Close Won %": 0.4263565891472868,
+   "Deliveries": 55,
+   "Total Revenue NZD": 4365500.0,
+   "Public Pool Leads": 7,
+   "Connected Rate": 0.6692197223551939
+  },
+  {
+   "rep": "Lauren Prentice",
+   "store": "Tauranga",
+   "tenure": 20,
+   "band": "12-24 months",
+   "active": true,
+   "Total Leads": 424,
+   "Lead SLA 24h %": 0.8584905660377359,
+   "TD SLA 48h %": 0.7181208053691275,
+   "FollowUp SLA 7d %": 0.6805555555555556,
+   "Close Won %": 0.3828125,
+   "Deliveries": 49,
+   "Total Revenue NZD": 3886100.0,
+   "Public Pool Leads": 3,
+   "Connected Rate": 0.6568796776050662
+  },
+  {
+   "rep": "Susan Kennedy",
+   "store": "Tauranga",
+   "tenure": 31,
+   "band": "24-48 months",
+   "active": true,
+   "Total Leads": 471,
+   "Lead SLA 24h %": 0.8959660297239915,
+   "TD SLA 48h %": 0.6950354609929078,
+   "FollowUp SLA 7d %": 0.6911764705882353,
+   "Close Won %": 0.4166666666666667,
+   "Deliveries": 45,
+   "Total Revenue NZD": 3666500.0,
+   "Public Pool Leads": 5,
+   "Connected Rate": 0.6575571667596207
+  },
+  {
+   "rep": "Aria Jones",
+   "store": "Wellington",
+   "tenure": 48,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 677,
+   "Lead SLA 24h %": 0.880354505169867,
+   "TD SLA 48h %": 0.75,
+   "FollowUp SLA 7d %": 0.7050691244239631,
+   "Close Won %": 0.39325842696629215,
+   "Deliveries": 70,
+   "Total Revenue NZD": 5573000.0,
+   "Public Pool Leads": 24,
+   "Connected Rate": 0.6684092606422704
+  },
+  {
+   "rep": "Charlie Hart",
+   "store": "Wellington",
+   "tenure": 60,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 694,
+   "Lead SLA 24h %": 0.9178674351585014,
+   "TD SLA 48h %": 0.7379032258064516,
+   "FollowUp SLA 7d %": 0.7909836065573771,
+   "Close Won %": 0.3891891891891892,
+   "Deliveries": 72,
+   "Total Revenue NZD": 5612800.0,
+   "Public Pool Leads": 31,
+   "Connected Rate": 0.6876907426246185
+  },
+  {
+   "rep": "Mackenzie O'Brien",
+   "store": "Wellington",
+   "tenure": 31,
+   "band": "24-48 months",
+   "active": false,
+   "Total Leads": 85,
+   "Lead SLA 24h %": 0.8705882352941177,
+   "TD SLA 48h %": 0.875,
+   "FollowUp SLA 7d %": 0.8055555555555556,
+   "Close Won %": 0.4583333333333333,
+   "Deliveries": 33,
+   "Total Revenue NZD": 2584700.0,
+   "Public Pool Leads": 4,
+   "Connected Rate": 0.6681514476614699
+  },
+  {
+   "rep": "Tia Lane-Gaskin",
+   "store": "Wellington",
+   "tenure": 28,
+   "band": "24-48 months",
+   "active": true,
+   "Total Leads": 674,
+   "Lead SLA 24h %": 0.8827893175074184,
+   "TD SLA 48h %": 0.6898148148148148,
+   "FollowUp SLA 7d %": 0.719626168224299,
+   "Close Won %": 0.39080459770114945,
+   "Deliveries": 68,
+   "Total Revenue NZD": 5573200.0,
+   "Public Pool Leads": 33,
+   "Connected Rate": 0.6240917782026769
+  },
+  {
+   "rep": "Nicholas Thomas",
+   "store": "Wellington",
+   "tenure": 31,
+   "band": "24-48 months",
+   "active": false,
+   "Total Leads": 121,
+   "Lead SLA 24h %": 0.859504132231405,
+   "TD SLA 48h %": 0.7011494252873564,
+   "FollowUp SLA 7d %": 0.7471264367816092,
+   "Close Won %": 0.40229885057471265,
+   "Deliveries": 35,
+   "Total Revenue NZD": 2813500.0,
+   "Public Pool Leads": 15,
+   "Connected Rate": 0.6275738585496866
+  },
+  {
+   "rep": "Rachael Griffin",
+   "store": "Wellington",
+   "tenure": 20,
+   "band": "12-24 months",
+   "active": true,
+   "Total Leads": 722,
+   "Lead SLA 24h %": 0.832409972299169,
+   "TD SLA 48h %": 0.6964285714285714,
+   "FollowUp SLA 7d %": 0.6422018348623854,
+   "Close Won %": 0.35359116022099446,
+   "Deliveries": 64,
+   "Total Revenue NZD": 5139600.0,
+   "Public Pool Leads": 42,
+   "Connected Rate": 0.6309192200557103
+  },
+  {
+   "rep": "Abigail Barr",
+   "store": "Christchurch",
+   "tenure": 49,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 692,
+   "Lead SLA 24h %": 0.8728323699421965,
+   "TD SLA 48h %": 0.7933884297520661,
+   "FollowUp SLA 7d %": 0.731404958677686,
+   "Close Won %": 0.46596858638743455,
+   "Deliveries": 89,
+   "Total Revenue NZD": 7191100.0,
+   "Public Pool Leads": 8,
+   "Connected Rate": 0.6795325779036827
+  },
+  {
+   "rep": "William Nolan-Allan",
+   "store": "Christchurch",
+   "tenure": 54,
+   "band": "48+ months",
+   "active": true,
+   "Total Leads": 707,
+   "Lead SLA 24h %": 0.8882602545968883,
+   "TD SLA 48h %": 0.7641921397379913,
+   "FollowUp SLA 7d %": 0.6651785714285714,
+   "Close Won %": 0.41711229946524064,
+   "Deliveries": 78,
+   "Total Revenue NZD": 6020200.0,
+   "Public Pool Leads": 10,
+   "Connected Rate": 0.6502226789996575
+  },
+  {
+   "rep": "Simon Stevens",
+   "store": "Christchurch",
+   "tenure": 19,
+   "band": "12-24 months",
+   "active": true,
+   "Total Leads": 593,
+   "Lead SLA 24h %": 0.8785834738617201,
+   "TD SLA 48h %": 0.7163461538461539,
+   "FollowUp SLA 7d %": 0.729064039408867,
+   "Close Won %": 0.3696969696969697,
+   "Deliveries": 61,
+   "Total Revenue NZD": 5010900.0,
+   "Public Pool Leads": 8,
+   "Connected Rate": 0.6542056074766355
+  },
+  {
+   "rep": "Maree Simpson",
+   "store": "Christchurch",
+   "tenure": 17,
+   "band": "12-24 months",
+   "active": true,
+   "Total Leads": 538,
+   "Lead SLA 24h %": 0.8438661710037175,
+   "TD SLA 48h %": 0.7058823529411765,
+   "FollowUp SLA 7d %": 0.6052631578947368,
+   "Close Won %": 0.31092436974789917,
+   "Deliveries": 37,
+   "Total Revenue NZD": 3024300.0,
+   "Public Pool Leads": 8,
+   "Connected Rate": 0.6344139650872818
+  },
+  {
+   "rep": "Lance Craig",
+   "store": "Christchurch",
+   "tenure": 14,
+   "band": "12-24 months",
+   "active": true,
+   "Total Leads": 366,
+   "Lead SLA 24h %": 0.8442622950819673,
+   "TD SLA 48h %": 0.7377049180327869,
+   "FollowUp SLA 7d %": 0.635593220338983,
+   "Close Won %": 0.45263157894736844,
+   "Deliveries": 43,
+   "Total Revenue NZD": 3381700.0,
+   "Public Pool Leads": 4,
+   "Connected Rate": 0.6390728476821192
+  },
+  {
+   "rep": "Tania Waters",
+   "store": "Christchurch",
+   "tenure": 12,
+   "band": "12-24 months",
+   "active": true,
+   "Total Leads": 319,
+   "Lead SLA 24h %": 0.8557993730407524,
+   "TD SLA 48h %": 0.6511627906976745,
+   "FollowUp SLA 7d %": 0.6867469879518072,
+   "Close Won %": 0.40298507462686567,
+   "Deliveries": 27,
+   "Total Revenue NZD": 2210300.0,
+   "Public Pool Leads": 1,
+   "Connected Rate": 0.640728476821192
+  }
+ ],
+ "sources": [
+  {
+   "source": "Website Enquiry",
+   "category": "Digital",
+   "leads": 4733,
+   "lead_to_opp": 0.24741178956264526,
+   "close_won": 0.35043668122270744,
+   "sla": 0.8335094020705683
+  },
+  {
+   "source": "Online Test Drive Booking",
+   "category": "Digital",
+   "leads": 3549,
+   "lead_to_opp": 0.41110171879402646,
+   "close_won": 0.4550218340611354,
+   "sla": 0.8436179205409975
+  },
+  {
+   "source": "Social Media Ads",
+   "category": "Paid",
+   "leads": 2801,
+   "lead_to_opp": 0.16494109246697608,
+   "close_won": 0.2972972972972973,
+   "sla": 0.8450553373795073
+  },
+  {
+   "source": "Google Ads",
+   "category": "Paid",
+   "leads": 2433,
+   "lead_to_opp": 0.20509658857377722,
+   "close_won": 0.3793103448275862,
+   "sla": 0.8417591450883682
+  },
+  {
+   "source": "Walk-in",
+   "category": "Offline",
+   "leads": 2602,
+   "lead_to_opp": 0.3608762490392006,
+   "close_won": 0.43005671077504726,
+   "sla": 0.8481936971560338
+  },
+  {
+   "source": "Event / Mall Pop-up",
+   "category": "Offline",
+   "leads": 1722,
+   "lead_to_opp": 0.2073170731707317,
+   "close_won": 0.31560283687943264,
+   "sla": 0.8356562137049942
+  },
+  {
+   "source": "Owner Referral",
+   "category": "Referral",
+   "leads": 1355,
+   "lead_to_opp": 0.37490774907749075,
+   "close_won": 0.44831591173054586,
+   "sla": 0.8391143911439114
+  },
+  {
+   "source": "Corporate Fleet Desk",
+   "category": "Offline",
+   "leads": 570,
+   "lead_to_opp": 0.2964912280701754,
+   "close_won": 0.35658914728682173,
+   "sla": 0.8543859649122807
+  }
+ ],
+ "funnel": {
+  "Leads": 19765,
+  "Opportunities": 6545,
+  "Test drive completed": 6487,
+  "Order placed": 2178,
+  "Closed won": 2082
+ },
+ "open_stages": [
+  {
+   "stage": "Test Drive Scheduled",
+   "n": 58,
+   "weighted": 465420.0
+  },
+  {
+   "stage": "Test Drive Completed",
+   "n": 146,
+   "weighted": 2910350.0
+  },
+  {
+   "stage": "Negotiation",
+   "n": 115,
+   "weighted": 4578750.0
+  },
+  {
+   "stage": "Order Placed",
+   "n": 96,
+   "weighted": 6178720.0
+  },
+  {
+   "stage": "Long Term Prospect",
+   "n": 963,
+   "weighted": 3875935.0
+  }
+ ],
+ "decline": {
+  "Price / budget": 462,
+  "Range or charging concerns": 458,
+  "No longer interested": 447,
+  "Delivery time too long": 438,
+  "Chose competitor": 436,
+  "Finance declined": 425,
+  "Unresponsive": 419
+ },
+ "delay": {
+  "Finance approval pending": 101,
+  "Vehicle damage in transit": 98,
+  "Registration / compliance": 92,
+  "Customer requested later date": 92,
+  "Shipping delay": 92
+ },
+ "response_band": {
+  "< 1h": 480,
+  "1-4h": 4772,
+  "4-24h": 11372,
+  "24-72h": 2042,
+  "> 72h": 461,
+  "No contact": 638
+ },
+ "lost_stage": {
+  "Followed up <=7d": 1992,
+  "Followed up >7d": 1088,
+  "Lost before follow-up": 5
+ },
+ "tenure_sla": [
+  {
+   "band": "< 12 months",
+   "Lead SLA 24h %": 0.8531468531468531,
+   "TD SLA 48h %": 0.717948717948718,
+   "FollowUp SLA 7d %": 0.6027397260273972
+  },
+  {
+   "band": "12-24 months",
+   "Lead SLA 24h %": 0.8599757183326588,
+   "TD SLA 48h %": 0.7060268159661859,
+   "FollowUp SLA 7d %": 0.6763225644528551
+  },
+  {
+   "band": "24-48 months",
+   "Lead SLA 24h %": 0.8829692376281766,
+   "TD SLA 48h %": 0.7271841087450845,
+   "FollowUp SLA 7d %": 0.7005303353426682
+  },
+  {
+   "band": "48+ months",
+   "Lead SLA 24h %": 0.890808915602304,
+   "TD SLA 48h %": 0.7744686727680639,
+   "FollowUp SLA 7d %": 0.7455367332197171
+  }
+ ],
+ "activity_outcomes": {
+  "Positive": 25965,
+  "Neutral": 18072,
+  "No Answer": 17306,
+  "Left Message": 9262,
+  "Negative": 6445
+ }
+};
+const K = D.kpi;
+const $ = (s, el = document) => el.querySelector(s);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const pct = (v, d = 1) => v == null ? "–" : (v * 100).toFixed(d) + "%";
+const pp = v => v == null ? "–" : (v >= 0 ? "+" : "−") + Math.abs(v * 100).toFixed(1) + " pp";
+const int = v => v == null ? "–" : Math.round(v).toLocaleString("en-NZ");
+const nzd = v => v == null ? "–" : "$" + (Math.abs(v) >= 1e6 ? (v / 1e6).toFixed(1) + "M" : Math.round(v / 1e3) + "k");
+const nzdFull = v => v == null ? "–" : "$" + Math.round(v).toLocaleString("en-NZ");
+const NS = "http://www.w3.org/2000/svg";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const monthLabel = ym => { const [y, m] = ym.split("-"); return ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+m - 1] + (m === "01" ? " " + y.slice(2) : ""); };
+
+$("#meta").innerHTML = `Data <b>${D.window[0]} – ${D.window[1]}</b> · snapshot <b>${D.snapshot}</b> · overall SLA status <span class="chip ${K["SLA Alert"]}"></span>`;
+
+function tile(cls, title, sub, inner = "") {
+  return `<div class="tile ${cls}"><h2>${title}</h2>${sub ? `<p class="sub">${sub}</p>` : ""}${inner}</div>`;
+}
+function kpi(cls, label, value, foot) {
+  return `<div class="tile kpi ${cls}"><div class="label">${label}</div><div class="value">${value}</div><div class="foot">${foot}</div></div>`;
+}
+function legend(items) {
+  return `<div class="legend">${items.map(([n, c, dash]) => `<span><i class="${dash ? "dash" : ""}" style="background:${c}"></i>${n}</span>`).join("")}</div>`;
+}
+
+/* ---------- tiny SVG chart kit ---------- */
+function svgEl(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function tipFor(host) {
+  let t = host.querySelector(".tip");
+  if (!t) { t = document.createElement("div"); t.className = "tip"; t.hidden = true; host.appendChild(t); }
+  return {
+    show(html, x, y) {
+      t.innerHTML = html; t.hidden = false;
+      const w = t.offsetWidth, hw = host.clientWidth;
+      t.style.left = Math.max(0, Math.min(x + 12, hw - w)) + "px";
+      t.style.top = Math.max(0, y - t.offsetHeight - 10) + "px";
+    },
+    hide() { t.hidden = true; }
+  };
+}
+function niceMax(v) { const p = Math.pow(10, Math.floor(Math.log10(v))); const n = v / p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * p; }
+function ticks(max, n = 4) { return Array.from({ length: n + 1 }, (_, i) => max * i / n); }
+
+/* Vertical bars with optional reference line (target) and hover */
+function barsWithTarget(host, rows, { key, target, fmt, height = 220, label = "Actual", tlabel = "Target", yfmt }) {
+  host.innerHTML = ""; const W = Math.max(host.clientWidth, 280), H = height, m = { t: 12, r: 8, b: 26, l: 46 };
+  const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img" }, host);
+  const vals = rows.map(r => r[key]).concat(target ? rows.map(r => r[target] || 0) : []);
+  const max = niceMax(Math.max(...vals) * 1.05), iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const y = v => m.t + ih - v / max * ih, bw = iw / rows.length;
+  const g = svgEl("g", { class: "grid" }, svg), ax = svgEl("g", { class: "axis" }, svg);
+  ticks(max).forEach(v => { svgEl("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v) }, g); svgEl("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end" }, ax).textContent = (yfmt || fmt)(v); });
+  const step = rows.length > 14 ? 3 : 1;
+  rows.forEach((r, i) => {
+    const x = m.l + i * bw, h = Math.max(ih - (y(r[key]) - m.t), 0), w = Math.max(bw - 4, 2);
+    svgEl("path", { d: roundedTop(x + 2, y(r[key]), w, h, Math.min(4, w / 2)), fill: css("--accent") }, svg);
+    if (i % step === 0) svgEl("text", { x: x + bw / 2, y: H - 8, "text-anchor": "middle" }, ax).textContent = monthLabel(r.month);
+  });
+  if (target) {
+    const pts = rows.map((r, i) => `${m.l + i * bw + bw / 2},${y(r[target] || 0)}`).join(" ");
+    svgEl("polyline", { points: pts, fill: "none", stroke: css("--fg"), "stroke-width": 2, "stroke-dasharray": "4 3" }, svg);
+  }
+  const tip = tipFor(host), hl = svgEl("rect", { fill: "rgba(255,255,255,.06)", height: ih, y: m.t, width: bw, x: -999 }, svg);
+  svgEl("rect", { x: m.l, y: m.t, width: iw, height: ih, fill: "transparent" }, svg).addEventListener("mousemove", e => {
+    const b = svg.getBoundingClientRect(), sx = (e.clientX - b.left) * W / b.width, i = Math.min(rows.length - 1, Math.max(0, Math.floor((sx - m.l) / bw)));
+    const r = rows[i]; hl.setAttribute("x", m.l + i * bw);
+    tip.show(`<b>${r.month}</b><div class="row"><span>${label}</span><span>${fmt(r[key])}</span></div>` +
+      (target ? `<div class="row"><span>${tlabel}</span><span>${fmt(r[target])}</span></div><div class="row"><span>Attainment</span><span>${pct(r[key] / r[target])}</span></div>` : ""),
+      e.clientX - host.getBoundingClientRect().left, e.clientY - host.getBoundingClientRect().top);
+  });
+  svg.lastChild.addEventListener("mouseleave", () => { tip.hide(); hl.setAttribute("x", -999); });
+}
+function roundedTop(x, y, w, h, r) {
+  if (h <= r) return `M${x},${y + h}h${w}v${-h}h${-w}z`;
+  return `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`;
+}
+/* Multi-line chart with crosshair tooltip + direct end labels */
+function lines(host, rows, series, { fmt, height = 240, min = null, max = null }) {
+  host.innerHTML = ""; const W = Math.max(host.clientWidth, 280), H = height, m = { t: 12, r: 64, b: 26, l: 44 };
+  const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img" }, host);
+  const all = series.flatMap(s => rows.map(r => r[s.key]).filter(v => v != null));
+  const lo = min ?? Math.floor(Math.min(...all) * 20) / 20, hi = max ?? Math.ceil(Math.max(...all) * 20) / 20;
+  const iw = W - m.l - m.r, ih = H - m.t - m.b, x = i => m.l + i * iw / (rows.length - 1), y = v => m.t + ih - (v - lo) / (hi - lo) * ih;
+  const g = svgEl("g", { class: "grid" }, svg), ax = svgEl("g", { class: "axis" }, svg);
+  const n = Math.round((hi - lo) / 0.05);
+  for (let i = 0; i <= n; i++) { const v = lo + (hi - lo) * i / n; if (n > 6 && i % 2) continue; svgEl("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v) }, g); svgEl("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end" }, ax).textContent = fmt(v); }
+  rows.forEach((r, i) => { if (i % 3 === 0) svgEl("text", { x: x(i), y: H - 8, "text-anchor": "middle" }, ax).textContent = monthLabel(r.month); });
+  const ends = [];
+  series.forEach(s => {
+    const pts = rows.map((r, i) => r[s.key] == null ? null : `${x(i)},${y(r[s.key])}`).filter(Boolean).join(" ");
+    svgEl("polyline", { points: pts, fill: "none", stroke: s.color, "stroke-width": 2, "stroke-dasharray": s.dash ? "4 3" : "none", "stroke-linejoin": "round" }, svg);
+    if (!s.dash) { const v = rows[rows.length - 1][s.key]; svgEl("circle", { cx: x(rows.length - 1), cy: y(v), r: 4, fill: s.color, stroke: css("--panel"), "stroke-width": 2 }, svg); ends.push({ y: y(v), s, v }); }
+  });
+  ends.sort((a, b) => a.y - b.y).forEach((e, i, arr) => { if (i && e.y - arr[i - 1].y < 14) e.y = arr[i - 1].y + 14; });
+  ends.forEach(e => { svgEl("text", { x: W - m.r + 8, y: e.y + 4 }, svg).textContent = `${e.s.short} ${fmt(e.v)}`; });
+  const cross = svgEl("line", { y1: m.t, y2: m.t + ih, stroke: css("--muted"), "stroke-width": 1, x1: -9, x2: -9 }, svg), tip = tipFor(host);
+  const hit = svgEl("rect", { x: m.l, y: m.t, width: iw, height: ih, fill: "transparent" }, svg);
+  hit.addEventListener("mousemove", e => {
+    const b = svg.getBoundingClientRect(), sx = (e.clientX - b.left) * W / b.width, i = Math.max(0, Math.min(rows.length - 1, Math.round((sx - m.l) / iw * (rows.length - 1))));
+    cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i));
+    tip.show(`<b>${rows[i].month}</b>` + series.map(s => `<div class="row"><span>${s.name}</span><span>${fmt(rows[i][s.key])}</span></div>`).join(""),
+      e.clientX - host.getBoundingClientRect().left, e.clientY - host.getBoundingClientRect().top);
+  });
+  hit.addEventListener("mouseleave", () => { tip.hide(); cross.setAttribute("x1", -9); cross.setAttribute("x2", -9); });
+}
+/* Horizontal bars (sorted categories / funnel) */
+function hbars(host, items, { fmt, color, rowH = 30, labelW = 170, extra }) {
+  host.innerHTML = ""; const W = Math.max(host.clientWidth, 280), lw = Math.min(labelW, W * 0.45), H = items.length * rowH + 4;
+  const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img" }, host), max = Math.max(...items.map(d => d.v));
+  const iw = W - lw - 74, tip = tipFor(host);
+  items.forEach((d, i) => {
+    const y0 = i * rowH + 4, w = Math.max(d.v / max * iw, 2);
+    svgEl("text", { x: lw - 8, y: y0 + rowH / 2 + 1, "text-anchor": "end" }, svg).textContent = d.k;
+    svgEl("path", { d: roundedRight(lw, y0 + 5, w, rowH - 12, 4), fill: d.c || color }, svg);
+    svgEl("text", { x: lw + w + 6, y: y0 + rowH / 2 + 1 }, svg).textContent = fmt(d.v);
+    const hit = svgEl("rect", { x: 0, y: y0, width: W, height: rowH, fill: "transparent" }, svg);
+    hit.addEventListener("mousemove", e => tip.show(`<b>${esc(d.k)}</b><div class="row"><span>Value</span><span>${fmt(d.v)}</span></div>${extra ? extra(d) : ""}`,
+      e.clientX - host.getBoundingClientRect().left, e.clientY - host.getBoundingClientRect().top));
+    hit.addEventListener("mouseleave", () => tip.hide());
+  });
+  svg.querySelectorAll("text").forEach(t => t.setAttribute("dominant-baseline", "middle"));
+}
+function roundedRight(x, y, w, h, r) { r = Math.min(r, w / 2, h / 2); return `M${x},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h - r}Q${x + w},${y + h} ${x + w - r},${y + h}H${x}Z`; }
+
+/* ---------- pages ---------- */
+const STORES = Object.keys(D.stores);
+const SLAS = [
+  ["Lead", "Lead SLA 24h %", "Lead SLA Target", "First response ≤ 24h"],
+  ["TD", "TD SLA 48h %", "TD SLA Target", "Test drive booked ≤ 48h"],
+  ["FollowUp", "FollowUp SLA 7d %", "FollowUp SLA Target", "Follow-up ≤ 7 days after test drive"],
+  ["LTP", "LTP SLA 30d %", "LTP SLA Target", "Long Term Prospect contacted ≤ 30 days"],
+];
+const draws = {};
+
+function pageExecutive() {
+  const el = $("#p-executive");
+  el.innerHTML =
+    kpi("c2", "Leads", int(K["Total Leads"]), `${pct(K["Leads vs Target %"])} of target ${int(K["Leads Target"])}`) +
+    kpi("c2", "Lead → Opp", pct(K["Lead to Opp %"]), `${int(K["Converted Leads"])} converted`) +
+    kpi("c2", "Close won", pct(K["Close Won %"]), `${int(K["Closed Won"])} won · ${int(K["Closed Lost"])} lost`) +
+    kpi("c2", "Deliveries", int(K["Deliveries"]), `${pct(K["Deliveries vs Target %"])} of target ${int(K["Closed Won Target"])}`) +
+    kpi("c2", "Revenue", nzd(K["Total Revenue NZD"]), `${pct(K["Revenue vs Target %"])} of ${nzd(K["Revenue Target"])} · avg ${nzd(K["Avg Order NZD"])}`) +
+    kpi("c2", "Pipeline coverage", pct(K["Pipeline Coverage %"]), `${nzd(K["Weighted Pipeline"])} weighted vs Q4 target ${nzd(K["Next Quarter Revenue Target"])}`) +
+    tile("c8", "Delivered revenue vs target", "By delivery month (USERELATIONSHIP on CloseDate). Quarter-end months carry the delivery push.",
+      legend([["Revenue", css("--accent")], ["Target", css("--fg"), true]]) + `<div class="chart" id="ch-rev"></div>`) +
+    tile("c4", "SLA status", "Network actual vs target, report window", `<div id="sla-mini" style="display:grid;gap:14px"></div>`) +
+    tile("c12", "Leads per month vs target", "Lead volume by creation month",
+      legend([["Leads", css("--accent")], ["Target", css("--fg"), true]]) + `<div class="chart" id="ch-leads"></div>`);
+  $("#sla-mini").innerHTML = SLAS.map(([k, a, t, desc]) => `
+    <div class="sla-row"><div><div style="font-weight:600">${k === "FollowUp" ? "Follow-up" : k} SLA</div><div class="note" style="margin:0">${desc}</div></div>
+    <div style="text-align:right"><div style="font:600 22px var(--display);font-variant-numeric:tabular-nums">${pct(K[a])}</div><span class="chip ${K[k + " SLA Alert"]} compact">${pp(K[k + " SLA vs Target"])}</span></div>
+    <div class="meter" aria-hidden="true"><div class="fill" style="width:${K[a] * 100}%"></div><div class="tgt" style="left:${K[t] * 100}%"></div></div></div>`).join("") +
+    `<div class="note">White tick = target. Chips: green on target, amber within 5 pp, red more than 5 pp behind.</div>`;
+  draws.executive = () => {
+    barsWithTarget($("#ch-rev"), D.monthly, { key: "Total Revenue NZD", target: "Revenue Target", fmt: nzd, label: "Revenue" });
+    barsWithTarget($("#ch-leads"), D.monthly, { key: "Total Leads", target: "Leads Target", fmt: int, height: 180, label: "Leads" });
+  };
+}
+
+function pageFunnel() {
+  const el = $("#p-funnel");
+  el.innerHTML = SLAS.map(([k, a, t, desc]) =>
+      kpi("c3", `${k === "FollowUp" ? "Follow-up" : k} SLA`, pct(K[a]), `${desc}<br>Target ${pct(K[t])} · <span class="chip ${K[k + " SLA Alert"]}"></span>`)).join("") +
+    tile("c5", "Pipeline funnel", "Report window, creation cohort. Opportunities include ~15% created without a lead.", `<div class="chart" id="ch-funnel"></div>`) +
+    tile("c7", "SLA trend", "Monthly attainment by creation month",
+      legend([["Lead SLA 24h", css("--accent")], ["TD SLA 48h", css("--s2")], ["Follow-up SLA 7d", css("--s3")]]) + `<div class="chart" id="ch-sla"></div>`) +
+    tile("c12", "Lead source performance", "Where leads come from and how well each source converts",
+      `<div class="tbl-wrap"><table><thead><tr><th>Source</th><th>Category</th><th class="num">Leads</th><th class="num">Lead → Opp</th><th class="num">Close won</th><th class="num">Lead SLA 24h</th></tr></thead><tbody>` +
+      D.sources.slice().sort((a, b) => b.leads - a.leads).map(s => `<tr><td class="name">${esc(s.source)}</td><td>${s.category}</td><td class="num">${int(s.leads)}</td>
+        <td class="num">${pct(s.lead_to_opp)}<span class="cell-bar" style="width:${s.lead_to_opp * 90}px"></span></td><td class="num">${pct(s.close_won)}</td><td class="num">${pct(s.sla)}</td></tr>`).join("") +
+      `</tbody></table></div>`);
+  draws.funnel = () => {
+    const f = Object.entries(D.funnel), top = f[0][1];
+    hbars($("#ch-funnel"), f.map(([k, v], i) => ({ k, v, c: i === f.length - 1 ? css("--accent") : css("--fg-2") })),
+      { fmt: v => `${int(v)} · ${pct(v / top)}`, rowH: 38, labelW: 150 });
+    lines($("#ch-sla"), D.monthly, [
+      { key: "Lead SLA 24h %", name: "Lead SLA 24h", short: "Lead", color: css("--accent") },
+      { key: "TD SLA 48h %", name: "TD SLA 48h", short: "TD", color: css("--s2") },
+      { key: "FollowUp SLA 7d %", name: "Follow-up SLA 7d", short: "F/U", color: css("--s3") }], { fmt: v => pct(v, 0) });
+  };
+}
+
+function pageStores() {
+  const el = $("#p-stores");
+  const poolRows = STORES.map(s => ({ k: s, v: D.stores[s]["Public Pool Leads"], s }));
+  el.innerHTML =
+    kpi("c3", "Public pool leads", int(K["Public Pool Leads"]), `${pct(K["Public Pool Lead %"])} of all leads`) +
+    kpi("c3", "Reactivated", pct(K["Public Pool Reactivation %"]), `${int(K["Reactivated Pool Leads"])} claimed by another advisor`) +
+    kpi("c3", "Pool leads converted", int(K["Pool Leads Converted"]), "Value recovered from the pool") +
+    kpi("c3", "Stale long-term prospects", int(K["Stale LTP"]), `${int(K["Public Pool Opps"])} opportunities released to pool`) +
+    tile("c8", "Store scorecard", "Actual vs each store's own target. Chip colour = SLA alert.",
+      `<div class="tbl-wrap"><table><thead><tr><th>Store</th><th class="num">Leads</th><th class="num">Deliveries</th><th class="num">Revenue vs target</th>${SLAS.map(s => `<th class="num">${s[0] === "FollowUp" ? "F/U" : s[0]} SLA</th>`).join("")}</tr></thead><tbody>` +
+      STORES.map(s => { const m = D.stores[s]; return `<tr><td class="name">${s}</td><td class="num">${int(m["Total Leads"])}</td><td class="num">${int(m["Deliveries"])}</td><td class="num">${pct(m["Revenue vs Target %"])}</td>` +
+        SLAS.map(([k, a]) => `<td class="num">${pct(m[a])} <span class="chip ${m[k + " SLA Alert"]} compact" title="${pp(m[k + " SLA vs Target"])} vs target"></span></td>`).join("") + "</tr>"; }).join("") +
+      `</tbody></table></div><p class="note">Hover a chip for the gap to target. Targets differ by store, so a lower SLA can still be green.</p>`) +
+    tile("c4", "Public pool leads by store", "Leads not contacted within 72h, or whose advisor left", `<div class="chart" id="ch-pool"></div>`) +
+    tile("c12", "Advisor performance", "Lead-owner view. Pool leads without an owner are shown as one row.",
+      `<div class="toolbar"><label for="rep-store">Store</label><select id="rep-store"><option value="">All stores</option>${STORES.map(s => `<option>${s}</option>`).join("")}</select>
+       <span>Click a column header to sort.</span></div><div class="tbl-wrap"><table id="rep-tbl"></table></div>`);
+  const cols = [["rep", "Advisor"], ["store", "Store"], ["tenure", "Tenure (m)", 1], ["Total Leads", "Leads", 1], ["Lead SLA 24h %", "Lead SLA", 1, pct],
+    ["TD SLA 48h %", "TD SLA", 1, pct], ["FollowUp SLA 7d %", "F/U SLA", 1, pct], ["Close Won %", "Close won", 1, pct], ["Deliveries", "Deliveries", 1], ["Total Revenue NZD", "Revenue", 1, nzd]];
+  let sortKey = "Total Leads", dir = -1;
+  const draw = () => {
+    const st = $("#rep-store").value;
+    const rows = D.reps.filter(r => !st || r.store === st).sort((a, b) => ((a[sortKey] ?? -1) > (b[sortKey] ?? -1) ? 1 : -1) * dir);
+    $("#rep-tbl").innerHTML = `<thead><tr>${cols.map(([k, n, num]) => `<th class="${num ? "num" : ""}"><button data-k="${k}">${n}</button></th>`).join("")}</tr></thead><tbody>` +
+      rows.map(r => `<tr><td class="name">${esc(r.rep)}${r.active ? "" : ' <span class="note">(left)</span>'}</td>` + cols.slice(1).map(([k, , num, f]) => `<td class="${num ? "num" : ""}">${f ? f(r[k]) : num ? int(r[k]) : esc(r[k])}</td>`).join("") + "</tr>").join("") +
+      (st ? "" : `<tr class="pool"><td>(Public pool – no owner)</td><td>All</td><td class="num">–</td><td class="num">${int(K["Total Leads"] - D.reps.reduce((a, r) => a + r["Total Leads"], 0))}</td><td colspan="6">Unclaimed pool leads; in Power BI these show as (Blank) in rep visuals.</td></tr>`) + "</tbody>";
+    $("#rep-tbl").querySelectorAll("button").forEach(b => b.onclick = () => { dir = sortKey === b.dataset.k ? -dir : -1; sortKey = b.dataset.k; draw(); });
+  };
+  $("#rep-store").onchange = draw; draw();
+  draws.stores = () => hbars($("#ch-pool"), poolRows.sort((a, b) => b.v - a.v), { fmt: int, color: css("--accent"), labelW: 140,
+    extra: d => `<div class="row"><span>Share of store leads</span><span>${pct(D.stores[d.s]["Public Pool Lead %"])}</span></div><div class="row"><span>Reactivated</span><span>${pct(D.stores[d.s]["Public Pool Reactivation %"])}</span></div>` });
+}
+
+function pageLoss() {
+  const el = $("#p-loss");
+  el.innerHTML =
+    tile("c6", "First response time", "Lead SLA detail: where the 24h misses sit", `<div class="chart" id="ch-resp"></div>`) +
+    tile("c6", "Advisor tenure vs SLA", "Newer advisors miss more SLAs, mostly on follow-up",
+      `<div class="tbl-wrap"><table><thead><tr><th>Tenure</th><th class="num">Lead SLA</th><th class="num">TD SLA</th><th class="num">Follow-up SLA</th></tr></thead><tbody>` +
+      D.tenure_sla.map(t => `<tr><td class="name">${t.band}</td>${["Lead SLA 24h %", "TD SLA 48h %", "FollowUp SLA 7d %"].map(k => `<td class="num">${pct(t[k])}<span class="cell-bar" style="width:${Math.max(0, (t[k] - 0.55) * 160)}px"></span></td>`).join("")}</tr>`).join("") +
+      `</tbody></table></div><p class="note">Bar length starts at 55% to show the spread. Lead-weighted average per tenure band.</p>`) +
+    tile("c4", "Why deals are lost", "Closed Lost by decline reason", `<div class="chart" id="ch-decline"></div>`) +
+    tile("c4", "Lost deals by follow-up timing", "Was the 7-day follow-up met before the deal was lost?", `<div class="chart" id="ch-lostfu"></div>`) +
+    tile("c4", "Delivery delay reasons", "Orders taking more than 30 days to deliver", `<div class="chart" id="ch-delay"></div>`) +
+    tile("c12", "Open pipeline by stage", "Count and weighted value at the snapshot date; Long Term Prospect carries a 5% probability",
+      `<div class="chart" id="ch-stage"></div>`);
+  draws.loss = () => {
+    const rb = Object.entries(D.response_band), late = ["24-72h", "> 72h", "No contact"];
+    hbars($("#ch-resp"), rb.map(([k, v]) => ({ k, v, c: late.includes(k) ? css("--accent") : css("--fg-2") })), { fmt: v => `${int(v)} · ${pct(v / K["Total Leads"])}`, labelW: 100 });
+    const toItems = o => Object.entries(o).sort((a, b) => b[1] - a[1]).map(([k, v]) => ({ k, v }));
+    hbars($("#ch-decline"), toItems(D.decline), { fmt: int, color: css("--fg-2"), labelW: 170 });
+    hbars($("#ch-lostfu"), toItems(D.lost_stage).map(d => ({ ...d, c: d.k.includes(">7d") ? css("--accent") : css("--fg-2") })), { fmt: v => `${int(v)} · ${pct(v / K["Closed Lost"])}`, labelW: 150 });
+    hbars($("#ch-delay"), toItems(D.delay), { fmt: int, color: css("--fg-2"), labelW: 180 });
+    hbars($("#ch-stage"), D.open_stages.map(s => ({ k: s.stage, v: s.weighted, n: s.n, c: s.stage === "Long Term Prospect" ? css("--fg-2") : css("--accent") })),
+      { fmt: v => nzd(v), labelW: 170, extra: d => `<div class="row"><span>Opportunities</span><span>${int(d.n)}</span></div>` });
+  };
+}
+
+pageExecutive(); pageFunnel(); pageStores(); pageLoss();
+const PAGES = ["executive", "funnel", "stores", "loss"];
+function route() {
+  const p = PAGES.includes(location.hash.slice(1)) ? location.hash.slice(1) : "executive";
+  PAGES.forEach(k => { $("#p-" + k).hidden = k !== p; });
+  document.querySelectorAll("#nav a").forEach(a => a.setAttribute("aria-current", a.hash === "#" + p ? "page" : "false"));
+  draws[p] && draws[p]();
+}
+addEventListener("hashchange", route);
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(route, 120); });
+route();
+</script>
+
+</body>
+</html>

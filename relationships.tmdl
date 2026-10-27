@@ -1,0 +1,102 @@
+/// relationships.tmdl - paste into TMDL view, click Apply.
+/// Turn OFF 'Autodetect new relationships' before loading data, or delete auto-created ones first.
+/// All relationships: many-to-one, single direction (dimension filters fact).
+
+createOrReplace
+
+	relationship Lead_CreatedDate_to_Dim_Date
+		fromColumn: Lead.CreatedDate
+		toColumn: Dim_Date.Date
+
+	relationship Lead_StoreId_to_Dim_Store
+		fromColumn: Lead.StoreId
+		toColumn: Dim_Store.StoreId
+
+	relationship Lead_SalesRepId_to_Dim_SalesRep
+		fromColumn: Lead.SalesRepId
+		toColumn: Dim_SalesRep.SalesRepId
+
+	relationship Lead_SourceId_to_Dim_Source
+		fromColumn: Lead.SourceId
+		toColumn: Dim_Source.SourceId
+
+	relationship Lead_ModelId_to_Dim_Model
+		fromColumn: Lead.ModelId
+		toColumn: Dim_Model.ModelId
+
+	relationship Opportunity_CreatedDate_to_Dim_Date
+		fromColumn: Opportunity.CreatedDate
+		toColumn: Dim_Date.Date
+
+	relationship Opportunity_CloseDate_to_Dim_Date
+		fromColumn: Opportunity.CloseDate
+		toColumn: Dim_Date.Date
+		isActive: false
+
+	relationship Opportunity_StoreId_to_Dim_Store
+		fromColumn: Opportunity.StoreId
+		toColumn: Dim_Store.StoreId
+
+	relationship Opportunity_SalesRepId_to_Dim_SalesRep
+		fromColumn: Opportunity.SalesRepId
+		toColumn: Dim_SalesRep.SalesRepId
+
+	relationship Opportunity_SourceId_to_Dim_Source
+		fromColumn: Opportunity.SourceId
+		toColumn: Dim_Source.SourceId
+
+	relationship Opportunity_ModelId_to_Dim_Model
+		fromColumn: Opportunity.ModelId
+		toColumn: Dim_Model.ModelId
+
+	relationship Opportunity_AccountId_to_Account
+		fromColumn: Opportunity.AccountId
+		toColumn: Account.AccountId
+
+	relationship Fact_LeadConversion_ConversionDate_to_Dim_Date
+		fromColumn: Fact_LeadConversion.ConversionDate
+		toColumn: Dim_Date.Date
+
+	relationship Fact_LeadConversion_StoreId_to_Dim_Store
+		fromColumn: Fact_LeadConversion.StoreId
+		toColumn: Dim_Store.StoreId
+
+	relationship Fact_LeadConversion_SalesRepId_to_Dim_SalesRep
+		fromColumn: Fact_LeadConversion.SalesRepId
+		toColumn: Dim_SalesRep.SalesRepId
+
+	relationship Fact_LeadConversion_SourceId_to_Dim_Source
+		fromColumn: Fact_LeadConversion.SourceId
+		toColumn: Dim_Source.SourceId
+
+	relationship Fact_Activity_ActivityDate_to_Dim_Date
+		fromColumn: Fact_Activity.ActivityDate
+		toColumn: Dim_Date.Date
+
+	relationship Fact_Activity_StoreId_to_Dim_Store
+		fromColumn: Fact_Activity.StoreId
+		toColumn: Dim_Store.StoreId
+
+	relationship Fact_Activity_SalesRepId_to_Dim_SalesRep
+		fromColumn: Fact_Activity.SalesRepId
+		toColumn: Dim_SalesRep.SalesRepId
+
+	relationship Dim_Target_TargetMonth_to_Dim_Date
+		fromColumn: Dim_Target.TargetMonth
+		toColumn: Dim_Date.Date
+
+	relationship Dim_Target_StoreId_to_Dim_Store
+		fromColumn: Dim_Target.StoreId
+		toColumn: Dim_Store.StoreId
+
+	relationship Vehicle_OpportunityId_to_Opportunity
+		fromColumn: Vehicle.OpportunityId
+		toColumn: Opportunity.OpportunityId
+
+	relationship Charging_OpportunityId_to_Opportunity
+		fromColumn: Charging.OpportunityId
+		toColumn: Opportunity.OpportunityId
+
+	relationship TradeIn_OpportunityId_to_Opportunity
+		fromColumn: TradeIn.OpportunityId
+		toColumn: Opportunity.OpportunityId

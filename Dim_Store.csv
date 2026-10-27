@@ -1,0 +1,7 @@
+StoreId,StoreName,City,Island,StoreType,OpenDate
+ST01,Auckland Central,Auckland,North,Flagship,2021-04-01
+ST02,Auckland North Shore,Auckland,North,Store,2022-02-01
+ST03,Hamilton,Hamilton,North,Store,2023-03-01
+ST04,Tauranga,Tauranga,North,Gallery,2023-09-01
+ST05,Wellington,Wellington,North,Store,2021-09-01
+ST06,Christchurch,Christchurch,South,Store,2022-06-01
