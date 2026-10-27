@@ -1,0 +1,7 @@
+output/*.csv
+output/*.json
+*.pbix
+*.pbit
+.venv/
+__pycache__/
+.DS_Store
